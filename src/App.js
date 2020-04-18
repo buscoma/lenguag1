@@ -23,4 +23,13 @@ function App() {
   );
 }
 
+
+class Test_comp extends Component {
+  render () {
+    return React.createElement('div', null, 'h1', 'Hi, Ale');
+
+  }
+}
+
+
 export default App;
