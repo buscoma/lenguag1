@@ -1,15 +1,11 @@
 import React from 'react';
 import './App.css';
-import Navbar from './Components/Navbar/Navbar'
-import Counter from './Components/LoginPage/LoginPage'
+import LoginFormDialog from './Components/Login/Login'
 
 function App() {
-  let user = {'Name': 'Pablo'};
-  
   return (
     <div className="App">
-      <Navbar AppName="lenguamaticag1" User={user}></Navbar>
-      <Counter/>
+       <LoginFormDialog/>
     </div>
   );
 }

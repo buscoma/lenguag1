@@ -1,3 +1,14 @@
 .App {
+  background-image: url("https://cdn6.f-cdn.com/contestentries/1247677/624278/5a7d7aa680ef1_thumb900.jpg");
+  background-size: cover;
+  align-self: center;
+  vertical-align: middle;
   text-align: center;
+  height: 100%;
+  margin: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%
+  ;
 }

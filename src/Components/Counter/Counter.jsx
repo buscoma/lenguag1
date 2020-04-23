@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './LoginPage.css';
+import './Counter.css';
 import Button from '@material-ui/core/Button';
 
 export default class Counter extends React.Component{
