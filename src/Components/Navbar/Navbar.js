@@ -4,9 +4,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import Avatar from '@material-ui/core/Avatar';
+import backgroundWood from '../Navbar/WOODGRAIN.svg';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,15 +19,27 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
-        textAlign: "left"
+        textAlign: "left",
+        fontWeight: 'bold'
     },
+    mainBkg: {
+        backgroundImage: 'url(' + backgroundWood + ')'
+    },
+    homeIcon: {
+        fontSize: '25pt'
+    },
+    usuario: {
+        display: 'inline',
+        float: 'right',
+        textAlign: 'right'
+    }
 }));
 
 export default function Navbar(props) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+    const mediaQueryMatch = useMediaQuery('(min-width:600px)');
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
@@ -43,9 +57,13 @@ export default function Navbar(props) {
         console.log('handleBackClicked');
     }
 
+    const handleHome = () => {
+        console.log('handleHomeClicked');
+    }
+
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.mainBkg}>
                 <Toolbar>
                     <IconButton
                         aria-label="account of current user"
@@ -54,15 +72,25 @@ export default function Navbar(props) {
                         onClick={handleBack}
                         color="inherit"
                     >
-                        <ArrowBackIosIcon />
+                        <ArrowBackIosRoundedIcon />
                     </IconButton>
 
                     <Typography variant="subtitle1" className={classes.title}>
                         {props.AppName}
                     </Typography>
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleHome}
+                        color="inherit"
+                    >
+                        <HomeRoundedIcon className={classes.homeIcon} />
+                    </IconButton>
                     {auth && (
                         <div>
                             <Avatar alt="nombre" src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-512.png"></Avatar>
+                            {mediaQueryMatch ? <span className={classes.usuario}>{props.User.Name}</span> : ''}
                         </div>
                     )}
                 </Toolbar>
