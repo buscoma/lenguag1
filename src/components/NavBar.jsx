@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Navbar(props) {
+export default function NavBar(props) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,7 +61,7 @@ export default function Navbar(props) {
                     </Typography>
                     {auth && (
                         <div>
-                            <Avatar alt="nombre" src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/girl_avatar_child_kid-512.png"></Avatar>
+                            <Avatar alt="nombre" src="../Assets/Images/Avatars/coffee_zorro_avatar_cup-512.webp"></Avatar>
                         </div>
                     )}
                 </Toolbar>
