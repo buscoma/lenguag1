@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import './App.css';
-import TrippleButton from './Components/TripleButton.js';
-import RankingList from './Components/RankingList.js';
+import '../css/LandingPage.css';
+import TrippleButton from '../components/TrippleButton';
+import RankingList from '../components/RankingList';
+import Navbar from '../components/NavBar'
 
-class App extends Component {
+class LandingPage extends Component {
 
   state = {
     showRanking: true
@@ -29,9 +30,13 @@ class App extends Component {
       )
     }
 
+    let user = {Name: "Ale" }
+
     return (      
-        <div className="App">
+        <div className="LandingPage">
         
+          <Navbar User={user} />
+
           <h1> LenguaMatica!</h1>
 
           <TrippleButton onClick={this.toggleRankingListHandler} />
@@ -46,4 +51,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default LandingPage;

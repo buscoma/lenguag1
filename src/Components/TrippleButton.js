@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import lenguaImg from '../Images/abc.jpg';
-import mathImg from '../Images/math.jpg';
-import rankingImg from '../Images/ranking.jpg';
+import lenguaImg from '../images/abc.jpg';
+import mathImg from '../images/math.jpg';
+import rankingImg from '../images/ranking.jpg';
 
 const images = [
   {
