@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import RakingPage from './Ranking/RankingPag.js';
 
 function App() {
   return (
-    <div className="App">
+    <RakingPage />
+    /*<div className="App">
       Hola Mundo!!!
-    </div>
+    </div>*/
   );
 }
 
