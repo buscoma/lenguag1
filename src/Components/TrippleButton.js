@@ -2,26 +2,28 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-//import lenguaImg from "./Images/test.svg";
+import lenguaImg from '../Images/abc.jpg';
+import mathImg from '../Images/math.jpg';
+import rankingImg from '../Images/ranking.jpg';
 
 const images = [
   {
-    url: './Images/abc.jpg',
-    //url: '/static/images/grid-list/breakfast.jpg',
+    url: lenguaImg,
     title: 'Lengua',
     width: '20%',
+    href: '/lengua'
   },
   {
-    url: './Images/math.jpg',
-    //url: '/static/images/grid-list/burgers.jpg',
+    url: mathImg,
     title: 'Matemática',
     width: '20%',
+    href: '/lengua'
   },
   {
-    url: './Images/ranking.jpg',
-    //url: '/static/images/grid-list/camera.jpg',
+    url: rankingImg,
     title: 'Ranking',
     width: '20%',
+    href: '/lengua'
   },
 ];
 
@@ -121,6 +123,7 @@ export default function TrippleButton() {
             style={{
                 width: image.width,
             }}
+            href={image.href}
         >
             <span className={classes.imageSrc}
                 style={{ backgroundImage: `url(${image.url})`,}}    />
