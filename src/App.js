@@ -1,10 +1,17 @@
 import React from 'react';
-import './App.css';
+import './Assets/css/App.css';
+
+//Importar componentes//
+import Game1Container from './Containers/Game1Container'
+import ScoreboardComponent from './Components/ScoreboardComponent'
+
 
 function App() {
+
   return (
     <div className="App">
-      Hola Mundo!!!
+      <ScoreboardComponent/>
+      <Game1Container/>
     </div>
   );
 }
