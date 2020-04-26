@@ -2,21 +2,24 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-//import LenguaImg from "./Images/test.svg";
+//import lenguaImg from "./Images/test.svg";
 
 const images = [
   {
-   // url: LenguaImg,
+    url: './Images/abc.jpg',
+    //url: '/static/images/grid-list/breakfast.jpg',
     title: 'Lengua',
     width: '20%',
   },
   {
-    url: '/static/images/grid-list/burgers.jpg',
+    url: './Images/math.jpg',
+    //url: '/static/images/grid-list/burgers.jpg',
     title: 'Matemática',
     width: '20%',
   },
   {
-    url: '/static/images/grid-list/camera.jpg',
+    url: './Images/ranking.jpg',
+    //url: '/static/images/grid-list/camera.jpg',
     title: 'Ranking',
     width: '20%',
   },
