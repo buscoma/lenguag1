@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import Avatar from '@material-ui/core/Avatar';
-import backgroundWood from '../Images/Navbar/WOODGRAIN.svg';
+import {WoodGrain} from '../Images/';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import avatarOne from '../Images/avatars/avocado_scream_avatar_food-512.webp';
+import {AvatarZombie} from '../Images';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     mainBkg: {
-        backgroundImage: 'url(' + backgroundWood + ')'
+        backgroundImage: 'url(' + WoodGrain + ')'
     },
     homeIcon: {
         fontSize: '25pt'
@@ -90,7 +90,7 @@ export default function NavBar(props) {
                     </IconButton>
                     {auth && (
                         <div>
-                            <Avatar alt="nombre" src={avatarOne} />
+                            <Avatar alt="nombre" src={AvatarZombie} />
                             {mediaQueryMatch ? <span className={classes.usuario}>{props.User.Name}</span> : ''}
                         </div>
                     )}

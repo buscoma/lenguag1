@@ -170,7 +170,7 @@ class LengGameOne extends Component {
 	render() {
 		return (
 			<div>
-				<Typography h1>JUEGO DE LENGUA</Typography>
+				<Typography h2>JUEGO DE LENGUA</Typography>
 				<div className="game-area">
 					<Snake snakeDots={this.state.snakeDots} />
 					<Food dot={this.state.food} />
@@ -182,7 +182,7 @@ class LengGameOne extends Component {
 						<Button variant="contained" color="secondary" onClick={this.onRestart}>
 							Restart
 						</Button>
-						<Button variant="contained" color="primary" onClick={this.onRestart}>
+						<Button variant="contained" color="primary" href="/landing_page">
 							Volver
 						</Button>
 					</div>
