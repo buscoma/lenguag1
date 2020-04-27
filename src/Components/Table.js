@@ -65,7 +65,7 @@ function AutoGridNoWrap(props) {
             <Typography  className={classes.topo} noWrap> #{data.posicion}</Typography>
           </Grid>
           <Grid item xs={4}    zeroMinWidth>
-            <Typography  className={classes.topo} noWrap>{data.nombre}</Typography>
+            <Typography   className={classes.topo} noWrap>{data.nombre}</Typography>
           </Grid>
           <Grid item xs={6} md={4} zeroMinWidth>
             <Typography  className={classes.topo} noWrap>{data.puntos}pts</Typography>
