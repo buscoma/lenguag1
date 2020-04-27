@@ -1,6 +1,6 @@
 # LenguaG1
 
-![LenguaMaticaG1](https://raw.githubusercontent.com/buscoma/lenguag1/master/public/logox256.png)
+![LenguaG1](https://raw.githubusercontent.com/buscoma/lenguag1/master/public/logox256.png)
 
 ## Aplicación de Lengua
 

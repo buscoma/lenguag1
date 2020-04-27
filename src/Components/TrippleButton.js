@@ -14,12 +14,6 @@ const images = [
     href: '/leng_game_one'
   },
   {
-    url: mathImg,
-    title: 'Matemática',
-    width: '20%',
-    href: '/math_game_one'
-  },
-  {
     url: rankingImg,
     title: 'Ranking',
     width: '20%',
