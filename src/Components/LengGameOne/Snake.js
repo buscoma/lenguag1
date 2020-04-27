@@ -1,5 +1,5 @@
 import React from 'react';
-import "./styles.css"
+import "../../css/LengGameOne.css"
 
 export default (props) => {
   return (

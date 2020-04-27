@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button} from "@material-ui/core";
+import Typography from '../Components/Typography';
 import Preview from '../Components/LengGameOne/Preview';
 import getText from '../Components/LengGameOne/getText';
 import Snake from '../Components/LengGameOne/Snake';
@@ -168,7 +170,7 @@ class LengGameOne extends Component {
 	render() {
 		return (
 			<div>
-				<text className="titulo">JUEGO DE LENGUA</text>
+				<Typography h1>JUEGO DE LENGUA</Typography>
 				<div className="game-area">
 					<Snake snakeDots={this.state.snakeDots} />
 					<Food dot={this.state.food} />
@@ -177,12 +179,12 @@ class LengGameOne extends Component {
 					<Food4 dot={this.state.food4} />
 					<div className="game-area2">
 						<Preview text={this.state.text} userInput={this.state.userInput} />
-						<button className="btn btn-light" onClick={this.onRestart}>
+						<Button variant="contained" color="secondary" onClick={this.onRestart}>
 							Restart
-						</button>
-						<button className="btn btn-light" onClick={this.onRestart}>
+						</Button>
+						<Button variant="contained" color="primary" onClick={this.onRestart}>
 							Volver
-						</button>
+						</Button>
 					</div>
 				</div>
 			</div>
