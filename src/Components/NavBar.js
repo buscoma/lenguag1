@@ -1,14 +1,14 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import Avatar from '@material-ui/core/Avatar';
+import React from './node_modules/react';
+import { makeStyles } from './node_modules/@material-ui/core/styles';
+import AppBar from './node_modules/@material-ui/core/AppBar';
+import Toolbar from './node_modules/@material-ui/core/Toolbar';
+import Typography from './node_modules/@material-ui/core/Typography';
+import IconButton from './node_modules/@material-ui/core/IconButton';
+import ArrowBackIosRoundedIcon from './node_modules/@material-ui/icons/ArrowBackIosRounded';
+import Avatar from './node_modules/@material-ui/core/Avatar';
 import backgroundWood from '../images/Navbar/WOODGRAIN.svg';
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import HomeRoundedIcon from './node_modules/@material-ui/icons/HomeRounded';
+import useMediaQuery from './node_modules/@material-ui/core/useMediaQuery';
 import avatarOne from '../images/avatars/avocado_scream_avatar_food-512.webp';
 
 const useStyles = makeStyles((theme) => ({

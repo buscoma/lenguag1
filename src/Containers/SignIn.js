@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "../components/Typography";
+import Typography from "../Components/Typography";
 
 export default class SignIn extends React.Component {
   render() {

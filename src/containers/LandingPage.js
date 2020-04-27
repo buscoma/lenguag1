@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../css/LandingPage.css';
-import TrippleButton from '../components/TrippleButton';
-import RankingList from '../components/RankingList';
-import Navbar from '../components/NavBar'
+import TrippleButton from '../Components/TrippleButton';
+import RankingList from '../Components/RankingList';
+import Navbar from '../Components/NavBar'
 
 class LandingPage extends Component {
 

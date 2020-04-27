@@ -1,12 +1,12 @@
-import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React from './node_modules/react';
+import { withStyles, makeStyles } from './node_modules/@material-ui/core/styles';
+import Table from './node_modules/@material-ui/core/Table';
+import TableBody from './node_modules/@material-ui/core/TableBody';
+import TableCell from './node_modules/@material-ui/core/TableCell';
+import TableContainer from './node_modules/@material-ui/core/TableContainer';
+import TableHead from './node_modules/@material-ui/core/TableHead';
+import TableRow from './node_modules/@material-ui/core/TableRow';
+import Paper from './node_modules/@material-ui/core/Paper';
 
 
 const StyledTableCell = withStyles((theme) => ({
