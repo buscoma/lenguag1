@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ButtonComponent from './ButtonComponent'
 import Container from '@material-ui/core/Container'
-import ScoreboardComponent from './ScoreboardComponent'
 const useStyles = makeStyles((theme) => ({
   grid:{
     backgroundColor:'green',

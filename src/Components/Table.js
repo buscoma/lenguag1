@@ -55,7 +55,7 @@ function ColorRaking(posicion){
 
 function AutoGridNoWrap(props) {
   const classes = useStylesAutoGridNoWrap();
-  const [data, setData] = useState(props);
+  const [data] = useState(props);
   const backgroundColorPosition = ColorRaking(data.posicion)
   return (
     <div className={classes.root}  >
@@ -80,7 +80,7 @@ function AutoGridNoWrap(props) {
 export default function TableResponsive(){
 
   const [refresh, setRefresh] = useState(false);
-  const [hasError, setErrors] = useState(false);
+  const [setErrors] = useState(false);
   const [loading, setLoading] = useState(true);
   const [row, setRow] = useState([]);
   

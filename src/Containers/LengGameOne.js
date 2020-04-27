@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from "@material-ui/core";
+import NavBar from "../Components/NavBar.js"
 import Typography from '../Components/Typography';
 import Preview from '../Components/LengGameOne/Preview';
 import getText from '../Components/LengGameOne/getText';
@@ -33,6 +34,8 @@ const initialState = {
 	snakeDots: [ [ 0, 0 ], [ 2, 0 ] ]
 };
 
+let user = {Name: "Ale" }
+
 class LengGameOne extends Component {
 	state = initialState;
 
@@ -59,7 +62,7 @@ class LengGameOne extends Component {
 			case 37:
 				this.setState({ direction: 'LEFT' });
 				break;
-			case 39:
+			default:
 				this.setState({ direction: 'RIGHT' });
 				break;
 		}
@@ -79,7 +82,7 @@ class LengGameOne extends Component {
 			case 'DOWN':
 				head = [ head[0], head[1] + 2 ];
 				break;
-			case 'UP':
+			default:
 				head = [ head[0], head[1] - 2 ];
 				break;
 		}
@@ -102,7 +105,7 @@ class LengGameOne extends Component {
 		let head = snake[snake.length - 1];
 		snake.pop();
 		snake.forEach((dot) => {
-			if (head[0] == dot[0] && head[1] == dot[1]) {
+			if (head[0] === dot[0] && head[1] === dot[1]) {
 				this.onGameOver();
 			}
 		});
@@ -115,7 +118,7 @@ class LengGameOne extends Component {
 		let food3 = this.state.food3;
 		let food4 = this.state.food4;
 
-		if (head[0] == food[0] && head[1] == food[1]) {
+		if (head[0] === food[0] && head[1] === food[1]) {
 			this.setState({
 				food: getRandomCoordinates(),
 				food2: getRandomCoordinates(),
@@ -124,11 +127,11 @@ class LengGameOne extends Component {
 			});
 			this.enlargeSnake();
 			this.increaseSpeed();
-		} else if (head[0] == food2[0] && head[1] == food2[1]) {
+		} else if (head[0] === food2[0] && head[1] === food2[1]) {
 			this.onGameOver();
-		} else if (head[0] == food3[0] && head[1] == food3[1]) {
+		} else if (head[0] === food3[0] && head[1] === food3[1]) {
 			this.onGameOver();
-		} else if (head[0] == food4[0] && head[1] == food4[1]) {
+		} else if (head[0] === food4[0] && head[1] === food4[1]) {
 			this.onGameOver();
 		}
 	}
@@ -170,6 +173,7 @@ class LengGameOne extends Component {
 	render() {
 		return (
 			<div>
+				<NavBar User={user} />
 				<Typography h2>JUEGO DE LENGUA</Typography>
 				<div className="game-area">
 					<Snake snakeDots={this.state.snakeDots} />

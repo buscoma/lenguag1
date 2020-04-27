@@ -38,21 +38,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    //const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
+    //const [anchorEl, setAnchorEl] = React.useState(null);
     const mediaQueryMatch = useMediaQuery('(min-width:600px)');
 
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
+    // const handleChange = (event) => {
+    //     setAuth(event.target.checked);
+    // };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handleMenu = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
     const handleBack = () => {
         console.log('handleBackClicked');
