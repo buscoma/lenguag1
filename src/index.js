@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './Assets/css/index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+//import * as serviceWorker from 'serviceWorker';
+
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Home from "./containers/Home";
+import SignIn from "./containers/SignIn";
+import SignUp from "./containers/SignUp";
+import LandingPage from "./containers/LandingPage";
+import RankingPage from "./containers/RankingPage";
+import MathGameOne from "./containers/MathGameOne";
+var hist = createBrowserHistory();
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Router history={hist}>
+    <Switch>
+      <Route path="/sign_in" component={SignIn} />
+      <Route path="/sign_up" component={SignUp} />
+      <Route path="/landing_page" component={LandingPage} />
+      <Route path="/ranking_page" component={RankingPage} />
+      <Route path="/math_game_one" component={MathGameOne} />
+      <Route path="/" component={Home} />
+    </Switch>
+  </Router>,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

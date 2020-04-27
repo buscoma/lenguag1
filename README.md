@@ -8,7 +8,7 @@
 
 - Busco Matias
 - Lucas Morral
-- Matias Rappaport
+- Matias Rapaport
 - Alejandra Curbelo
 - Pablo Durand
 - Inoue Rintaro
