@@ -15,4 +15,4 @@
 
 Site productivo de la APP hosteado en [Heroku](https://www.heroku.com)
 
-[https://lenguamaticag1.herokuapp.com/](https://lenguag1.herokuapp.com/)
+[https://lenguag1.herokuapp.com/](https://lenguag1.herokuapp.com/)
