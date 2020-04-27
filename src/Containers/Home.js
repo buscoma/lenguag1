@@ -1,5 +1,5 @@
-import React from "./node_modules/react";
-import { Button, Container, Link } from "./node_modules/@material-ui/core";
+import React from "react";
+import { Button, Container, Link } from "@material-ui/core";
 
 export default class Home extends React.Component {
   render() {

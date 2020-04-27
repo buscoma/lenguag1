@@ -4,12 +4,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Home from "./containers/Home";
-import SignIn from "./containers/SignIn";
-import SignUp from "./containers/SignUp";
-import LandingPage from "./containers/LandingPage";
-import RankingPage from "./containers/RankingPage";
-import MathGameOne from "./containers/MathGameOne";
+import Home from "./Containers/Home";
+import SignIn from "./Containers/SignIn";
+import SignUp from "./Containers/SignUp";
+import LandingPage from "./Containers/LandingPage";
+import RankingPage from "./Containers/RankingPage";
+import MathGameOne from "./Containers/MathGameOne";
+import LengGameOne from "./Containers/LengGameOne";
 var hist = createBrowserHistory();
 
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/landing_page" component={LandingPage} />
       <Route path="/ranking_page" component={RankingPage} />
       <Route path="/math_game_one" component={MathGameOne} />
+      <Route path="/leng_game_one" component={LengGameOne} />
       <Route path="/" component={Home} />
     </Switch>
   </Router>,

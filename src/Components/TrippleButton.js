@@ -1,17 +1,17 @@
-import React from './node_modules/react';
-import { makeStyles } from './node_modules/@material-ui/core/styles';
-import ButtonBase from './node_modules/@material-ui/core/ButtonBase';
-import Typography from './node_modules/@material-ui/core/Typography';
-import lenguaImg from '../images/abc.jpg';
-import mathImg from '../images/math.jpg';
-import rankingImg from '../images/ranking.jpg';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from '@material-ui/core/Typography';
+import lenguaImg from '../Images/abc.jpg';
+import mathImg from '../Images/math.jpg';
+import rankingImg from '../Images/ranking.jpg';
 
 const images = [
   {
     url: lenguaImg,
     title: 'Lengua',
     width: '20%',
-    href: '/lengua'
+    href: '/leng_game_one'
   },
   {
     url: mathImg,
@@ -23,7 +23,7 @@ const images = [
     url: rankingImg,
     title: 'Ranking',
     width: '20%',
-    href: '/lengua'
+    href: '/ranking_page'
   },
 ];
 

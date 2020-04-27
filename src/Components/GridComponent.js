@@ -1,8 +1,8 @@
-import React from './node_modules/react';
-import { makeStyles } from './node_modules/@material-ui/core/styles';
-import Grid from './node_modules/@material-ui/core/Grid';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import ButtonComponent from './ButtonComponent'
-import Container from './node_modules/@material-ui/core/Container'
+import Container from '@material-ui/core/Container'
 import ScoreboardComponent from './ScoreboardComponent'
 const useStyles = makeStyles((theme) => ({
   grid:{

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from './node_modules/react';
-import Container from './node_modules/@material-ui/core/Container';
-import Paper from './node_modules/@material-ui/core/Paper';
-import { makeStyles } from './node_modules/@material-ui/core/styles';
-import Grid from './node_modules/@material-ui/core/Grid';
-import Typography from './node_modules/@material-ui/core/Typography';
-import TextField from './node_modules/@material-ui/core/TextField';
-import Button from './node_modules/@material-ui/core/Button';
+import React, {useEffect, useState} from 'react';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 const url = 'http://www.mocky.io/v2/5ea453e13000006e00ce2cc9';

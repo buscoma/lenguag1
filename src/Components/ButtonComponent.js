@@ -1,8 +1,8 @@
-import React from './node_modules/react';
-import { createMuiTheme, makeStyles, ThemeProvider } from './node_modules/@material-ui/core/styles';
-import Button from './node_modules/@material-ui/core/Button';
-import {green } from './node_modules/@material-ui/core/colors';
-import Typography from './node_modules/@material-ui/core/Typography';
+import React from 'react';
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import {green } from '@material-ui/core/colors';
+import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({

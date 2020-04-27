@@ -1,7 +1,7 @@
-import React from "./node_modules/react";
-import PropTypes from "./node_modules/prop-types";
+import React from "react";
+import PropTypes from "prop-types";
 import "../css/Counter.css";
-import Button from "./node_modules/@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 
 export default class Counter extends React.Component {
   constructor() {

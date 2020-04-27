@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Preview from '../Component/Preview';
-import getText from '../Component/getText';
-import Snake from '../Component/Snake';
-import Food from '../Component/Food';
-import Food2 from '../Component/Food2';
-import Food3 from '../Component/Food3';
-import Food4 from '../Component/Food4';
+import Preview from '../Components/LengGameOne/Preview';
+import getText from '../Components/LengGameOne/getText';
+import Snake from '../Components/LengGameOne/Snake';
+import Food from '../Components/LengGameOne/Food';
+import Food2 from '../Components/LengGameOne/Food2';
+import Food3 from '../Components/LengGameOne/Food3';
+import Food4 from '../Components/LengGameOne/Food4';
 
 const getRandomCoordinates = () => {
 	let min = 1;

@@ -1,4 +1,4 @@
-import React from "./node_modules/react";
+import React from "react";
 import "../css/SignUp.css";
 import {
   List,
@@ -11,7 +11,7 @@ import {
   Avatar,
   TextField,
   Button
-} from "./node_modules/@material-ui/core";
+} from "@material-ui/core";
 
 export default class SignUp extends React.Component {
   render() {

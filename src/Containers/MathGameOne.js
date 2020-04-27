@@ -1,8 +1,8 @@
-import React from './node_modules/react';
+import React from 'react';
 import "../css/MathGameOne.css";
 
 //Importar componentes//
-import GridComponent from '../components/GridComponent'
+import GridComponent from '../Components/GridComponent'
 
 
 
