@@ -1,5 +1,5 @@
 import React from 'react';
-import './palabrasPerdidas.css';
+import '../css/PalabrasPerdidas/palabrasPerdidas.css';
 
 //Importar componentes//
 import Board from '../Components/Board';

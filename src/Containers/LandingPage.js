@@ -1,5 +1,5 @@
 import React from 'react';
-import './landingPage.css';
+import '../css/PalabrasPerdidas/landingPage.css';
 
 //Importar componentes//
 import TrippleButton from '../Components/TripleButton.js';
