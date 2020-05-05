@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Frijole');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style the header */
+.header {
+  background-color: #efefef;
+  padding: 20px;
+  text-align: center;
+
+  color: #ff3b3f;
+  font-family: 'Frijole';
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+/* Left column */
+.column.side {
+  width: 25%;
+}
+
+/* Main column */
+.column.middle {
+  width: 70%;
+}
+
+.row {
+  background-color: #caebf2;
+  padding: 20px;
+
+  width: 70%;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Caja para las frases que hay que completar */
+.clearfix {
+  overflow: auto;
+  border: 3px solid rgb(255, 255, 255);
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: large;
+}
+
+
+body {
+  background-color: #ffffff;
+  margin: 0;
+}
+
+.boxPalabras {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 768px;
+  height: 500px; /* height: 100vh; -- con este tamaño el board ira hasta el fin de la pag*/
+  
+  overflow: hidden;
+
+  margin: 0 auto; /* to center it*/
+  padding: 15px;
+}
+
+.boxPalabras .board {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 230px;
+
+  background-color: #a9a9a9;
+
+  padding: 15px;
+}
+
+
+.divAlign {
+  display: inline-flex;
+}
+
+.flexbox {
+  display: inline-flex;
+
+  width: 100%;
+  max-width: 250px;
+  height: 100px; /* height: 100vh; -- con este tamaño el board ira hasta el fin de la pag*/
+  
+  overflow: hidden;
+
+  margin: 0 auto; /* to center it*/
+  padding: 15px; 
+
+}
+
+.flexbox .board {
+  display: inline-block;
+
+  width: 100%;
+  max-width: 230px;
+
+  height: 80px;
+
+  background-color: rgb(3, 19, 5);
+
+  padding: 15px;
+}

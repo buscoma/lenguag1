@@ -1,54 +1,28 @@
-import React, {Component} from 'react';
-import '../css/LandingPage.css';
-import TrippleButton from '../Components/TrippleButton';
-import RankingList from '../Components/RankingList';
-import Navbar from '../Components/NavBar'
+import React from 'react';
+import './landingPage.css';
 
-class LandingPage extends Component {
+//Importar componentes//
+import TrippleButton from '../Components/TripleButton.js';
+import RankingList from '../Components/RankingList.js';
 
-  state = {
-    showRanking: true
-  }
+function LandingPage() {
 
-  // se ejecutará una vez el usuario le de click al boton "Ranking"
-  toggleRankingListHandler = () => {
-    const doesShow = this.state.showRanking;
-    this.setState({showRanking: !doesShow});
-  }
+    return (
+        <div>            
+            <div className="LenguaMatica"> LenguaMatica!</div>
 
-  render () {
-    
-    // rankingList va a almacenar el componente = RankingList y solo lo va a mostrar cuando el boton de "Ranking" sea seleccionado
-    let rankingList = null;
+            <div className="mainBox">
+                <TrippleButton />     
 
-    if(this.state.showRanking){
-      rankingList = (
-        <div>
-          <h1> Ranking: </h1>
-          <RankingList />
+            
+            </div>
+
+            { /*
+            <h1> Ranking: </h1>
+            <RankingList />
+            */ }
         </div>
-      )
-    }
-
-    let user = {Name: "Ale" }
-
-    return (      
-        <div className="LandingPage">
-        
-          <Navbar User={user} />
-
-          <h1>Juego de Lengua!</h1>
-
-          <TrippleButton onClick={this.toggleRankingListHandler} />
-          
-          { rankingList }
-
-          { /* <img src={TestImg} alt='' /> */ }
-
-        </div>
-      );
-    }
+    );
 }
-
 
 export default LandingPage;
