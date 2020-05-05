@@ -60,16 +60,16 @@ function AutoGridNoWrap(props) {
   return (
     <div className={classes.root}  >
       <Paper  className={classes.paper}  style={{backgroundColor:backgroundColorPosition }} elevation={3} >
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item xs={2} md={4} >
-            <Typography  className={classes.topo} noWrap> #{data.posicion}</Typography>
-          </Grid>
-          <Grid item xs={4}    zeroMinWidth>
-            <Typography   className={classes.topo} noWrap>{data.nombre}</Typography>
-          </Grid>
-          <Grid item xs={6} md={4} zeroMinWidth>
-            <Typography  className={classes.topo} noWrap>{data.puntos}pts</Typography>
-          </Grid>
+        <Grid container wrap="wrap" spacing={2}>
+            <Grid item xs={4} sm={4} md={2} >
+              <Typography  className={classes.topo} noWrap> #{data.posicion}</Typography>
+            </Grid>
+            <Grid item xs={8} sm={4} md={6}   zeroMinWidth>
+              <Typography   className={classes.topo} noWrap>{data.nombre}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={4} md={4} zeroMinWidth>
+              <Typography  className={classes.topo} noWrap>{data.puntos}pts</Typography>
+            </Grid>
         </Grid>
       </Paper>
     </div>
@@ -77,7 +77,17 @@ function AutoGridNoWrap(props) {
 }
   
 
+
+const useStylesRaking = makeStyles((theme) => ({
+  font: {
+        fontWeight: 'bolder',
+        textAlign:'Left',
+    },
+  
+}));
+
 export default function TableResponsive(){
+  const classes = useStylesRaking();
 
   const [refresh, setRefresh] = useState(false);
   const [setErrors] = useState(false);
@@ -108,13 +118,13 @@ export default function TableResponsive(){
           <Container maxWidth='md'> 
             <Grid container wrap="wrap" spacing={2}>
               <Grid item xs={12} md={12} >
-                <Typography  variant="h3" style={{textAlign:'Left'}} noWrap> Mi Raking </Typography>
+                <Typography className={classes.font}  variant="h3"  noWrap> Mi Raking </Typography>
               </Grid>
               <Grid item xs={12}  >
                 <AutoGridNoWrap posicion={row[2].posicion} nombre={row[2].nombre} puntos={row[2].puntos} />
               </Grid>
               <Grid item xs={12} md={6} >
-                <Typography  variant="h3" style={{textAlign:'Left'}} noWrap> Raking </Typography>
+                <Typography className={classes.font}  variant="h3"  noWrap> Raking </Typography>
               </Grid>
               <Grid item xs={12} md={6} style={{textAlign:'Left'}} >
                 <Grid container justify="center" alignItems="flex-end" wrap="wrap" spacing={2}>
