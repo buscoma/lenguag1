@@ -1,15 +1,19 @@
 import React from 'react';
 import '../css/PalabrasPerdidas/landingPage.css';
+import NavBar from "../Components/NavBar.js"
 
 //Importar componentes//
 import TrippleButton from '../Components/TripleButton.js';
 import RankingList from '../Components/RankingList.js';
 
 function LandingPage() {
-
+    
+    let user = {Name: "Ale" }
+    
     return (
-        <div>            
-            <div className="LenguaMatica"> LenguaMatica!</div>
+        <div>
+            <NavBar User={user}/>
+            <div className="LenguaMatica"> Juego de Lengua!</div>
 
             <div className="mainBox">
                 <TrippleButton />     
