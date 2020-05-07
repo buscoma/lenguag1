@@ -1,11 +1,14 @@
 export default () => {
 
   const texts = [
-    "pregunta 1",
-    "pregunta 2",
-    "Pregunta 3",
+    "Rojo",
+    "Azul",
+    "Verde",
+    "Violeta",
+  
+  
   ];
   
-  return texts[Math.floor(Math.random()*texts.length)];
+  return  texts[Math.floor(Math.random()*texts.length)];
 
 }

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import {Button} from "@material-ui/core";
-import NavBar from "../Components/NavBar.js"
+import { Button, Tab } from '@material-ui/core';
+import NavBar from '../Components/NavBar.js';
 import Typography from '../Components/Typography';
-import Preview from '../Components/LengGameOne/Preview';
 import getText from '../Components/LengGameOne/getText';
+import getText2 from '../Components/LengGameOne/getText2';
+import getText3 from '../Components/LengGameOne/getText3';
 import Snake from '../Components/LengGameOne/Snake';
 import Food from '../Components/LengGameOne/Food';
 import Food2 from '../Components/LengGameOne/Food2';
 import Food3 from '../Components/LengGameOne/Food3';
 import Food4 from '../Components/LengGameOne/Food4';
+import Food5 from '../Components/LengGameOne/Food5';
+import Preview from '../Components/LengGameOne/Preview';
+
 
 const getRandomCoordinates = () => {
 	let min = 1;
@@ -19,6 +23,7 @@ const getRandomCoordinates = () => {
 };
 
 const initialState = {
+	
 	text: getText(),
 	userInput: '',
 	symbols: 0,
@@ -29,12 +34,46 @@ const initialState = {
 	food2: getRandomCoordinates(),
 	food3: getRandomCoordinates(),
 	food4: getRandomCoordinates(),
-	speed: 100,
+	food5: getRandomCoordinates(),
+	speed: 50,
 	direction: 'RIGHT',
-	snakeDots: [ [ 0, 0 ], [ 2, 0 ] ]
+	snakeDots: [ [ 0, 0 ], [ 2, 0 ],[4,0] ]
+};
+const initialState2 = {
+	text: getText2(),
+	userInput: '',
+	symbols: 0,
+	sec: 0,
+	started: false,
+	finished: false,
+	food: getRandomCoordinates(),
+	food2: getRandomCoordinates(),
+	food3: getRandomCoordinates(),
+	food4: getRandomCoordinates(),
+	food5: getRandomCoordinates(),
+	
+	direction: 'RIGHT',
+	snakeDots: [ [ 0, 0 ], [ 2, 0 ],[ 4, 0 ],[ 6, 0 ],[ 8, 0 ],[ 10, 0 ],[ 12, 0 ] ,[ 14, 0 ],[ 16, 0 ]],
+	speed: 50,
+};
+const initialState3 = {
+	text: getText3(),
+	userInput: '',
+	symbols: 0,
+	sec: 0,
+	started: false,
+	finished: false,
+	food: getRandomCoordinates(),
+	food2: getRandomCoordinates(),
+	food3: getRandomCoordinates(),
+	food4: getRandomCoordinates(),
+	food5: [0,0],
+	speed: 40,
+	direction: 'RIGHT',
+	snakeDots: [ [ 0, 0 ], [ 2, 0 ],[ 4, 0 ],[ 6, 0 ],[ 8, 0 ],[ 10, 0 ],[ 12, 0 ],[ 14, 0 ],[ 16, 0 ],[ 18, 0 ],[ 20, 0 ],[ 22, 0 ],[ 24, 0 ]  ]
 };
 
-let user = {Name: "Ale" }
+let user = { Name: 'Ale' };
 
 class LengGameOne extends Component {
 	state = initialState;
@@ -65,6 +104,30 @@ class LengGameOne extends Component {
 			default:
 				this.setState({ direction: 'RIGHT' });
 				break;
+		}
+	};
+	botonAbajo = (e) => {
+		e = e || window.event;
+		 {
+				this.setState({ direction: 'DOWN' });
+		}
+	};
+	botonArriba = (e) => {
+		e = e || window.event;
+		 {
+				this.setState({ direction: 'UP' });
+		}
+	};
+	botonIzquierda = (e) => {
+		e = e || window.event;
+		 {
+				this.setState({ direction: 'LEFT' });
+		}
+	};
+	botonDerecha = (e) => {
+		e = e || window.event;
+		 {
+				this.setState({ direction: 'RIGHT' });
 		}
 	};
 
@@ -117,24 +180,424 @@ class LengGameOne extends Component {
 		let food2 = this.state.food2;
 		let food3 = this.state.food3;
 		let food4 = this.state.food4;
+		let food5 = this.state.food5;
+		let text = this.state.text;
+		
+		
 
-		if (head[0] === food[0] && head[1] === food[1]) {
-			this.setState({
-				food: getRandomCoordinates(),
-				food2: getRandomCoordinates(),
-				food3: getRandomCoordinates(),
-				food4: getRandomCoordinates()
-			});
-			this.enlargeSnake();
-			this.increaseSpeed();
-		} else if (head[0] === food2[0] && head[1] === food2[1]) {
-			this.onGameOver();
-		} else if (head[0] === food3[0] && head[1] === food3[1]) {
-			this.onGameOver();
-		} else if (head[0] === food4[0] && head[1] === food4[1]) {
-			this.onGameOver();
+		if ((this.state.snakeDots.length<=8)&&((text === 'Rojo')||(text ==='#FF0000'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
 		}
-	}
+		else if (((this.state.snakeDots.length>=9) && (this.state.snakeDots.length <13))&&((text === 'Rojo')||(text ==='#FF0000'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel2();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length>=13)&&(text === 'Ultravioleta')) {
+			if (head[0] === food5[0] && head[1] === food5[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					
+					text: getText3(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel3();
+			
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			}
+		}
+
+		else if ((this.state.snakeDots.length<=8)&&((text === 'Azul')||(text ==='#0000FF'))) {
+			if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+		else if (((this.state.snakeDots.length>=9) && (this.state.snakeDots.length <13))&&((text === 'Azul')||(text ==='#0000FF'))) {
+			if (head[0] === food2[0] && head[1] === food2[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel2();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length>=13)&&(text === 'Ultravioleta'))  {
+			if (head[0] === food5[0] && head[1] === food5[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					
+					text: getText3(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel3();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length<=8)&&((text === 'Verde')||(text ==='#00FF00'))) {
+			if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+		else if (((this.state.snakeDots.length>=9 && this.state.snakeDots.length <13))&&((text === 'Verde')||(text ==='#00FF00'))) {
+			if (head[0] === food3[0] && head[1] === food3[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel2();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length>=13)&&((text === 'Ultravioleta'))) {
+			if (head[0] === food5[0] && head[1] === food5[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					
+					text: getText3(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel3();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length<=8)&&((text === 'Violeta')||(text ==='##7F00FF'))) {
+			if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			}
+		}
+		else if (((this.state.snakeDots.length>=9) && (this.state.snakeDots.length <13))&&((text === 'Violeta')||(text ==='#7F00FF'))) {
+			if (head[0] === food4[0] && head[1] === food4[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel2();
+			} else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			}
+		}
+		else if ((this.state.snakeDots.length>=13)&&((text === 'Ultravioleta'))) {
+			if (head[0] === food5[0] && head[1] === food5[1]) {
+			
+				this.setState({  
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					
+					text: getText3(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+				this.onNewLevel3();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}else if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			}
+		}
+
+	/*	else if ((this.state.snakeDots.length<=3)&&((text === 'Azul')||(text ==='#0000FF'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+					
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+			else if ((this.state.snakeDots.length>4)&&((text === 'Azul')||(text ==='#0000FF'))) {
+				if (head[0] === food[0] && head[1] === food[1]) {
+					this.setState({
+						
+						food: getRandomCoordinates(),
+						food2: getRandomCoordinates(),
+						food3: getRandomCoordinates(),
+						food4: getRandomCoordinates(),
+						text: getText2(),
+						
+	
+					});
+					this.enlargeSnake();
+					this.increaseSpeed();
+				} else if (head[0] === food2[0] && head[1] === food2[1]) {
+					this.onGameOver();
+				} else if (head[0] === food3[0] && head[1] === food3[1]) {
+					this.onGameOver();
+				} else if (head[0] === food4[0] && head[1] === food4[1]) {
+					this.onGameOver();
+				}
+			}
+
+		 else if ((this.state.snakeDots.length<=3)&&((text === 'Verde')||(text ==='#00FF00'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+					
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}		
+		}
+
+		else if ((this.state.snakeDots.length>4)&&((text === 'Verde')||(text ==='#00FF00'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.setState({
+					
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		}
+	
+
+		else if((this.state.snakeDots.length<=3)&&((text === 'Violeta')||(text ==='#7F00FF'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.onGameOver();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.setState({
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText(),
+					
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+			}
+		}
+	
+		else if ((this.state.snakeDots.length>4)&&((text === 'Violeta')||(text ==='#7F00FF'))) {
+			if (head[0] === food[0] && head[1] === food[1]) {
+				this.setState({
+					
+					food: getRandomCoordinates(),
+					food2: getRandomCoordinates(),
+					food3: getRandomCoordinates(),
+					food4: getRandomCoordinates(),
+					text: getText2(),
+					
+
+				});
+				this.enlargeSnake();
+				this.increaseSpeed();
+			} else if (head[0] === food2[0] && head[1] === food2[1]) {
+				this.onGameOver();
+			} else if (head[0] === food3[0] && head[1] === food3[1]) {
+				this.onGameOver();
+			} else if (head[0] === food4[0] && head[1] === food4[1]) {
+				this.onGameOver();
+			}
+		} 
+	}*/
+}
+	
+	
 
 	enlargeSnake() {
 		let newSnake = [ ...this.state.snakeDots ];
@@ -145,16 +608,42 @@ class LengGameOne extends Component {
 	}
 
 	increaseSpeed() {
-		if (this.state.speed > 10) {
+		if (this.state.speed > 5) {
 			this.setState({
-				speed: this.state.speed - 10
+				speed: this.state.speed - 50
 			});
 		}
 	}
 
 	onGameOver() {
-		alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
+		if (this.state.snakeDots.length <= 4) {
+			alert(`Game Over. Sumo ${this.state.snakeDots.length -3} pregunta correcta!`);
+		} else {
+			alert(`Game Over. Sumo ${this.state.snakeDots.length -3} preguntas correctas!`);
+		}
+
 		this.setState(initialState);
+	}
+	onNewLevel() {
+		if (this.state.snakeDots.length === 7) {
+			alert(`MUY BIEN, AL PROXIMO NIVEL: NIVEL 2!`);
+			
+			this.setState(initialState2);
+		}
+
+
+	}
+	onNewLevel2() {
+		if (this.state.snakeDots.length === 12) {
+			alert(`EXCELENTE! A VER....NIVEL DIOS!`);
+			this.setState(initialState3);
+		}
+	}
+	onNewLevel3() {
+		if (this.state.snakeDots.length === 13) {
+			alert(`FELICITACIONES GANO EL JUEGO!`);
+			this.setState(initialState);
+		}
 	}
 
 	onRestart = () => {
@@ -169,6 +658,8 @@ class LengGameOne extends Component {
 			});
 		}
 	}
+	
+
 
 	render() {
 		return (
@@ -181,16 +672,31 @@ class LengGameOne extends Component {
 					<Food2 dot={this.state.food2} />
 					<Food3 dot={this.state.food3} />
 					<Food4 dot={this.state.food4} />
+					<Food5 dot={this.state.food5} />
 					<div className="game-area2">
-						<Preview text={this.state.text} userInput={this.state.userInput} />
-						<Button variant="contained" color="secondary" onClick={this.onRestart}>
+					<Preview  justifyContent="center" text= {this.state.text}/>	
+					<Button variant="contained" color="secondary" onClick={this.onRestart}>
 							Restart
 						</Button>
 						<Button variant="contained" color="primary" href="/landing_page">
 							Volver
 						</Button>
+						<Tab/> <Button variant="contained"  onClick={this.botonArriba}>ARRIBA</Button>
+						<br/> 
+						<Tab/>
+						<Tab/>
+						<Button  variant="contained" onClick={this.botonIzquierda}>IZQUIERDA</Button>
+						<Button  variant="contained" onClick={this.botonDerecha}>DERECHA</Button>
+						<br/>
+						<Tab/>
+						<Tab/>
+						 <Button variant="contained" onClick={this.botonAbajo}>ABAJO</Button>				
 					</div>
+					
 				</div>
+				
+						
+						
 			</div>
 		);
 	}
