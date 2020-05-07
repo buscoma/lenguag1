@@ -1,10 +1,11 @@
 import React from 'react';
-import '../css/PalabrasPerdidas/landingPage.css';
-import NavBar from "../Components/NavBar.js"
+import '../css/LandingPage.css';
 
 //Importar componentes//
-import TrippleButton from '../Components/TripleButton.js';
-import RankingList from '../Components/RankingList.js';
+import DobleBoton from '../Components/DobleBoton.js';
+import NavBar from '../Components/NavBar.js';
+
+// import RankingList from '../Components/RankingList.js';
 
 function LandingPage() {
     
@@ -16,7 +17,7 @@ function LandingPage() {
             <div className="LenguaMatica"> Juego de Lengua!</div>
 
             <div className="mainBox">
-                <TrippleButton />     
+                <DobleBoton />     
 
             
             </div>
