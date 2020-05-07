@@ -11,13 +11,13 @@ const images = [
         url: lenguaImg,
         title: 'Lengua',
         width: '25%',
-        href: '/lengua'
+        href: '/leng_game_one'
     },
     {
         url: rankingImg,
         title: 'Ranking',
         width: '25%',
-        href: '/ranking'
+        href: '/ranking_page'
     },
 ];
 
