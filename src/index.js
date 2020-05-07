@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route path="/landing_page" component={LandingPage} />
       <Route path="/ranking_page" component={RankingPage} />
       <Route path="/leng_game_one" component={LengGameOne} />
-      <Route path="/palabras_p" component={PalabrasPerdidas} />
+      <Route path="/palabras_perdidas" component={PalabrasPerdidas} />
       <Route path="/" component={Home} />
     </Switch>
   </Router>,

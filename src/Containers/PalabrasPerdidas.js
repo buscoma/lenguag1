@@ -31,15 +31,14 @@ const row = [
 function PalabrasPerdidas() {
 
     return (        
-        <Container>    
-            <CssBaseline >    
+        <Container>
+            <CssBaseline />    
                 <div className="header">
                     <h1> Palabras perdidas </h1>
                     <p> Completa las frases utilizando las palabras del recuadro </p>
                 </div>
                 
                 <Grid container spacing={3} className="row">
-
                     <Grid item xs={3}>
                         <div className="boxPalabras">
                             <Board id="board-0" className="board">
@@ -62,7 +61,6 @@ function PalabrasPerdidas() {
                         </div>
                     </Grid>
                 </Grid>
-            </CssBaseline>
         </Container>
     );
 }
