@@ -23,7 +23,16 @@ export default function Login(props){
     paper,
     TextBlackShadow,
     logo,logoClose,
-    TitleH2,
+    TitleH2:  {
+      fontSize: "2rem",
+      padding: ".7rem",
+    
+      textAlign: "center",
+      "@media (min-width: 768px)": {
+        fontSize: "2.5rem",
+        padding: "1.5rem",
+      },
+    },
     TextBold,
     buttom,
     input
@@ -100,7 +109,7 @@ export default function Login(props){
               </Button>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
-                <Typography className={classes.TitleH2 + " " + classes.TextBold}>  Not registered yet? </Typography>
+                <Typography className={classes.TitleH2 + " " + classes.TextBold}>  No estas registrado aun? </Typography>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
                 <Button
