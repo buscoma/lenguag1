@@ -1,22 +1,61 @@
-import React, {Component} from 'react';
-
-class ComprensionLectoraController extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            baseUrl: "http://www.mocky.io/v2/5eb4e5210e00005e00081e29",
+class ComprensionLectoraController{
+    obtenerNivel = (dificultad) => {
+        switch(dificultad){
+            case 1: 
+                return{
+                    Pregunta: "¿La mama de Julia tiene cinco hijas Papa, Pepa, Pipa y Popa. Como se llama la ultima hija?",
+                    Respuestas: [
+                        {
+                            Descripcion: "Pupa",
+                            Correcta: false,
+                        },
+                        {
+                            Descripcion: "Julia",
+                            Correcta: true,
+                        },
+                        {
+                            Descripcion: "Pepa",
+                            Correcta: false,
+                        },
+                    ],
+                };
+            case 2: 
+                return{
+                Pregunta: "¿De que color ese el caballo blanco de San Martin?",
+                Respuestas: [
+                    {
+                        Descripcion: "Blanco",
+                        Correcta: true,
+                    },
+                    {
+                        Descripcion: "Negro",
+                        Correcta: false,
+                    },
+                    {
+                        Descripcion: "Azul",
+                        Correcta: false,
+                    },
+                ],
+                };
+            case 3:
+                return{
+                    Pregunta: "¿Que pesa mas un Kg de acero o un Kg de algodón ?",
+                    Respuestas: [
+                        {
+                            Descripcion: "Un Kg de acero",
+                            Correcta: false,
+                        },
+                        {
+                            Descripcion: "Un Kg de plumas",
+                            Correcta: false,
+                        },
+                        {
+                            Descripcion: "Ambos pesan lo mismo",
+                            Correcta: true,
+                        },
+                    ],
+                };
         }
-        this.fetchData = this.fetchData.bind(this);
-    }
-
-    fetchData(){
-        return fetch(this.state.baseUrl)
-        .then((response) => {
-            return response.json();
-        })
-        .then((responseData) => {
-            return responseData.result;
-        });
     }
 }
 

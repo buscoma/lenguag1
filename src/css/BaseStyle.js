@@ -4,7 +4,7 @@ const TitleH1 = {
   padding: "1rem",
   color: "white",
   textAlign: "center",
-  textShadow: "4px 4px 4px black",
+  textShadow: "3px 3px 3px black",
   /* TABLET */
   "@media (min-width: 768px)": {
     fontSize: "6rem",
@@ -13,20 +13,26 @@ const TitleH1 = {
 };
 
 const TitleH2 = {
-  fontSize: "1.5rem",
-  padding: ".5rem",
+  fontSize: "2rem",
+  padding: ".7rem",
+  color: "white",
+  textAlign: "center",
+  textShadow: "2px 2px 2px black",
   "@media (min-width: 768px)": {
-    fontSize: "2rem",
-    padding: "1rem",
+    fontSize: "5rem",
+    padding: "1.5rem",
   },
 };
 
 const TitleH3 = {
-  fontSize: "1rem",
-  padding: ".3rem",
+  fontSize: "1.5rem",
+  padding: ".5rem",
+  color: "white",
+  textAlign: "center",
+  textShadow: "1px 1px 1px black",
   "@media (min-width: 768px)": {
-    fontSize: "1.5rem",
-    padding: "0.7rem",
+    fontSize: "4rem",
+    padding: "1rem",
   },
 };
 
@@ -126,6 +132,11 @@ const paperIncorrecta = {
   opacity: "0.85",
 };
 
+const paperNumero = {
+  opacity: "0.85",
+  borderRadius: "35px",
+};
+
 export {
   TitleH1,
   TitleH2,
@@ -139,4 +150,5 @@ export {
   paper,
   paperCorrecta,
   paperIncorrecta,
+  paperNumero,
 };

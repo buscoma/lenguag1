@@ -1,34 +1,17 @@
-import React, { useEffect, useState } from "react";
-import * as BaseStyle from "../css/BaseStyle.js";
-import controller from "../Controllers/ComprensionLectoraCtrl"
+import React, { useState } from "react";
 import {
-  CssBaseline,
   Container,
-  Typography,
-  CircularProgress,
+  makeStyles,
   Paper,
-  Grid,
+  Typography,
   Button,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import * as BaseStyle from "../css/BaseStyle.js";
+import controller from "../Controllers/ComprensionLectoraCtrl";
 import { Background } from "../Images";
 
-export default function ComprensionLectora(props) {
-  const [nivel, setNivel] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [startGame, setStartGame] = useState(true);
-  const [gameState, setGameState] = useState({
-    perdio: false,
-  });
-  const [data, setData] = useState({});
-  useEffect(() => {
-    let _data = controller.fetchData();
-    console.log({data: data})
-    setData(_data)
-    setLoading(false)
-  }, []);
-
-  const root = {
+const useStyles = makeStyles((theme) => ({
+  root: {
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
     height: "100vh",
@@ -38,30 +21,55 @@ export default function ComprensionLectora(props) {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-  };
-  const useStyles = makeStyles({
-    root,
-    TitleH1: BaseStyle.TitleH1,
-    TitleH2: BaseStyle.TitleH2,
-    TitleH3: BaseStyle.TitleH3,
-    label: BaseStyle.ButtomDefualt,
-    container: BaseStyle.ContainerCenter,
-    progress: BaseStyle.progress,
-    paperCorrecta: BaseStyle.paperCorrecta,
-    paperInorrecta: BaseStyle.paperIncorrecta,
-    paper: BaseStyle.paper,
+  },
+  containerOpciones: {
+    /* MOBILE */
+    alignSelf: "strech",
+    justifyContent: "center",
+    padding: "2rem",
+    display: "flex",
+    flexDirection: "column",
+    /* TABLET */
+    "@media (min-width: 768px)": {
+      fontSize: "2rem",
+      padding: "2rem",
+    },
+    "@media (min-width: 1000px)": {
+      fontSize: "6rem",
+      padding: "2rem",
+      alignSelf: "Center",
+      textAlign: "center",
+      maxWidth: "900px",
+    },
+  },
+  container: BaseStyle.ContainerCenter,
+  H1: BaseStyle.TitleH1,
+  H2: BaseStyle.TitleH2,
+  H3: BaseStyle.TitleH3,
+  paper: BaseStyle.paper,
+  paperCorrecta: BaseStyle.paperCorrecta,
+  paperIncorrecta: BaseStyle.paperIncorrecta,
+  containerOpciones: {
+    marginTop: "50px",
+  },
+  paperNumero: BaseStyle.paperNumero
+}));
+
+const ComprensionLectora = (props) => {
+  const classes = useStyles();
+
+  const [nivelState, setNivelState] = useState({
+    dificultad: 1,
+    nivel: controller.obtenerNivel(1),
+    perdio: false,
   });
-  const classes = useStyles(props);
-  const subirNivel = () => {
-    if (nivel == 3){
-      console.log("Ganaste!")
-      reiniciar(); // TODO: Dialogo que lleve al siguiente juego !
-    }else{
-      setNivel(nivel+1);
-    }
-  };
+
+  const [gameState, setGameState] = useState({
+    perdio: false,
+  });
+
   const opcionClickHandler = (opcion) => {
-    if (opcion.valid) {
+    if (opcion.Correcta === true) {
       console.log("Correcta!");
       subirNivel();
     } else {
@@ -69,49 +77,64 @@ export default function ComprensionLectora(props) {
       setGameState({ perdio: true });
     }
   };
+
+  const subirNivel = () => {
+    if (nivelState.dificultad === 3) {
+      alert("ganaste!")
+      return;
+    }
+
+    var nuevaDificultad = nivelState.dificultad + 1;
+    setNivelState({
+      dificultad: nuevaDificultad,
+      nivel: controller.obtenerNivel(nuevaDificultad),
+    });
+  };
+
   const reiniciar = () => {
     setGameState({ perdio: false });
-  }
+
+    setNivelState({
+      dificultad: 1,
+      nivel: controller.obtenerNivel(1),
+    });
+  };
+
   return (
-    <div>
-      {!loading ? (
-        <div className={classes.root}>
-          <CssBaseline />
-          {startGame && (
-            <Container className={classes.container}>
-              <Grid container spacing={3} alignItems="center">
-                <Grid item xs={12} style={{ textAlign: "center" }}>
-                  <Paper elevation={4}>
-                    <Typography className={classes.TitleH2}>
-                      {data[nivel].query}
-                    </Typography>
-                  </Paper>
-                </Grid>
-                {/* <Grid item xs={12} style={{ textAlign: "center" }}>
-                  <Paper elevation={2}>{data[nivel].resp[0].value}</Paper>
-                </Grid> */}
-                {data[nivel].resp.map((opcion) => (
-                  <Grid item xs={12} style={{ textAlign: "center" }}>
-                  <Paper
-                    className={
-                      !gameState.perdio
-                        ? classes.paper
-                        : opcion.valid
-                        ? classes.paperCorrecta
-                        : classes.paperIncorrecta
-                    }
-                    onClick={() =>
-                      !gameState.perdio ? opcionClickHandler(opcion): null
-                    }
-                    key={opcion.value}
-                  >
-                    {opcion.value}
-                  </Paper>
-                </Grid>
-                ))}
-                </Grid>
-            </Container>
-          )}
+    <div className={classes.root}>
+      <Container className={classes.container}>
+        <Typography className={classes.H1}>
+          <Paper className={classes.paperNumero}>
+            {"Nivel " + nivelState.dificultad}
+          </Paper>
+        </Typography>
+        <Typography className={classes.H2}>
+          <Paper className={classes.paperNumero}>
+            {nivelState.nivel.Pregunta}
+          </Paper>
+        </Typography>
+        <Container className={classes.containerOpciones}>
+          {nivelState.nivel.Respuestas.map((opcion) => (
+            <Typography className={classes.H3}>
+              <Paper
+                elevation={4}
+                className={
+                  !gameState.perdio
+                    ? classes.paper
+                    : opcion.Correcta
+                    ? classes.paperCorrecta
+                    : classes.paperIncorrecta
+                }
+                onClick={() =>
+                  gameState.perdio ? null : opcionClickHandler(opcion)
+                }
+                key={opcion.Descripcion}
+              >
+                {opcion.Descripcion}
+              </Paper>
+            </Typography>
+          ))}
+        </Container>
         {gameState.perdio ? (
           <Button
             variant="contained"
@@ -121,12 +144,9 @@ export default function ComprensionLectora(props) {
             Jugar de nuevo
           </Button>
         ) : null}
-        </div>
-      ) : (
-        <div className={classes.root}>
-          <CircularProgress color="secondary" size={80} />
-        </div>
-      )}
+      </Container>
     </div>
   );
-}
+};
+
+export default ComprensionLectora;
