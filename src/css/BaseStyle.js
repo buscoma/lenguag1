@@ -12,6 +12,30 @@ const TitleH1 = {
     },
 }
 
+const TitleH2= {
+    fontSize: '1.5rem',
+    padding:'.5rem',
+    '@media (min-width: 768px)': {
+        fontSize: '2rem',
+        padding:'1rem',
+    },
+}
+
+const TextWhiteShadow = {
+    color: 'white',
+    textShadow: '4px 4px 4px black',
+}
+
+const TextBlackShadow = {
+    color: 'black',
+    textShadow: '4px 4px 4px white',
+}
+
+const TextBold = {
+    fontWeight: 'bold',
+}
+
+
 const ButtomDefualt = {
     /* MOBILE */
     fontSize: '1.5rem',
@@ -20,9 +44,11 @@ const ButtomDefualt = {
      /* TABLET */
     '@media (min-width: 768px)': {
         fontSize: '2rem',
-        padding:'2rem'
+        padding:'1rem'
     },
 }
+
+
 
 const ContainerCenter = {
      /* MOBILE */
@@ -43,7 +69,7 @@ const ContainerCenter = {
         padding:'2rem',
         alignSelf: "Center",
         textAlign:'center',
-        display:'init'
+        maxWidth:'900px'
     },
 
     
@@ -51,6 +77,10 @@ const ContainerCenter = {
 
 export {
     TitleH1,
+    TitleH2,
+    TextWhiteShadow,
+    TextBlackShadow,
+    TextBold,
     ButtomDefualt,
     ContainerCenter
 }
