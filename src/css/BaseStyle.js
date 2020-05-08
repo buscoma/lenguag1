@@ -15,9 +15,8 @@ const TitleH1 = {
 const TitleH2 = {
   fontSize: "2rem",
   padding: ".7rem",
-  color: "white",
+
   textAlign: "center",
-  textShadow: "2px 2px 2px black",
   "@media (min-width: 768px)": {
     fontSize: "5rem",
     padding: "1.5rem",

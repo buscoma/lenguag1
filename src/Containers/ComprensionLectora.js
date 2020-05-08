@@ -5,10 +5,13 @@ import {
   Paper,
   Typography,
   Button,
+  Grid,
 } from "@material-ui/core";
 import * as BaseStyle from "../css/BaseStyle.js";
 import controller from "../Controllers/ComprensionLectoraCtrl";
 import { Background } from "../Images";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import NavBar from '../Components/NavBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,8 +29,18 @@ const useStyles = makeStyles((theme) => ({
     /* MOBILE */
     alignSelf: "strech",
     justifyContent: "center",
-    padding: "2rem",
+    padding: ".1rem",
     display: "flex",
+    label:{
+      color:'white',
+      height:'12vw',
+      width:'12vw',
+      //SCALE FOR TABLET
+      '@media (min-width: 768px)': {
+        height:'8vw',
+      width:'8vw',
+    },
+    },
     flexDirection: "column",
     /* TABLET */
     "@media (min-width: 768px)": {
@@ -44,14 +57,30 @@ const useStyles = makeStyles((theme) => ({
   },
   container: BaseStyle.ContainerCenter,
   H1: BaseStyle.TitleH1,
-  H2: BaseStyle.TitleH2,
-  H3: BaseStyle.TitleH3,
+  H2: {
+    fontSize: "1.5rem",
+    padding: ".7rem",
+  
+    textAlign: "center",
+    "@media (min-width: 768px)": {
+      fontSize: "2rem",
+      padding: ".5rem",
+    },
+  },
+  H3: {
+    fontSize: "1.5rem",
+    padding: ".5rem",
+    color: "white",
+    textAlign: "center",
+    textShadow: "1px 1px 1px black",
+    "@media (min-width: 768px)": {
+      fontSize: "3rem",
+      padding: "1rem",
+    },
+  },
   paper: BaseStyle.paper,
   paperCorrecta: BaseStyle.paperCorrecta,
   paperIncorrecta: BaseStyle.paperIncorrecta,
-  containerOpciones: {
-    marginTop: "50px",
-  },
   paperNumero: BaseStyle.paperNumero
 }));
 
@@ -101,40 +130,53 @@ const ComprensionLectora = (props) => {
   };
 
   return (
+    <div>
+    <NavBar User={{Name: "Ale" }} />
     <div className={classes.root}>
+      
+      <CssBaseline />
       <Container className={classes.container}>
-        <Typography className={classes.H1}>
-          <Paper className={classes.paperNumero}>
-            {"Nivel " + nivelState.dificultad}
-          </Paper>
-        </Typography>
-        <Typography className={classes.H2}>
-          <Paper className={classes.paperNumero}>
-            {nivelState.nivel.Pregunta}
-          </Paper>
-        </Typography>
-        <Container className={classes.containerOpciones}>
-          {nivelState.nivel.Respuestas.map((opcion) => (
+        <Grid container>
+          <Grid item xs={12} >
             <Typography className={classes.H3}>
-              <Paper
-                elevation={4}
-                className={
-                  !gameState.perdio
-                    ? classes.paper
-                    : opcion.Correcta
-                    ? classes.paperCorrecta
-                    : classes.paperIncorrecta
-                }
-                onClick={() =>
-                  gameState.perdio ? null : opcionClickHandler(opcion)
-                }
-                key={opcion.Descripcion}
-              >
-                {opcion.Descripcion}
+              <Paper className={classes.paperNumero}>
+                {"Nivel " + nivelState.dificultad}
               </Paper>
             </Typography>
-          ))}
-        </Container>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography className={classes.H2}>
+              <Paper className={classes.paperNumero}>
+                {nivelState.nivel.Pregunta}
+              </Paper>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Container className={classes.containerOpciones}>
+              {nivelState.nivel.Respuestas.map((opcion) => (
+                <Typography className={classes.H3}>
+                  <Paper
+                    elevation={4}
+                    style={{marginBottom:'0px'}}
+                    className={
+                      !gameState.perdio
+                        ? classes.paper
+                        : opcion.Correcta
+                        ? classes.paperCorrecta
+                        : classes.paperIncorrecta
+                    }
+                    onClick={() =>
+                      gameState.perdio ? null : opcionClickHandler(opcion)
+                    }
+                    key={opcion.Descripcion}
+                  >
+                    {opcion.Descripcion}
+                  </Paper>
+                </Typography>
+              ))}
+            </Container>
+          </Grid>
+        </Grid>
         {gameState.perdio ? (
           <Button
             variant="contained"
@@ -145,6 +187,7 @@ const ComprensionLectora = (props) => {
           </Button>
         ) : null}
       </Container>
+    </div>
     </div>
   );
 };
