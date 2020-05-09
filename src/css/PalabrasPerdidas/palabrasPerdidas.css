@@ -25,12 +25,6 @@
   margin: 0 auto;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 /* Caja para las frases que hay que completar */
 .clearfix {
@@ -45,10 +39,6 @@
 .boxPalabras {
   display: flex;
   justify-content: space-between;
-
-  width: 100%;
-  max-width: 768px;
-  height: 500px; /* height: 100vh; -- con este tamaño el board ira hasta el fin de la pag*/
   
   overflow: hidden;
 
@@ -61,11 +51,12 @@
   flex-direction: column;
 
   width: 100%;
-  max-width: 230px;
-
+  
   background-color: #a9a9a9;
 
   padding: 15px;
+
+  min-height: 200px;
 }
 
 

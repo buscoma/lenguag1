@@ -4,7 +4,7 @@ import app from "../base.js";
 import { AuthContext } from "./Auth.js";
 import { TextField, Button, Dialog, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import {TitleH2, TextBold} from '../css/BaseStyle.js';
+import {TitleH2, TextBold, TextBlackShadow} from '../css/BaseStyle.js';
 import {paperScrollPaper, buttom, paper, logo, logoClose, input} from '../css/BaseLineDialog';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -21,8 +21,18 @@ export default function Login(props){
     },
     paperScrollPaper,
     paper,
+    TextBlackShadow,
     logo,logoClose,
-    TitleH2,
+    TitleH2:  {
+      fontSize: "2rem",
+      padding: ".7rem",
+    
+      textAlign: "center",
+      "@media (min-width: 768px)": {
+        fontSize: "2.5rem",
+        padding: "1.5rem",
+      },
+    },
     TextBold,
     buttom,
     input
@@ -66,7 +76,7 @@ export default function Login(props){
                 <img src={RegistrarLogo} style={{height:'15vh',width:'15vh'}} alt="React Logo" />
               </Grid>
               <Grid item xs={12} style={{textAlign:'center'}} >
-                <Typography className={classes.TitleH2 + " " + classes.TextBold}  >Registrate para jugar!!</Typography> 
+                <Typography className={classes.TitleH2 + " " + classes.TextBold + " " + classes.TextBlackShadow}  >Registrate para jugar!!</Typography> 
               </Grid>
               <Grid item xs={12} justify="strech" alignItems="center" style={{textAlign:'center'}}>
                 <TextField
@@ -99,7 +109,7 @@ export default function Login(props){
               </Button>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
-                <Typography className={classes.TitleH2 + " " + classes.TextBold}>  Not registered yet? </Typography>
+                <Typography className={classes.TitleH2 + " " + classes.TextBold}>  No estas registrado aun? </Typography>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
                 <Button
