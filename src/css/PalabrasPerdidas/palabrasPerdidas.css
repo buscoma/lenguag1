@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Frijole');
+@import url("https://fonts.googleapis.com/css?family=Frijole");
 
 * {
   margin: 0;
@@ -13,7 +13,7 @@
   text-align: center;
 
   color: #ff3b3f;
-  font-family: 'Frijole';
+  font-family: "Frijole";
 }
 
 .row {
@@ -25,21 +25,21 @@
   margin: 0 auto;
 }
 
-
 /* Caja para las frases que hay que completar */
 .clearfix {
   overflow: auto;
   border: 3px solid rgb(255, 255, 255);
   padding: 10px;
   margin-bottom: 10px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: large;
 }
 
 .boxPalabras {
   display: flex;
   justify-content: space-between;
-  
+
   overflow: hidden;
 
   margin: 0 auto; /* to center it*/
@@ -51,7 +51,7 @@
   flex-direction: column;
 
   width: 100%;
-  
+
   background-color: #a9a9a9;
 
   padding: 15px;
@@ -59,19 +59,17 @@
   min-height: 200px;
 }
 
-
 .flexbox {
   display: inline-flex;
 
   width: 100%;
   max-width: 250px;
   height: 100px; /* height: 100vh; -- con este tamaño el board ira hasta el fin de la pag*/
-  
+
   overflow: hidden;
 
   margin: 0 auto; /* to center it*/
-  padding: 15px; 
-
+  padding: 15px;
 }
 
 .flexbox .board {

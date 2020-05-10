@@ -99,7 +99,7 @@ const JuegoNumAPalabra = (props) => {
 
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
-      alert("ganaste!")
+      alert("ganaste!");
       return;
     }
 

@@ -27,21 +27,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundAttachment: "fixed",
-    backgroundSize:"cover",
+    backgroundSize: "cover",
     backgroundColor: "#AAbbCC",
     height: "100vh",
     padding: "20px",
-    textAlign:"center"
+    textAlign: "center",
   },
   nivel: {
     fontWeight: "bold",
   },
-  boxNivel:{
-    margin: "30pt 0 0 0"
+  boxNivel: {
+    margin: "30pt 0 0 0",
   },
-  boxTexto:{
-    margin: "20pt 0 20pt 0"
-  }
+  boxTexto: {
+    margin: "20pt 0 20pt 0",
+  },
 }));
 
 export default function GameIntro(props) {
