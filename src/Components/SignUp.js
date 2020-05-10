@@ -62,7 +62,7 @@ export default function SignUp(props){
                 <img src={RegistrarLogo} className={classes.logo}  alt="React Logo" />
               </Grid>
               <Grid item xs={12} style={{textAlign:'center'}} >
-              <Typography className={classes.TitleH2 + " " + classes.TextBold}  >Registrate para jugar!!</Typography> 
+              <Typography className={classes.TitleH2 + " " + classes.TextBold}  >Registrate para jugar!!!</Typography> 
               </Grid>
               <Grid item xs={12} justify="strech" alignItems="center" style={{textAlign:'center'}}>
                 <TextField
@@ -91,7 +91,7 @@ export default function SignUp(props){
                   type="submit"
                   color="primary"
                 >
-                  Registrarse
+                  Confirmar
                 </Button>
               </Grid>
             </Grid>

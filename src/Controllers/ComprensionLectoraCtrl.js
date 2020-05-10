@@ -3,7 +3,7 @@ class ComprensionLectoraController{
         switch(dificultad){
             case 1: 
                 return{
-                    Pregunta: "¿La mama de Julia tiene cinco hijas Papa, Pepa, Pipa y Popa. Como se llama la ultima hija?",
+                    Pregunta: "¿La mamá de Julia tiene cinco hijas: Papa, Pepa, Pipa, Popa ¿Cómo se llama la última hija?",
                     Respuestas: [
                         {
                             Descripcion: "Pupa",
@@ -21,7 +21,7 @@ class ComprensionLectoraController{
                 };
             case 2: 
                 return{
-                Pregunta: "¿De que color ese el caballo blanco de San Martin?",
+                Pregunta: "¿De qué color es el caballo blanco de San Martín?",
                 Respuestas: [
                     {
                         Descripcion: "Blanco",
@@ -39,14 +39,14 @@ class ComprensionLectoraController{
                 };
             case 3:
                 return{
-                    Pregunta: "¿Que pesa mas un Kg de acero o un Kg de algodón ?",
+                    Pregunta: "¿Qué pesa más 1 kilo de manazanas 🍎 o 1 kilo de algodón ☁?",
                     Respuestas: [
                         {
-                            Descripcion: "Un Kg de acero",
+                            Descripcion: "1 kilo de manzanas 🍎",
                             Correcta: false,
                         },
                         {
-                            Descripcion: "Un Kg de plumas",
+                            Descripcion: "1 kilo de algodón ☁",
                             Correcta: false,
                         },
                         {

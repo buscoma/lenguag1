@@ -76,7 +76,7 @@ export default function Login(props){
                 <img src={RegistrarLogo} style={{height:'15vh',width:'15vh'}} alt="React Logo" />
               </Grid>
               <Grid item xs={12} style={{textAlign:'center'}} >
-                <Typography className={classes.TitleH2 + " " + classes.TextBold + " " + classes.TextBlackShadow}  >Registrate para jugar!!</Typography> 
+                <Typography className={classes.TitleH2 + " " + classes.TextBold + " " + classes.TextBlackShadow}>Ingresa con tu usuario</Typography> 
               </Grid>
               <Grid item xs={12} justify="strech" alignItems="center" style={{textAlign:'center'}}>
                 <TextField
@@ -105,11 +105,11 @@ export default function Login(props){
                 type="submit"
                 color="primary"
               >
-                Iniciar
+                Ingresar
               </Button>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
-                <Typography className={classes.TitleH2 + " " + classes.TextBold}>  No estas registrado aun? </Typography>
+                <Typography className={classes.TitleH2 + " " + classes.TextBold}>¿No estas registrado aún?</Typography>
               </Grid>
               <Grid item xs={12} justify="center" alignItems="center" style={{textAlign:'center'}}>
                 <Button
@@ -118,7 +118,7 @@ export default function Login(props){
                   onClick={() => handleRegister()}
                   color="secondary"
                 >
-                  Registrarse
+                  Registrate
                 </Button>
               </Grid>
             </Grid>

@@ -11,9 +11,7 @@ import {TitleH1, ContainerCenter} from '../css/BaseStyle';
 const useStyles = makeStyles({
     TitleH1,
     
-  });
-  
-
+});
 export default function LandingPage() {
     let user = {Name: "Ale" }
     const classes = useStyles();
@@ -23,7 +21,7 @@ export default function LandingPage() {
             <NavBar User={user}/>
             
             <div className="mainBox">
-            <div className={classes.TitleH1}> Juego de Lengua!</div>
+            <div className={classes.TitleH1}>Comencemos a jugar</div>
                 <DobleBoton />     
             </div>
         </div>

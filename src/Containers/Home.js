@@ -45,7 +45,7 @@ export default function Home(props) {
       <CssBaseline />
       <Container className={classes.container}>
         <ThemeProvider >
-        <Typography className={classes.TitleH1}>Lengua</Typography>
+        <Typography className={classes.TitleH1}>LenguaMática</Typography>
         </ThemeProvider>
         <Button
           onClick={handleLoginClick}
@@ -53,7 +53,7 @@ export default function Home(props) {
           className={classes.label}
           color="primary"
         >
-          Comencemos a Jugar!
+          Ingresar
         </Button>
         {dialogLogin ? <Login show={handleLoginClick} showSignUp={handleSignUpClick} /> : null}
         {dialogSignUp ? <SignUp show={handleSignUpClick} /> : null}
