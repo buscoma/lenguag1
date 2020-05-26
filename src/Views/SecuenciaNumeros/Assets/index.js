@@ -1,0 +1,1 @@
+export const BackgroundMat = require('./backgroundMat.jpg');
