@@ -8,9 +8,13 @@ import ArrowBackIosRoundedIcon from "@material-ui/icons/ArrowBackIosRounded";
 import Avatar from "@material-ui/core/Avatar";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {useStyles} from "./Styles";
 
+// Componentes externos
+import firebaseAuth from "../Firebase";
 import { AvatarZombie, WoodGrain } from "./Assets";
+
+// Componentes internos
+import {useStyles} from "./Styles";
 
 export default function NavBar(props) {
   const classes = useStyles();
@@ -33,6 +37,7 @@ export default function NavBar(props) {
 
   const handleBack = () => {
     console.log("handleBackClicked");
+    firebaseAuth.auth().signOut();
   };
 
   const handleHome = () => {

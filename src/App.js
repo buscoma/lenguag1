@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import { AuthProvider } from "./Components/Auth";
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "./PrivateRoute";
 import { createBrowserHistory } from "history";
 
 class App extends Component {
