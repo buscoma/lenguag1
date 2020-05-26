@@ -1,19 +1,6 @@
 // Librerias
 import React, { useState, useContext } from "react";
 import { Button, Container, Typography } from "@material-ui/core";
-<<<<<<< HEAD:src/Containers/Home.js
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-import { AuthContext } from "../Components/Auth.js";
-import Login from "../Components/Login.js";
-import SignUp from "../Components/SignUp.js";
-import Background from "../Images/background.jpg";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { TitleH1, ButtomDefualt, ContainerCenter } from "../css/BaseStyle.js";
-=======
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -25,7 +12,6 @@ import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import {Background} from "./Assets";
 import { TitleH1, ButtomDefualt, ContainerCenter } from "./Styles";
->>>>>>> develop:src/Views/Home/index.js
 
 const root = {
   backgroundImage: `url(${Background})`,

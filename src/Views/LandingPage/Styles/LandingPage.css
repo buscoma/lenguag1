@@ -7,13 +7,8 @@
   font-size: xx-large;
 }
 
-<<<<<<< HEAD:src/css/LandingPage.css
-.mainBox {
-  background-image: url("../Images/background.jpg");
-=======
 .mainBox{
   background-image: url("../Assets/background.jpg");
->>>>>>> develop:src/Views/LandingPage/Styles/LandingPage.css
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
 
