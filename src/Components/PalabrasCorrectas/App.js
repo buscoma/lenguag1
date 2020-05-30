@@ -1,126 +1,116 @@
 import React, { Component } from 'react';
-import Preview from './Preview';
 import PalabrasCorrectas from './PalabrasCorrectas';
-
-
-
-
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        position: 0, 
-        text: PalabrasCorrectas(),
-        userInput: '',
-    };
-}
+  
 
-  state = {
-    position: 0, 
-    text: PalabrasCorrectas(),
+	constructor(props) {
+		super(props);
+		this.state = {
+			position: 0,
+			text: PalabrasCorrectas(),
+			userInput: ''
+		};
+  }
+
+  
+
+	state = {
+		position: 0,
+		text: PalabrasCorrectas(),
     userInput: '',
-  }
-
-  onRestart = () => {
+    mensaje: "",
     
-  }
+	};
 
-  checkIfCorrect (){
-    
-    if(this.state.text[this.state.position].EsCorrecta===true){
-      alert('Correcto!  ! ')
-      if(this.state.text.length-1>this.state.position){
-        
-      let x=this.state.position;
-      this.setState({position:x+1})
-      }
-      else
-      alert('HAS GANADO')
-    }
-    else {alert('Incorrecto!')} 
-   
-  }
+	onRestart = () => {};
 
-  checkIfInCorrect (text,posicion){
-    
-    if(this.state.text[this.state.position].EsCorrecta===false){
-      alert('Correcto!  ')
-      if(this.state.text.length-1>this.state.position){
+	checkIfCorrect() {
+		if (this.state.text[this.state.position].EsCorrecta === true) {
+			this.setState({mensaje:'Correcto!! '});
+			if (this.state.text.length - 1 > this.state.position) {
+				let x = this.state.position;
+				this.setState({ position: x + 1 });
+			} else this.setState({mensaje:'Has ganado!'});
+		} else {
+			this.setState({mensaje:'InCorrecto!! '});
+		}
+	}
 
-      let x=this.state.position;
-      this.setState({position:x+1})
-      }
-      else alert('HAS GANADO')
-    }
-    else {alert('Incorrecto!')} 
-   
-  }
+	checkIfInCorrect(text, posicion) {
+		if (this.state.text[this.state.position].EsCorrecta === false) {
+			this.setState({mensaje:'Correcto!! '});
+			if (this.state.text.length - 1 > this.state.position) {
+				let x = this.state.position;
+				this.setState({ position: x + 1 });
+			} else this.setState({mensaje:'Has ganado!! '});
+		} else {
+			this.setState({mensaje:'Incorrecto!! '});
+		}
+	}
 
+	onUserInputChange = (e) => {
+		const v = e.target.value;
+		this.onFinish(v);
+		this.setState({
+			userInput: v,
+			symbols: this.countCorrectSymbols(v)
+		});
+	};
 
-  onUserInputChange = (e) => {
-    const v = e.target.value;
-    this.onFinish(v)
-    this.setState({
-      userInput: v,
-      symbols: this.countCorrectSymbols(v)
-    })
-  }
+	onFinish(userInput) {
+		if (userInput === this.state.text) {
+			clearInterval(this.interval);
+			this.setState({
+				finished: true
+			});
+			alert('bien');
+		}
+	}
 
-  onFinish(userInput) {
-    if (userInput === this.state.text) {
-      clearInterval(this.interval);
-      this.setState({
-        finished: true
-      })
-      alert('bien');
-    }
-   
-  }
+	countCorrectSymbols(userInput) {
+		const text = this.state.text.replace(' ', '');
+		return userInput.replace(' ', '').split('').filter((s, i) => s === text[i]).length;
+	}
 
-  countCorrectSymbols(userInput) {
-    const text = this.state.text.replace(' ', '');
-    return userInput.replace(' ', '').split('').filter((s,i) => s === text[i]).length;
-  }
-
- 
-
-  render() {
-    
-    
-    return (
-      
-      <div className="container mt-5 mb-5">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 text-center">
-            <Preview text={this.state.text[this.state.position].palabra} userInput={this.state.userInput}/>
-           
-           <div className="text-center">
-            <text>ES CORRECTO?</text>
-            <br/>
-            <button className="btn btn-light" onClick={()=>this.checkIfCorrect()} >SI</button>
-            <button className="btn btn-light" onClick={()=>this.checkIfInCorrect()} >NO</button>
-           
-            </div>
-            <br/>
-          {/*}  <textarea
-              value={this.state.userInput}
-              onChange={this.onUserInputChange}
-              className="form-control mb-3"
-              placeholder="Start typing..."
-              readOnly={this.state.finished}
-            ></textarea> */}
-           
-            <div className="text-center">
-       
-              <button className="btn btn-light" onClick={this.onRestart}>Restart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="root">
+				<Container fixed>
+					<Grid container spacing={3}>
+						<Grid item xs={12}>
+							
+								{this.state.text[this.state.position].palabra}
+							
+							
+						</Grid>
+						<Grid item xs={12}>
+						<Typography className="center">
+            	ES CORRECTO?
+              </Typography>
+						</Grid>
+						<Grid item xs={12} md={6}>
+            <Button variant="contained" onClick={() => this.checkIfCorrect()} fullWidth>SI </Button>
+							
+							
+							
+						</Grid>
+						<Grid item xs={12} md={6}>
+            <Button variant="contained" onClick={() => this.checkIfInCorrect()} fullWidth>NO </Button>
+						</Grid>
+            <Grid item xs={12}>
+            {this.state.mensaje}
+            </Grid>
+					</Grid>
+				</Container>
+			</div>
+		);
+	}
 }
 
 export default App;
