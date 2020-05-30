@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PalabrasCorrectas from './PalabrasCorrectas';
+import PalabrasCorrectas from './PalabrasCorrectas.js';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
