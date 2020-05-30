@@ -3,13 +3,13 @@ import { Router, Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import { AuthProvider } from "./Components/Auth";
 import PrivateRoute from "./PrivateRoute";
-import history from "./history";
+import { createBrowserHistory } from "history";
 
 class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <Router history={history}>
+        <Router history={createBrowserHistory()}>
           <Switch>
             {routes.map((route) =>
               route.public ? (

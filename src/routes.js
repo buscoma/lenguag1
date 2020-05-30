@@ -1,22 +1,99 @@
+// Librerias
 import React from "react";
-import Home from "./Containers/Home.js";
-import LandingPage from "./Containers/LandingPage.js";
-import RankingPage from "./Containers/RankingPage.js";
-import LengGameOne from "./Containers/LengGameOne.js";
-import PalabrasPerdidas from "./Containers/PalabrasPerdidas.js";
-import JuegoNumAPalabra from "./Containers/JuegoNumAPalabra";
-import ComprensionLectora from "./Containers/ComprensionLectora";
-import PalabrasCorrectas from "./Components/PalabrasCorrectas/App"
+
+// Miscelaneos
+import Home from "./Views/Home";
+import RankingPage from "./Views/RankingPage";
+import LandingPage from "./Views/LandingPage";
+
+// Lengua
+
+import ComprensionLectora from "./Views/ComprensionLectora";
+import PalabrasCorrectas from "./Views/PalabrasCorrectas";
+import PalabrasPerdidas from "./Views/PalabrasPerdidas";
+
+// Matemática
+import JuegoNumAPalabra from "./Views/JuegoNumAPalabra";
+import BurgerBuilder from "./Views/BurgerBuilder";
+import SecuenciaNumeros from "./Views/SecuenciaNumeros";
 
 const routes = [
-  { key: 1, public: true, name: "Home", path: "/", exact: true, main: () => <Home /> },
-  { key: 2, public: false, name: "LandingPage", path: "/landing_page", exact: true, main: () => <LandingPage /> },
-  { key: 3, public: false, name: "LengGameOne", path: "/leng_game_one", exact: true, main: () => <LengGameOne /> },
-  { key: 4, public: false, name: "RankingPage", path: "/ranking_page", exact: true, main: () => <RankingPage /> },
-  { key: 5, public: false, name: "PalabrasPerdidas", path: "/palabras_perdidas", exact: true, main: () => <PalabrasPerdidas /> },
-  { key: 6, public: false, name: "NumeroAPalabra", path: "/numero_a_palabra", exact: true, main: () => <JuegoNumAPalabra /> },
-  { key: 7, public: true, name: "ComprensionLectora", path: "/comprension_lectora", exact: true, main: () => <ComprensionLectora /> },
-  { key: 8, public: true, name: "PalabrasCorrectas", path: "/palabras_correctas", exact: true, main: () => <PalabrasCorrectas /> }
+  {
+    key: 1,
+    public: true,
+    name: "Home",
+    path: "/",
+    exact: true,
+    main: () => <Home />,
+  },
+  {
+    key: 2,
+    public: false,
+    name: "RankingPage",
+    path: "/ranking_page",
+    exact: true,
+    main: () => <RankingPage />,
+  },
+  {
+    key: 3,
+    public: false,
+    name: "LandingPage",
+    path: "/landing_page",
+    exact: true,
+    main: () => <LandingPage />,
+  },
+
+  {
+    key: 4,
+    public: false,
+    name: "ComprensionLectora",
+    path: "/comprension_lectora",
+    exact: true,
+    main: () => <ComprensionLectora />,
+  },
+  {
+    key: 5,
+    public: false,
+    name: "PalabrasCorrectas",
+    path: "/palabras_correctas",
+    exact: true,
+    main: () => <PalabrasCorrectas />,
+  },
+  {
+    key: 6,
+    public: false,
+    name: "PalabrasPerdidas",
+    path: "/palabras_perdidas",
+    exact: true,
+    main: () => <PalabrasPerdidas />,
+  },
+
+  {
+    key: 7,
+    public: false,
+    name: "NumeroAPalabra",
+    path: "/numero_a_palabra",
+    exact: true,
+    main: () => <JuegoNumAPalabra />,
+  },
+
+  {
+    key: 8,
+    public: false,
+    name: "BurgerBuilder",
+    path: "/burger_builder",
+    exact: true,
+    main: () => <BurgerBuilder />,
+  },
+
+  {
+    key: 9,
+    public: false,
+    name: "Secuencia números",
+    path: "/secuencia_numeros",
+    exact: true,
+    main: () => <SecuenciaNumeros />,
+  },
 ];
 
 export default routes;

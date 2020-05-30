@@ -1,0 +1,1 @@
+export const FastFood = require("./FastFood.jpg");
