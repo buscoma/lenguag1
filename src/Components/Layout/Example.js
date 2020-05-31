@@ -6,31 +6,33 @@ import Button from '@material-ui/core/Button';
 
 export default function Example(props){
 
-    const [gane, setGane] = useState(false);
-    const [perdi, setPerdi] = useState(false);
     const [puntos, setPuntos] = useState(0);
     const [nivel, setNivel] = useState(1);
+    const [dialog, setDialog] = useState("bienvenido");
+    const [show, setShow] = useState(false);
 
 
     return (
-        <MyComponent
+         <MyComponent
+            game="Palabras perdidas"
             level={nivel}
             points={puntos}
-            showerWinner={gane}
-            setShowWinner={setGane}
-            showLoser={perdi}
-            setShowLoser={setPerdi}
+            show={show}
+            handleShow={setShow}
+            dialogAction={dialog}
             backgroundImage={BackgroundImage}
             color="white"
             backgroundPaper="rgba(0,0,0,.3)"
             enunciado={"un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!l"}
         >
-           HOLA
-           <Button variant="contained" color="primary"  onClick={()=> {setGane(true);console.log(gane)}}>
+           <Button variant="contained" color="primary"  onClick={()=> {setDialog("Ganaste");setShow(true);}}>
                                 GANAE
                             </Button>
-                            <Button variant="contained" onClick={()=> setPerdi(true)} color="primary" >
+                            <Button variant="contained" onClick={()=> {setDialog("Perdiste");setShow(true);}} color="primary" >
                                 PERDI
+                            </Button>
+                            <Button variant="contained" onClick={()=> {setDialog("Fin");setShow(true);}} color="primary" >
+                                Fin
                             </Button>
                             <Button variant="contained" color="primary"  onClick={()=> setPuntos(puntos + 1)}>
                                 SUMAR PUTNOS

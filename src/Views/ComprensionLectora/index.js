@@ -9,6 +9,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import LayaoutContainer from '../../Components/Layout/LayaoutContainer';
 
 // Componentes externos
 import NavBar from "../../Components/NavBar";
@@ -135,8 +136,8 @@ const ComprensionLectora = (props) => {
   };
 
   return (
-    <div>
-      <NavBar User={{ Name: "Ale" }} />
+    <LayaoutContainer >
+     
       <div className={classes.root}>
         <CssBaseline />
         <Container className={classes.container}>
@@ -192,7 +193,7 @@ const ComprensionLectora = (props) => {
           ) : null}
         </Container>
       </div>
-    </div>
+    </LayaoutContainer>
   );
 };
 
