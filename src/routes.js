@@ -17,6 +17,9 @@ import JuegoNumAPalabra from "./Views/JuegoNumAPalabra";
 import BurgerBuilder from "./Views/BurgerBuilder";
 import SecuenciaNumeros from "./Views/SecuenciaNumeros";
 
+//Layout
+import ExampleLayout from "./Components/Layout/Example";
+
 const routes = [
   {
     key: 1,
@@ -93,6 +96,14 @@ const routes = [
     path: "/secuencia_numeros",
     exact: true,
     main: () => <SecuenciaNumeros />,
+  },
+  {
+    key: 10,
+    public: false,
+    name: "Secuencia números",
+    path: "/example_rapa",
+    exact: true,
+    main: () => <ExampleLayout />,
   },
 ];
 
