@@ -1,17 +1,18 @@
 // Librerias
 import React, { Component } from "react";
 import { Paper, Typography, Button } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 
 // Componentes externos
-import Dialog from "../../Components/Dialog";
+import LayoutGame from '../../Components/Layout/LayaoutContainer';
+import BackgroundImage from './Assets/FastFood.jpg';
 
 // Componentes internos
 import Burger from "./Components/Burger";
 import BuildControls from "./Components/Burger/Components/BuildControls";
 import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
+
 
 
 class BurgerBuilder extends Component {
@@ -72,7 +73,9 @@ class BurgerBuilder extends Component {
         operacion: this.recuperarOperacion(nivel),
       };
 
-    if (nivel === 2)
+    if (nivel === 2) {
+      this.setShow(true);
+      this.setStateOfGame("WINNER");
       return {
         numero: nivel,
         orden: {
@@ -83,8 +86,12 @@ class BurgerBuilder extends Component {
         },
         operacion: this.recuperarOperacion(nivel),
       };
+    }
 
-    if (nivel === 3)
+
+    if (nivel === 3){
+      this.setShow(true);
+      this.setStateOfGame("WINNER");
       return {
         numero: nivel,
         orden: {
@@ -95,6 +102,8 @@ class BurgerBuilder extends Component {
         },
         operacion: this.recuperarOperacion(nivel),
       };
+    }
+      
   };
 
   state = {
@@ -107,12 +116,13 @@ class BurgerBuilder extends Component {
     },
     openDialog: false,
     perdiste: false,
-    startGame: true,
+    //Layout state
+    show: false,
+    stateOfGame: "Enunciado"
   };
 
-  handleStartGame = () => {
-    this.setState({ startGame: false });
-  };
+  setShow = (state) => { this.setState({ show: state, }) }
+  setStateOfGame = (state) => { this.setState({ stateOfGame: state, }) }
 
   addIngridientHandler = (type) => {
     this.setState({
@@ -150,7 +160,7 @@ class BurgerBuilder extends Component {
   handleDialogClose = () => {
     console.log("handleDialogClose called!");
     if (
-      this.state.nivel.operacion.respuesta !=
+      this.state.nivel.operacion.respuesta !==
       this.state.nivel.operacion.respuestaUsuario
     ) {
       this.setState({
@@ -195,7 +205,8 @@ class BurgerBuilder extends Component {
     console.log("handleNextLevel called!");
     let nivelSiguiente = this.state.nivel;
     if (nivelSiguiente.numero === 3) {
-      alert("Ganaste!");
+      this.setShow(true);
+      this.setStateOfGame("END");
       return;
     }
 
@@ -238,8 +249,66 @@ class BurgerBuilder extends Component {
     }
 
     return (
-      <div className="BurgerBuilder">
-        {this.state.startGame ? (
+      <LayoutGame
+        backgroundImage={BackgroundImage}
+        title="Burger Builder"
+        enunciado="Tienes hambre, vamos a hacer burgers"
+        show={this.state.show}
+        setShow={this.setShow}
+        stateOfGame={this.state.stateOfGame}
+        level={this.state.nivel.numero}
+      >
+        <div className="BurgerBuilder">
+
+          <Paper className="OrderDetail" elevation={4}>
+            <Typography variant="h6">Nivel {this.state.nivel.numero}</Typography>
+            <Typography variant="inherit">
+              Arma una hamburguesa con los siguientes ingredientes: Carne:{" "}
+              {this.state.nivel.orden.carne}, Queso:{" "}
+              {this.state.nivel.orden.queso}, Lechuga:{" "}
+              {this.state.nivel.orden.lechuga}, Panceta:{" "}
+              {this.state.nivel.orden.panceta}
+            </Typography>
+          </Paper>
+          <Burger ingredients={this.state.ingredients} />
+
+          <Grid container spacing={2} justify="center" alignItems="center">
+            <Grid item xs={12} md={8}>
+              <BuildControls
+                ingridientAdded={this.addIngridientHandler}
+                ingridientRemoved={this.removeIngridientHandler}
+                disabled={disabledInfo}
+                ingredients={this.state.ingredients}
+              ></BuildControls>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleBotonOrdenar()}
+                className="OrderButton"
+              >
+                Marche pedido
+            </Button>
+            </Grid>
+          </Grid>
+
+          <DialogOperacion
+            open={this.state.openDialog}
+            handleClose={this.handleDialogClose}
+            respuestaChanged={this.handleRespuestaChanged}
+            operation={this.state.nivel.operacion}
+            gameStatus={this.state.perdiste}
+            handleGameOver={this.handleGameOver}
+          />
+        </div>
+      </LayoutGame>
+    );
+  }
+}
+
+export default BurgerBuilder;
+/*{this.state.startGame ? (
           <Dialog
             bienvenida={this.state.startGame}
             show={this.handleStartGame}
@@ -247,52 +316,4 @@ class BurgerBuilder extends Component {
             tipo="Burger"
             nivel={this.state.nivel.numero}
           />
-        ) : null}
-        <CssBaseline />
-        <Paper className="OrderDetail" elevation={4}>
-          <Typography variant="h6">Nivel {this.state.nivel.numero}</Typography>
-          <Typography variant="inherit">
-            Arma una hamburguesa con los siguientes ingredientes: Carne:{" "}
-            {this.state.nivel.orden.carne}, Queso:{" "}
-            {this.state.nivel.orden.queso}, Lechuga:{" "}
-            {this.state.nivel.orden.lechuga}, Panceta:{" "}
-            {this.state.nivel.orden.panceta}
-          </Typography>
-        </Paper>
-        <Burger ingredients={this.state.ingredients} />
-
-        <Grid container spacing={2} justify="center" alignItems="center">
-          <Grid item xs={12} md={8}>
-            <BuildControls
-              ingridientAdded={this.addIngridientHandler}
-              ingridientRemoved={this.removeIngridientHandler}
-              disabled={disabledInfo}
-              ingredients={this.state.ingredients}
-            ></BuildControls>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleBotonOrdenar()}
-              className="OrderButton"
-            >
-              Marche pedido
-            </Button>
-          </Grid>
-        </Grid>
-
-        <DialogOperacion
-          open={this.state.openDialog}
-          handleClose={this.handleDialogClose}
-          respuestaChanged={this.handleRespuestaChanged}
-          operation={this.state.nivel.operacion}
-          gameStatus={this.state.perdiste}
-          handleGameOver={this.handleGameOver}
-        />
-      </div>
-    );
-  }
-}
-
-export default BurgerBuilder;
+        ) : null} */

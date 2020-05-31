@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import {  makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -30,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     height: '25vw',
     width: '25vw',
     [theme.breakpoints.up('md')]: {
-      height: '40vw',
-      width: '40vw',
+      height: '30vw',
+      width: '30vw',
     },
   },
   textTitle:{
@@ -63,7 +62,7 @@ export default function CustomizedDialogs(props) {
       maxWidth="xl"
       open={props.showDialog}
     >
-      <Container maxWidth="xl" className={classes.root} >
+      <Container maxWidth="xl" className={[classes.root, classes.center].join(" ")} >
         <Grid container spacing={2}>
           <Hidden mdUp>
             <Grid item xs={12} className={[classes.right].join(" ")}  >
@@ -72,10 +71,10 @@ export default function CustomizedDialogs(props) {
               </IconButton>
             </Grid>
           </Hidden>
-          <Grid item xs={12} md={4} className={[classes.center].join(" ")}>
+          <Grid item xs={12} md={6} className={[classes.center].join(" ")}>
             <img src={props.icon} onClick={props.show} className={classes.logo} alt="React Logo" />
           </Grid>
-          <Grid container item spacing={2} xs={12} md={8} justify="center">
+          <Grid container item spacing={2} xs={12} md={6} justify="center">
             <Hidden smDown>
               <Grid item xs={12} className={[classes.right].join(" ")}>
                 <IconButton  className={classes.closeButton} onClick={props.setShowDialog}>
@@ -83,16 +82,16 @@ export default function CustomizedDialogs(props) {
                 </IconButton>
               </Grid>
             </Hidden>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} >
               <Typography className={[classes.center, classes.textTitle].join(" ")}> {props.title}</Typography>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} >
               <Typography className={[classes.textSubTitle].join(" ")}> Enunciado </Typography>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} >
               <Typography variant="h6">{props.description}</Typography>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} >
               {props.children} 
             </Grid>
           </Grid>

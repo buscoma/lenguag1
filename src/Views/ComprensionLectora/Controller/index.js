@@ -56,6 +56,9 @@ class ComprensionLectoraController {
             },
           ],
         };
+        default:
+          console.log("Caso defualt en el switch del controler de Compresion lectora COntroller");
+        break;
     }
   };
 }

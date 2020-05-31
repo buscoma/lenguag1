@@ -1,17 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-import {Background} from "../Assets";
-
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundImage: `url(${Background})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundAttachment: "fixed",
-    backgroundSize: "cover",
-    backgroundColor: "#e0da62",
-    height: "100vh",
-    padding: "30px",
     textAlign: "center",
   },
   paper: {

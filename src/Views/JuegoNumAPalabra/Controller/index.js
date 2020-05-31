@@ -55,6 +55,9 @@ class JuegoNumAPalabraCtrl {
             },
           ],
         };
+        default:
+          console.log("Caso defualt en el switch del controler de JuegoNUmApalabra");
+        break;
     }
   }
 }

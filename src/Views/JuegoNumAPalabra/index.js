@@ -2,9 +2,13 @@
 import React, { useState } from "react";
 import { Container, Paper, Typography, Button } from "@material-ui/core";
 
+// Componentes externos
+import LayoutGame from '../../Components/Layout/LayaoutContainer';
+
 // Componentes internos
 import controller from "./Controller";
 import styles from "./Styles";
+import {Background} from "./Assets";
 
 const JuegoNumAPalabra = (props) => {
   const classes = styles();
@@ -19,11 +23,19 @@ const JuegoNumAPalabra = (props) => {
     perdio: false,
   });
 
+  //Layout hook
+  const [show, setShow] = useState(false);
+  const [stateOfGame, setStateOfGame] = useState("Enunciado");
+
   const opcionClickHandler = (opcion) => {
     if (opcion.Correcta === true) {
+      setStateOfGame("WINNER");
+      setShow(true);
       console.log("Correcta!");
       subirNivel();
     } else {
+      setStateOfGame("LOSER");
+      setShow(true);
       console.log("Incorrecta");
       setGameState({ perdio: true });
     }
@@ -31,7 +43,8 @@ const JuegoNumAPalabra = (props) => {
 
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
-      alert("ganaste!");
+      setStateOfGame("END");
+      setShow(true);
       return;
     }
 
@@ -52,7 +65,14 @@ const JuegoNumAPalabra = (props) => {
   };
 
   return (
-    <div>
+    <LayoutGame
+      backgroundImage={Background}
+      title="Numeros a palabras"
+      enunciado="Selecciona el como se escribe el numero en la parte superiro"
+      show={show}
+      setShow={setShow}
+      stateOfGame={stateOfGame}
+    >
       <Container className={classes.container}>
         <Typography variant="h2" style={{ fontWeight: "bold" }}>
           <Paper elevation={4} className={classes.paperNumero}>
@@ -89,7 +109,7 @@ const JuegoNumAPalabra = (props) => {
           </Button>
         ) : null}
       </Container>
-    </div>
+    </LayoutGame>
   );
 };
 

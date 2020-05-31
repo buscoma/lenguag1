@@ -14,15 +14,15 @@ export default function Example(props){
 
     return (
          <MyComponent
-            game="Palabras perdidas"
             level={nivel}
             points={puntos}
             show={show}
-            handleShow={setShow}
-            dialogAction={dialog}
+            setShow={setShow}
+            stateOfGame={dialog}
             backgroundImage={BackgroundImage}
             color="white"
             backgroundPaper="rgba(0,0,0,.3)"
+            title="Palabras perdidas"
             enunciado={"un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!l"}
         >
            <Button variant="contained" color="primary"  onClick={()=> {setDialog("Ganaste");setShow(true);}}>
