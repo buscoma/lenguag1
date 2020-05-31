@@ -1,15 +1,15 @@
 // Librerias
-import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { Grid, Container } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid} from "@material-ui/core";
 
 // Componentes externos
-import NavBar from "../../Components/NavBar";
+import LayoutGame from "../../Components/Layout/LayaoutContainer";
 
 // Componentes internos
 import "./Styles/palabrasPerdidas.css";
 import Board from "./Components/Board";
 import Card from "./Components/Card";
+import BackgroundImage from "./Assets/background.jpg";
 
 const row = [
   {
@@ -39,16 +39,19 @@ const row = [
 ];
 
 function PalabrasPerdidas() {
+
+  const [show, setShow] = useState(false);
+  const [stateOfGame, setStateOfGame] = useState("BEGIN");
+
   return (
-    <Container>
-      <CssBaseline />
-      <NavBar User="Ale" />
-
-      <div className="header">
-        <h1> Palabras perdidas </h1>
-        <p> Completa las frases utilizando las palabras del recuadro </p>
-      </div>
-
+    <LayoutGame
+      show={show}
+      setShow={setShow}
+      stateOfGame={stateOfGame}
+      title="Palabras perdiddas"
+      enunciado="Oh, no!. Las palabras se han perdido y no saben como volver a sus oraciones. Ayudalas a volver a casa."
+      backgroundImage={BackgroundImage}
+    >
       <Grid container spacing={3} className="row">
         <Grid item lg={3} md={3} xs={5}>
           <div className="boxPalabras">
@@ -80,7 +83,7 @@ function PalabrasPerdidas() {
           </div>
         </Grid>
       </Grid>
-    </Container>
+    </LayoutGame>
   );
 }
 

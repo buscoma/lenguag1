@@ -9,7 +9,7 @@
 /* Style the header */
 .header {
   background-color: #efefef;
-  padding: 20px;
+  
   text-align: center;
 
   color: #ff3b3f;
@@ -17,11 +17,10 @@
 }
 
 .row {
-  background-color: #caebf2;
-  padding: 20px;
+  background-color: rgb(0,0, 0, 0.5);
 
   width: 70%;
-  height: 100vh;
+
   margin: 0 auto;
 }
 
