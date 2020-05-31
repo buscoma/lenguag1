@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
             <CssBaseline />
             
             <NewDialog 
-                showDialog={startGame || (props.show && props.stateOfGame === "Enunciado")} 
+                showDialog={startGame || (props.show && props.stateOfGame === "BEGIN")} 
                 setShowDialog={handleStartGame} 
                 title={props.title}
                 description={props.enunciado}

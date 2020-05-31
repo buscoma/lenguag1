@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import LayoutGame from '../../Components/Layout/LayaoutContainer';
 class App extends Component {
 
   
@@ -80,35 +80,40 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="root">
-				<Container fixed>
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							
-								{this.state.text[this.state.position].palabra}
-							
-							
+			<LayoutGame
+				title="Palabras Correctas"
+				enunciado="Sos bueno escribiendo. Identifica si la palabra esta escrita correctamente o no."
+			>
+				<div className="root">
+					<Container fixed>
+						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								
+									{this.state.text[this.state.position].palabra}
+								
+								
+							</Grid>
+							<Grid item xs={12}>
+							<Typography className="center">
+					ES CORRECTO?
+				</Typography>
+							</Grid>
+							<Grid item xs={12} md={6}>
+				<Button variant="contained" onClick={() => this.checkIfCorrect()} fullWidth>SI </Button>
+								
+								
+								
+							</Grid>
+							<Grid item xs={12} md={6}>
+				<Button variant="contained" onClick={() => this.checkIfInCorrect()} fullWidth>NO </Button>
+							</Grid>
+				<Grid item xs={12}>
+				{this.state.mensaje}
+				</Grid>
 						</Grid>
-						<Grid item xs={12}>
-						<Typography className="center">
-            	ES CORRECTO?
-              </Typography>
-						</Grid>
-						<Grid item xs={12} md={6}>
-            <Button variant="contained" onClick={() => this.checkIfCorrect()} fullWidth>SI </Button>
-							
-							
-							
-						</Grid>
-						<Grid item xs={12} md={6}>
-            <Button variant="contained" onClick={() => this.checkIfInCorrect()} fullWidth>NO </Button>
-						</Grid>
-            <Grid item xs={12}>
-            {this.state.mensaje}
-            </Grid>
-					</Grid>
-				</Container>
-			</div>
+					</Container>
+				</div>
+			</LayoutGame>
 		);
 	}
 }
