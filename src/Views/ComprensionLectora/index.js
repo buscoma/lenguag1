@@ -8,11 +8,9 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import LayaoutContainer from '../../Components/Layout/LayaoutContainer';
 
 // Componentes externos
-import NavBar from "../../Components/NavBar";
+import LayaoutGame from '../../Components/Layout/LayaoutContainer';
 
 // Componentes internos
 import * as BaseStyle from "./Styles";
@@ -21,12 +19,7 @@ import { Background } from "./Assets";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url(${Background})`,
-    backgroundSize: "cover",
-    height: "100vh",
     display: "flex",
-    backgroundAttachment: "fixed",
-    backgroundRepeat: "no-repeat",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
@@ -66,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
   H2: {
     fontSize: "1.5rem",
     padding: ".7rem",
-
     textAlign: "center",
     "@media (min-width: 768px)": {
       fontSize: "2rem",
@@ -99,15 +91,23 @@ const ComprensionLectora = (props) => {
     perdio: false,
   });
 
+  //Layout hook
+  const[show, setShow] = useState(false);
+  const[stateOfGame, setStateOfGame] = useState("Enunciado");
+
   const [gameState, setGameState] = useState({
     perdio: false,
   });
 
   const opcionClickHandler = (opcion) => {
     if (opcion.Correcta === true) {
+      setStateOfGame("WINNER");
+      setShow(true);
       console.log("Correcta!");
       subirNivel();
     } else {
+      setStateOfGame("LOSER");
+      setShow(true);
       console.log("Incorrecta");
       setGameState({ perdio: true });
     }
@@ -115,7 +115,9 @@ const ComprensionLectora = (props) => {
 
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
-      alert("ganaste!");
+      //alert("ganaste!");
+      setStateOfGame("END");
+      setShow(true);
       return;
     }
 
@@ -136,11 +138,15 @@ const ComprensionLectora = (props) => {
   };
 
   return (
-    <LayaoutContainer 
-    
+    <LayaoutGame 
+      backgroundImage={Background}
+      title="Compresion lectora"
+      enunciado="Entiende el enunciado y no jodas"
+      show={show}
+      setShow={setShow}
+      stateOfGame={stateOfGame}
     >
       <div className={classes.root}>
-        <CssBaseline />
         <Container className={classes.container}>
           <Grid container>
             <Grid item xs={12}>
@@ -194,7 +200,7 @@ const ComprensionLectora = (props) => {
           ) : null}
         </Container>
       </div>
-    </LayaoutContainer>
+    </LayaoutGame>
   );
 };
 
