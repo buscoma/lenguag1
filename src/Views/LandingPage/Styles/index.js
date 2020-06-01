@@ -1,13 +1,14 @@
 const TitleH1 = {
     /* MOBILE */
-    fontSize: "2.5rem",
+    fontSize: "2rem",
     padding: "1rem",
-    color: "white",
+    color: "black",
     textAlign: "center",
-    textShadow: "3px 3px 3px black",
+    fontWeight:"1000",
+    textDecoration:"underline",
     /* TABLET */
     "@media (min-width: 768px)": {
-    fontSize: "6rem",
+    fontSize: "4rem",
     padding: "2rem",
     },
 };
@@ -25,11 +26,12 @@ const TitleH2 = {
 const TitleH3 = {
     fontSize: "1.5rem",
     padding: ".5rem",
-    color: "white",
+    color: "black",
     textAlign: "center",
-    textShadow: "1px 1px 1px black",
+    fontWeight:"750",
+    textDecoration:"underline",
     "@media (min-width: 768px)": {
-        fontSize: "4rem",
+        fontSize: "2.5rem",
         padding: "1rem",
     },
 };

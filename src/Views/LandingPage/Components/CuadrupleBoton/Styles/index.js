@@ -7,7 +7,7 @@ const TitleH1 = {
     textShadow: "3px 3px 3px black",
     /* TABLET */
     "@media (min-width: 768px)": {
-    fontSize: "6rem",
+    fontSize: "4rem",
     padding: "2rem",
     },
 };

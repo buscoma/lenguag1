@@ -72,10 +72,10 @@ const useStyles = makeStyles((theme) => ({
   TextWhiteShadow,
   image: {
     position: "relative",
-    height: 200,
+    height: 100,
     [theme.breakpoints.down("xs")]: {
       width: "100% !important", // Overrides inline-style
-      height: 100,
+      height: 70,
     },
     "&:hover, &$focusVisible": {
       zIndex: 1,
@@ -85,13 +85,9 @@ const useStyles = makeStyles((theme) => ({
       "& $imageMarked": {
         opacity: 0,
       },
-      "& $imageTitle": {
-        border: "4px solid currentColor",
-      },
+     
     },
   },
-
-  focusVisible: {},
 
   imageButton: {
     position: "absolute",
@@ -133,26 +129,17 @@ const useStyles = makeStyles((theme) => ({
     }px`,
   },
 
-  // la rayita debajo del nombre
-  imageMarked: {
-    height: 3,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: "absolute",
-    bottom: -2,
-    left: "calc(50% - 9px)",
-    transition: theme.transitions.create("opacity"),
-  },
+  
 }));
 
 export default function CuadrupleBoton(props) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.ContainerCenter}>
-      <Grid container spacing={2} alignItems="center">
+   
+      <Grid container spacing={2} justify="center" alignItems="center">
         {(props.type == 'leng' ? imagesLeng : imagesMath).map((image) => (
-          <Grid item xs={12} md={3}>
+          <Grid item xs={6} md={5}>
             <ButtonBase
               focusRipple
               key={image.title}
@@ -184,13 +171,12 @@ export default function CuadrupleBoton(props) {
                   }
                 >
                   {image.title}
-                  <span className={classes.imageMarked} />
                 </Typography>
               </span>
             </ButtonBase>
           </Grid>
         ))}
       </Grid>
-    </Container>
+
   );
 }
