@@ -102,8 +102,8 @@ const useStyles = makeStyles((theme) => ({
                 title={props.title}
                 description={props.enunciado}
                 icon={IconGame}>
-                    <Button onClick={handleStartGame}> Elejir otro juego </Button>
-                    <Button> Jugar </Button>
+                    <Button href="/landing_page"> Elejir otro juego </Button>
+                    <Button onClick={handleStartGame}> Jugar </Button>
             </NewDialog>
             
             <NewDialog 
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
                 title={"Ganaste"}
                 description={"Felicitaciones, ganaste el nivel."}
                 icon={GanasteSvg}>
-                    <Button onClick={handleCloseDialog}> Elejir otro juego </Button>
+                    <Button href="/landing_page"> Elejir otro juego </Button>
                     <Button onClick={handleCloseDialog}> Seguir jugando </Button>
             </NewDialog>
 
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
                 title={"Perdiste"}
                 description={"Perdiste, ganaste el nivel."}
                 icon={PerdisteSvg}>
-                    <Button onClick={() => handleCloseDialog}> Elejir otro juego </Button>
+                    <Button href="/landing_page"> Elejir otro juego </Button>
                     <Button onClick={() => handleCloseDialog}> Volvera a jugar </Button>
             </NewDialog>
 
@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
                 title={"Se termino el juego"}
                 description={"Se termino el juego"}
                 icon={JuegoTerminado}>
-                    <Button onClick={() => handleCloseDialog}> Elejir otro juego </Button>
+                    <Button href="/landing_page"> Elejir otro juego </Button>
                     <Button onClick={() => handleCloseDialog}> Volvera a jugar </Button>
             </NewDialog>
             
