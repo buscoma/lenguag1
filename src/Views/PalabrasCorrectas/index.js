@@ -13,7 +13,9 @@ import Paper from '@material-ui/core/Paper';
 // Componentes externos
 import {
     useStylesPaper,
-    useStyleTypografy
+    useStyleTypografy,
+    useStylesButtom,
+    useStyleAlert,
         } from './Styles';
 
 // Componentes externos
@@ -26,7 +28,9 @@ const PalabrasCorrectas = (props) => {
 
     const clasess = useStylesPaper();
     const clasessTypografy = useStyleTypografy();
-
+    const clasessButtom = useStylesButtom();
+    const classesAlert = useStyleAlert();
+    
     const [state, setState] = useState({
         text: PalabrasCorrectasControler(),
         position: 0,
@@ -102,52 +106,52 @@ const PalabrasCorrectas = (props) => {
             stateOfGame={state.stateOfGame}
         >
             <Container>
-                <Grid container spacing={3}>
+                <Grid container spacing={3} style={{paddingTop:"15px"}}>
                     <Grid item xs={12}>
                         <Paper className={clasess.root}>
                             <Grid container spacing={3}>
                                 <Grid item xs={12}>
-                                    <Typography className={clasessTypografy.root}> La palabra esta escrita correctamente?</Typography>
+                                    <Typography  className={clasessTypografy.questionTitle}> La palabra esta escrita correctamente?</Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography> "{state.text[state.position].palabra}" </Typography>
+                                    <Typography className={clasessTypografy.wordSubTitle}> "{state.text[state.position].palabra}" </Typography>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <Button variant="contained" disabled={state.playNextWord} onClick={checkIfCorrect} fullWidth>SI </Button>
+                                    <Button variant="contained" className={clasessButtom.buttomYesOn} disabled={state.playNextWord} onClick={checkIfCorrect} fullWidth>SI </Button>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <Button variant="contained" disabled={state.playNextWord} onClick={checkIfInCorrect} fullWidth>NO </Button>
+                                    <Button variant="contained" className={clasessButtom.buttomYesOn} disabled={state.playNextWord} onClick={checkIfInCorrect} fullWidth>NO </Button>
                                 </Grid>
                             </Grid>
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
                         <Collapse in={state.rightAnswer}>
-                            <Grid container spacing={3}>
+                            <Grid container spacing={3} justify="center" >
                                 <Grid item xs={12}>
-                                    <Alert severity="success" >
-                                        <AlertTitle>RESPUESTA CORRECTO</AlertTitle>
+                                    <Alert icon=" " severity="success"  className={classesAlert.alert} >
+                                        <AlertTitle  className={classesAlert.alert} >RESPUESTA CORRECTO</AlertTitle>
                                         {state.mensaje}
                                     </Alert>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button variant="contained" onClick={readyForNextWord} fullWidth> ESTAS LISTO PARA CONTINUAR </Button>
+                                <Grid item xs={12} md={6}>
+                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={readyForNextWord} fullWidth> ESTAS LISTO PARA CONTINUAR </Button>
                                 </Grid>
                             </Grid>
                         </Collapse>
                         <Collapse in={state.wrongAnswer}>
-                            <Grid container spacing={3}>
+                            <Grid container spacing={3} justify="center">
                                 <Grid item xs={12}>
-                                    <Alert severity="error" >
-                                        <AlertTitle>RESPUESTA INCORRECTA</AlertTitle>
+                                    <Alert icon=" " severity="error" className={classesAlert.alert} >
+                                        <AlertTitle  className={classesAlert.alert} >RESPUESTA INCORRECTA</AlertTitle>
                                         {state.mensaje}
                                     </Alert>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button variant="contained" onClick={playAgain} fullWidth> Volver a juegar </Button>
+                                <Grid item xs={12} md={6}>
+                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={playAgain} fullWidth> Volver a juegar </Button>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button variant="contained" onClick={playAgain} fullWidth> Juegar a otra cosa </Button>
+                                <Grid item xs={12} md={6}>
+                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={playAgain} fullWidth> Juegar a otra cosa </Button>
                                 </Grid>
                             </Grid>
                         </Collapse>
