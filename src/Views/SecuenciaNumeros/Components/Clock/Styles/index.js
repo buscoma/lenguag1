@@ -1,11 +1,38 @@
-const TitleH1 = {
-    /* MOBILE */
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
+
+const useStyleTypografy = makeStyles((theme) => ({
+    root:{
+        /* MOBILE */
+        fontSize: '2.5rem',
+        padding: '1rem',
+        color:'black',
+        textAlign: "center",
+       /* textShadow: '4px 4px 4px black',*/
+        /* TABLET */
+        '@media (min-width: 768px)': {
+            fontSize: '4rem',
+        },
+    }
+}));
+
+
+
+export {
+  useStyleTypografy,
+};
+
+
+/* const TitleH1 = {
+    /* MOBILE 
     fontSize: '2.5rem',
     padding: '1rem',
     color:'white',
     textAlign: "center",
     textShadow: '4px 4px 4px black',
-    /* TABLET */
+    /* TABLET 
     '@media (min-width: 768px)': {
         fontSize: '6rem',
         padding:'2rem'
@@ -47,11 +74,11 @@ const TextBold = {
 
 
 const ButtomDefualt = {
-    /* MOBILE */
+    /* MOBILE 
     fontSize: '1.5rem',
     padding: '1rem',
     fontWeight:'bold',
-     /* TABLET */
+     /* TABLET 
     '@media (min-width: 768px)': {
         fontSize: '2rem',
         padding:'1rem'
@@ -61,14 +88,14 @@ const ButtomDefualt = {
 
 
 const ContainerCenter = {
-     /* MOBILE */
+     /* MOBILE 
     alignSelf: "strech",
     justifyContent: 'center',
     padding: '2rem',
     backgroundColor: 'rgba(0, 0, 0, .1)',
     display:'flex',
     flexDirection:'column',
-     /* TABLET */
+     /* TABLET 
     '@media (min-width: 768px)': {
         fontSize: '2rem',
         padding:'2rem',
@@ -94,4 +121,4 @@ export {
     ButtomDefualt,
     ContainerCenter,
     TitleH3
-}
+} */

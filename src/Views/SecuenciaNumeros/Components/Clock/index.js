@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { TitleH2, TextWhiteShadow } from "./Styles";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({ TitleH2, TextWhiteShadow });
+import { Typography } from "@material-ui/core";
+import {
+  useStyleTypografy,
+      } from './Styles';
 
 export default function Clock(props) {
-  const classes = useStyles(props);
+
+  const clasessTypografy = useStyleTypografy();
+   
+
   const [counter, setCounter] = useState(props.time);
-  const [stopTimer, setStopTimer] = useState(props.stopTimer);
+  // const [stopTimer, setStopTimer] = useState(props.stopTimer);
 
   const endTime = () => {
     props.endLevel(false);
@@ -18,11 +21,11 @@ export default function Clock(props) {
   }, [counter]);
 
   return (
-    <div style={{ fontSize: "3rem", textAlign: "center" }}>
-      <div className={classes.TitleH2 + " " + classes.TextWhiteShadow}>
+    <div>
+      <Typography classes={clasessTypografy}>
         {" "}
         Tiempo {counter}
-      </div>
+      </Typography>
     </div>
   );
 }

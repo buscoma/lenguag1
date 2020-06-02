@@ -96,7 +96,7 @@ export default function SecuenciaDeNumeros(props) {
 			enunciado="Los numeros estan desordenados. Ayudanos a ordenarlos por favor"
 		>
 			<Paper className={clasessPaper.root}>
-				<Grid container style={{ marginBottom: '3rem' }}>
+				<Grid container style={{ marginBottom: '1rem' }}>
 					<Grid Item xs={12}>
 						<Clock time={30 / level} endLevel={endLevel} stopTimer={result} />
 					</Grid>
