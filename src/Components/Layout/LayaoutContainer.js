@@ -8,7 +8,7 @@ import NavBar from '../../Components/NavBar';
 import Button from '@material-ui/core/Button';
 import NewDialog from './Components/NewDialog';
 import PoperDialog from './Components/PoperDialog';
-
+import DialogoDatos from './Components';
 import PerdisteSvg from './icon.svg';
 import GanasteSvg from './ganaste.svg';
 import JuegoTerminado from './JuegoTerminado.svg';
@@ -113,6 +113,15 @@ const useStyles = makeStyles((theme) => ({
                     <Button onClick={handleStartGame}> Jugar </Button>
             </NewDialog>
 
+            <DialogoDatos
+                showDialog={(startGame || (props.show && props.stateOfGame === "BEGIN"))} 
+                setShowDialog={handleStartGame} 
+                level={props.level}
+                points={props.points}
+            >
+                    <Button href="/landing_page"> Elejir otro juego </Button>
+                    <Button onClick={handleStartGame}> Jugar </Button>
+            </DialogoDatos>
             
             <NewDialog 
                 showDialog={props.show && props.stateOfGame === "WINNER"} 
