@@ -1,28 +1,88 @@
-const TitleH1 = {
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
+const useStylesPaper = makeStyles({
+  root: {
+    opacity: 0.85,
+    padding: "20px",
+  },
+});
+
+const useStyleTypografy = makeStyles((theme) => ({
+  questionTitle: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    fontWeight: "750",
+    [theme.breakpoints.up('md')]: {
+      fontSize: "2.5rem",
+    },
+  },
+  wordSubTitle: {
+    textAlign: "center",
+    fontSize: "1.5rem",
+    fontWeight: "1000",
+    [theme.breakpoints.up('md')]: {
+      fontSize: "2.5rem",
+    },
+  }
+}));
+
+const useStylesButtom = makeStyles((theme) => ({
+  buttomNumber: {
     /* MOBILE */
+    fontSize: "1.5rem",
+    padding: "1rem",
+    fontWeight: "bold",
+    /* TABLET */
+    [theme.breakpoints.up('md')]: {
+      fontSize: "2rem",
+      padding: "1rem",
+    },
+  },
+}));
+
+const useStyleAlert = makeStyles((theme) => ({
+  alert: {
+    [theme.breakpoints.up('md')]: {
+      fontSize: "2rem",
+    },
+  },
+}));
+
+export {
+  useStylesPaper,
+  useStyleTypografy,
+  useStylesButtom,
+  useStyleAlert,
+};
+
+/*
+const TitleH1 = {
+    /* MOBILE
     fontSize: "2.5rem",
     padding: "1rem",
     color: "white",
     textAlign: "center",
     textShadow: "3px 3px 3px black",
-    /* TABLET */
+    /* TABLET
     "@media (min-width: 768px)": {
       fontSize: "6rem",
       padding: "2rem",
     },
   };
-  
+
   const TitleH2 = {
     fontSize: "2rem",
     padding: ".7rem",
-  
+
     textAlign: "center",
     "@media (min-width: 768px)": {
       fontSize: "5rem",
       padding: "1.5rem",
     },
   };
-  
+
   const TitleH3 = {
     fontSize: "1.5rem",
     padding: ".5rem",
@@ -34,42 +94,42 @@ const TitleH1 = {
       padding: "1rem",
     },
   };
-  
+
   const TextWhiteShadow = {
     color: "white",
     textShadow: "4px 4px 4px black",
   };
-  
+
   const TextBlackShadow = {
     color: "black",
     textShadow: "4px 4px 4px white",
   };
-  
+
   const TextBold = {
     fontWeight: "bold",
   };
-  
+
   const ButtomDefualt = {
-    /* MOBILE */
+    /* MOBILE
     fontSize: "1.5rem",
     padding: "1rem",
     fontWeight: "bold",
-    /* TABLET */
+    /* TABLET
     "@media (min-width: 768px)": {
       fontSize: "2rem",
       padding: "1rem",
     },
   };
-  
+
   const ContainerCenter = {
-    /* MOBILE */
+    /* MOBILE
     alignSelf: "strech",
     justifyContent: "center",
     padding: "2rem",
     backgroundColor: "rgba(0, 0, 0, .1)",
     display: "flex",
     flexDirection: "column",
-    /* TABLET */
+    /* TABLET
     "@media (min-width: 768px)": {
       fontSize: "2rem",
       padding: "2rem",
@@ -82,9 +142,9 @@ const TitleH1 = {
       maxWidth: "900px",
     },
   };
-  
+
   const progress = {};
-  
+
   const paper = {
     padding: "35px",
     marginBottom: "25px",
@@ -106,7 +166,7 @@ const TitleH1 = {
       fontSize: "24px",
     },
   };
-  
+
   const paperCorrecta = {
     padding: "35px",
     marginBottom: "25px",
@@ -118,7 +178,7 @@ const TitleH1 = {
     cursor: "pointer",
     opacity: "1",
   };
-  
+
   const paperIncorrecta = {
     padding: "35px",
     marginBottom: "25px",
@@ -130,12 +190,12 @@ const TitleH1 = {
     cursor: "pointer",
     opacity: "0.85",
   };
-  
+
   const paperNumero = {
     opacity: "0.85",
     borderRadius: "35px",
   };
-  
+
   export {
     TitleH1,
     TitleH2,
@@ -151,4 +211,4 @@ const TitleH1 = {
     paperIncorrecta,
     paperNumero,
   };
-  
+  */

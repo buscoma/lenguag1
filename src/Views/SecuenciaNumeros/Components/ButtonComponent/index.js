@@ -7,6 +7,14 @@ import {
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import {
+  useStylesPaper,
+  useStyleTypografy,
+  useStylesButtom,
+  useStyleAlert,
+      } from './Styles';
+
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(2),
@@ -45,6 +53,11 @@ const theme = createMuiTheme({
 export default function CustomizedButtons(props) {
   const classes = useStyles();
 
+  const clasessPaper = useStylesPaper();
+  const clasessTypografy = useStyleTypografy();
+  const clasessButtom = useStylesButtom();
+  const classesAlert = useStyleAlert();
+
   const [showButton, setShowButton] = useState(false);
 
   const handleClick = () => {
@@ -53,18 +66,14 @@ export default function CustomizedButtons(props) {
   };
 
   return (
-    <div>
-      <ThemeProvider theme={theme}>
         <Button
           disabled={showButton}
           onClick={() => handleClick()}
           variant="contained"
           color="primary"
-          className={classes.margin}
+          classes={clasessButtom}
         >
           <Typography variant="h4">{props.id}</Typography>
         </Button>
-      </ThemeProvider>
-    </div>
   );
 }

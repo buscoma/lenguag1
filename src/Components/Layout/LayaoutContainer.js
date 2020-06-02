@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../../Components/NavBar';
 import Button from '@material-ui/core/Button';
 import NewDialog from './Components/NewDialog';
+import PoperDialog from './Components/PoperDialog';
+
 import PerdisteSvg from './icon.svg';
 import GanasteSvg from './ganaste.svg';
 import JuegoTerminado from './JuegoTerminado.svg';
@@ -102,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
             <CssBaseline />
             
             <NewDialog 
-                showDialog={startGame || (props.show && props.stateOfGame === "BEGIN")} 
+                showDialog={(startGame || (props.show && props.stateOfGame === "BEGIN")) && false} 
                 setShowDialog={handleStartGame} 
                 title={props.title}
                 description={props.enunciado}
@@ -110,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
                     <Button href="/landing_page"> Elejir otro juego </Button>
                     <Button onClick={handleStartGame}> Jugar </Button>
             </NewDialog>
+
             
             <NewDialog 
                 showDialog={props.show && props.stateOfGame === "WINNER"} 

@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+
+
+//Librerias
+import { 
+	Grid,
+	Typography,
+	Paper
+} from '@material-ui/core';
 
 // Componentes externos
 import LayoutGame from '../../Components/Layout/LayaoutContainer';
 
 // Componentes internos
-import { TitleH2, TitleH1, ButtomDefualt, TextBlackShadow } from './Styles'
 import { BackgroundMat } from './Assets';
 import ButtonComponent from './Components/ButtonComponent';
 import Clock from './Components/Clock';
 import controller from './Controller';
+import {
+    useStylesPaper,
+    useStyleTypografy,
+    useStylesButtom,
+    useStyleAlert,
+        } from './Styles';
 
 
-
-const useStyles = makeStyles({ TitleH2, TitleH1, ButtomDefualt, TextBlackShadow });
 
 export default function SecuenciaDeNumeros(props) {
 
-	const classes = useStyles(props);
+	const clasessPaper = useStylesPaper();
+    const clasessTypografy = useStyleTypografy();
+    const clasessButtom = useStylesButtom();
+    const classesAlert = useStyleAlert();
+
 	const buttonsData = controller();
 	const [values, setValues] = useState([]);
 	const [lastID, setLastID] = useState(0);
@@ -83,30 +95,21 @@ export default function SecuenciaDeNumeros(props) {
 			title="Secuencia de numeros"
 			enunciado="Los numeros estan desordenados. Ayudanos a ordenarlos por favor"
 		>
-			<div >
+			<Paper className={clasessPaper.root}>
 				<Grid container style={{ marginBottom: '3rem' }}>
-
-					<Grid Item xs={12}>
-						<Typography className={classes.TitleH1} variant="h2" align="center" style={{ fontSize: '6vh' }}>
-							NIVEL {level}
-						</Typography>
-					</Grid>
-
 					<Grid Item xs={12}>
 						<Clock time={30 / level} endLevel={endLevel} stopTimer={result} />
 					</Grid>
 				</Grid>
-
 				<Grid container >
 					{buttonsData.map((image) => (
 						<Grid Item xs={6} sm={3} align="center">
-							<ButtonComponent className={classes.ButtomDefualt} id={image.id} methodAddId={methodAddId} />
+							<ButtonComponent className={clasessButtom.buttomNumber} id={image.id} methodAddId={methodAddId} />
 						</Grid>
 					))}
 
 				</Grid>
-
-			</div>
+			</Paper>
 		</LayoutGame>
 	);
 }
