@@ -21,7 +21,7 @@ import {
   useStyleTypografy,
   useStylesButtom,
   useStylesCard,
-      } from './Styles';
+} from './Styles';
 
 const row = [
   {
@@ -69,42 +69,46 @@ function PalabrasPerdidas() {
       enunciado="Oh, no!. Las palabras se han perdido y no saben como volver a sus oraciones. Ayudalas a volver a casa."
       backgroundImage={BackgroundImage}
     >
-        <Paper classes={clasessPaper}>
-          <Grid container spacing={3} className="row">
-            <Grid item lg={3} md={3} xs={12}>
+      <Paper classes={clasessPaper}>
+        <Grid container spacing={3} className="row">
+          <Grid item lg={3} md={3} xs={12}>
             <Paper className={clasessPaper.rootBlack}>
-                <Board id="board-0" className="board">
-                  {row.map((item) => (
-                    <Card id={item.id} draggable="true" classes={clasessCard}>
-                      {" "}
-                      <p> {item.palabra} </p>{" "}
-                    </Card>
-                  ))}
-                </Board>
-              </Paper>
-            </Grid>
-
-            <Grid item lg={9} md={9} xs={12}>
-              <div>
-              <Divider />
+              <Board id="board-0" className="board">
                 {row.map((item) => (
+                  <Card id={item.id} draggable="true" classes={clasessCard}>
+                    {" "}
+                    <p> {item.palabra} </p>{" "}
+                  </Card>
+                ))}
+              </Board>
+            </Paper>
+          </Grid>
+
+          <Grid item lg={9} md={9} xs={12}>
+            <div>
+              <Divider />
+              {row.map((item) => (
+                <div>
                   <div className="clearfix">
                     <p>
                       {" "}
                       {item.frase_frente}
-                      <div className="flexbox">
-                        <Board id="board-1" className="board"></Board>
-                      </div>
+                    </p>
+                    <div className="flexbox">
+                      <Board id="board-1" className="board" />
+                    </div>
+                    <p>
                       {item.frase_atras}{" "}
                     </p>
-                    <Divider />
+                    
                   </div>
-                  
-                ))}
-              </div>
-            </Grid>
+                  <Divider />
+                  </div>
+              ))}
+            </div>
           </Grid>
-        </Paper>
+        </Grid>
+      </Paper>
 
     </LayoutGame>
   );
