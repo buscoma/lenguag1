@@ -71,7 +71,7 @@ function PalabrasPerdidas() {
     >
       <Paper classes={clasessPaper}>
         <Grid container spacing={3} className="row">
-          <Grid item lg={3} md={3} xs={12}>
+          <Grid item lg={3} md={3} xs={12} className="center">
             <Paper className={clasessPaper.rootBlack}>
               <Board id="board-0" className="board">
                 {row.map((item) => (
