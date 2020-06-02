@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 // Librerias
-import { Container ,Grid, Typography} from "@material-ui/core";
+import { Grid, Typography} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 
 // Componentes internos

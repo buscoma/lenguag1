@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import {
   Grid,
   Paper,
-  Typography,
-  Container,
   Divider
 } from "@material-ui/core";
 
@@ -18,8 +16,6 @@ import Card from "./Components/Card";
 import BackgroundImage from "./Assets/background.jpg";
 import {
   useStylesPaper,
-  useStyleTypografy,
-  useStylesButtom,
   useStylesCard,
 } from './Styles';
 
@@ -53,8 +49,6 @@ const row = [
 function PalabrasPerdidas() {
 
   const clasessPaper = useStylesPaper();
-  const clasessTypografy = useStyleTypografy();
-  const clasessButtom = useStylesButtom();
   const clasessCard = useStylesCard();
 
   const [show, setShow] = useState(false);

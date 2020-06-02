@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 //Librerias
 import { 
 	Grid,
-	Typography,
 	Paper
 } from '@material-ui/core';
 
@@ -18,9 +17,7 @@ import Clock from './Components/Clock';
 import controller from './Controller';
 import {
     useStylesPaper,
-    useStyleTypografy,
     useStylesButtom,
-    useStyleAlert,
         } from './Styles';
 
 
@@ -28,17 +25,15 @@ import {
 export default function SecuenciaDeNumeros(props) {
 
 	const clasessPaper = useStylesPaper();
-    const clasessTypografy = useStyleTypografy();
     const clasessButtom = useStylesButtom();
-    const classesAlert = useStyleAlert();
 
 	const buttonsData = controller();
 	const [values, setValues] = useState([]);
 	const [lastID, setLastID] = useState(0);
 	const [arraySize] = useState(buttonsData.length);
-	const [clockTimer, setClockTimer] = useState(30);
+	//const [clockTimer, setClockTimer] = useState(30);
 	const [result, setResult] = useState();
-	const [caption, setCaption] = useState();
+	//const [caption, setCaption] = useState();
 
 	//LAYOUT HOOK
 	const[showDialog, setShowDialog] = useState(false);
@@ -78,12 +73,12 @@ export default function SecuenciaDeNumeros(props) {
 	}
 
 	//FUNCTION TO CONTROL LEVEL DETAILS
-	const gameHandler = (showLevel) => { }
+	//const gameHandler = (showLevel) => { }
 
 	//FUNCTION TO GO TO LANDING PAGE AFTER EXITING BUTTON ON GAME 
-	const goBack = () => {
+	/*const goBack = () => {
 
-	}
+	}*/
 
 	return (
 		<LayoutGame

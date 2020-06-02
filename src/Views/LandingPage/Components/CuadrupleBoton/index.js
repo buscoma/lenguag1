@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 
 import { Abc, Math, Ranking } from "./Assets";
 import { ContainerCenter, TitleH3, TextWhiteShadow, TextBold } from "./Styles";
@@ -85,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
       "& $imageMarked": {
         opacity: 0,
       },
-     
+
     },
   },
 
@@ -126,57 +125,57 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
       theme.spacing(1) + 6
-    }px`,
+      }px`,
   },
 
-  
+
 }));
 
 export default function CuadrupleBoton(props) {
   const classes = useStyles();
 
   return (
-   
-      <Grid container spacing={2} justify="center" alignItems="center">
-        {(props.type == 'leng' ? imagesLeng : imagesMath).map((image) => (
-          <Grid item xs={6} md={5}>
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.image}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width,
-              }}
-              href={image.href}
-            >
-              <span
-                className={classes.imageSrc}
-                style={{ backgroundImage: `url(${image.url})` }}
-              />
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography
-                  component="span"
-                  variant="subtitle1"
-                  color="inherit"
-                  className={
-                    classes.imageTitle +
-                    " " +
-                    classes.TitleH2 +
-                    " " +
-                    classes.TextBold +
-                    " " +
-                    classes.TextWhiteShadow
-                  }
-                >
-                  {image.title}
-                </Typography>
-              </span>
-            </ButtonBase>
-          </Grid>
-        ))}
-      </Grid>
+
+    <Grid container spacing={2} justify="center" alignItems="center">
+      {(props.type === 'leng' ? imagesLeng : imagesMath).map((image) => (
+        <Grid item xs={6} md={5}>
+          <ButtonBase
+            focusRipple
+            key={image.title}
+            className={classes.image}
+            focusVisibleClassName={classes.focusVisible}
+            style={{
+              width: image.width,
+            }}
+            href={image.href}
+          >
+            <span
+              className={classes.imageSrc}
+              style={{ backgroundImage: `url(${image.url})` }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                color="inherit"
+                className={
+                  classes.imageTitle +
+                  " " +
+                  classes.TitleH2 +
+                  " " +
+                  classes.TextBold +
+                  " " +
+                  classes.TextWhiteShadow
+                }
+              >
+                {image.title}
+              </Typography>
+            </span>
+          </ButtonBase>
+        </Grid>
+      ))}
+    </Grid>
 
   );
 }

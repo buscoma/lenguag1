@@ -52,13 +52,6 @@ const useStylesButtom = makeStyles((theme) => ({
     },
 }));
 
-const useStyleAlert = makeStyles((theme) => ({
-    alert: {
-        [theme.breakpoints.up('md')]: {
-            fontSize: "2rem",
-        },
-    },
-}));
 
 export {
     useStylesPaper,

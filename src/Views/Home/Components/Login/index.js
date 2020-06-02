@@ -11,7 +11,7 @@ import { AuthContext } from "../../../../Components/Auth";
 import firebaseAuth from "../../../../Components/Firebase";
 
 // Componentes internos
-import { TitleH2, TextBold, TextBlackShadow } from "./Styles";
+import { TextBold, TextBlackShadow } from "./Styles";
 import {
   paperScrollPaper,
   buttom,

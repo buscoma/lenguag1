@@ -1,62 +1,18 @@
 import React, { useState } from "react";
-import {
-  createMuiTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 
 import {
-  useStylesPaper,
-  useStyleTypografy,
+  Button,
+  Typography
+} from "@material-ui/core";
+
+import {
   useStylesButtom,
-  useStyleAlert,
       } from './Styles';
 
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(2),
-  },
-}));
-const theme = createMuiTheme({
-  overrides: {
-    // Style sheet name ⚛️
-    MuiButton: {
-      // Name of the rule
-      text: {
-        // Some CSS
-        backgroundColor: "#FFD740",
-        borderRadius: 3,
-        border: 0,
-        color: "white",
-        height: 100,
-        width: 100,
-        padding: "0 30px",
-        boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-      },
-      label: {
-        color: "white",
-        height: "12vw",
-        width: "12vw",
-        //SCALE FOR TABLET
-        "@media (min-width: 768px)": {
-          height: "8vw",
-          width: "8vw",
-        },
-      },
-    },
-  },
-});
-
 export default function CustomizedButtons(props) {
-  const classes = useStyles();
 
-  const clasessPaper = useStylesPaper();
-  const clasessTypografy = useStyleTypografy();
   const clasessButtom = useStylesButtom();
-  const classesAlert = useStyleAlert();
 
   const [showButton, setShowButton] = useState(false);
 
