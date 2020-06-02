@@ -1,6 +1,11 @@
 import React from "react";
 
+import {useStylesBoard} from './Styles';
+
 function Board(props) {
+
+  const classesBoard = useStylesBoard();
+  
   const drop = (e) => {
     e.preventDefault();
     const card_id = e.dataTransfer.getData("card_id");
@@ -18,7 +23,7 @@ function Board(props) {
   return (
     <div
       id={props.id}
-      className={props.className}
+      className={ props.empty === false ? classesBoard.CasillaLlena : classesBoard.casillaVacia}
       onDrop={drop}
       onDragOver={dragOver}
     >

@@ -61,14 +61,6 @@
   padding: 15px;
 }
 
-.boxPalabras .board {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  padding: 15px;
-  min-height: 200px;
-}
 
 .flexbox {
   display: inline-flex;
@@ -80,19 +72,6 @@
   overflow: hidden;
 
   margin: 0 auto; /* to center it*/
-  padding: 15px;
-}
-
-.flexbox .board {
-
-
-  width: 100%;
-  max-width: 230px;
-
-  height: 90px;
-
-  background-color: rgb(3, 19, 5);
-
   padding: 15px;
 }
 

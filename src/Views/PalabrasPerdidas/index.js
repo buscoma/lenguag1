@@ -69,7 +69,7 @@ function PalabrasPerdidas() {
             <Paper className={clasessPaper.rootBlack}>
               <Board id="board-0" className="board">
                 {row.map((item) => (
-                  <Card id={item.id} draggable="true" classes={clasessCard}>
+                  <Card id={item.id} draggable="true" empty={false} classes={clasessCard}>
                     {" "}
                     <p> {item.palabra} </p>{" "}
                   </Card>
@@ -89,7 +89,7 @@ function PalabrasPerdidas() {
                       {item.frase_frente}
                     </p>
                     <div className="flexbox">
-                      <Board id="board-1" className="board" />
+                      <Board id="board-1" empty={true} className="board" />
                     </div>
                     <p>
                       {item.frase_atras}{" "}

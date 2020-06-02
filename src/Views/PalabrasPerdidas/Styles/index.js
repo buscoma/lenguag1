@@ -10,7 +10,9 @@ const useStylesPaper = makeStyles({
     rootBlack:{
         opacity: 0.85,
         padding: "20px",
-        backgroundColor: "black"
+        backgroundColor: "black",
+        minHeight: "300px",
+        minWidth : "200px",
     }
 });
 
