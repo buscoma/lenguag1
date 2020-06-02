@@ -1,6 +1,12 @@
 // Librerias
 import React, { useState } from "react";
-import { Grid} from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Container,
+  Divider
+} from "@material-ui/core";
 
 // Componentes externos
 import LayoutGame from "../../Components/Layout/LayaoutContainer";
@@ -10,6 +16,12 @@ import "./Styles/palabrasPerdidas.css";
 import Board from "./Components/Board";
 import Card from "./Components/Card";
 import BackgroundImage from "./Assets/background.jpg";
+import {
+  useStylesPaper,
+  useStyleTypografy,
+  useStylesButtom,
+  useStylesCard,
+      } from './Styles';
 
 const row = [
   {
@@ -40,6 +52,11 @@ const row = [
 
 function PalabrasPerdidas() {
 
+  const clasessPaper = useStylesPaper();
+  const clasessTypografy = useStyleTypografy();
+  const clasessButtom = useStylesButtom();
+  const clasessCard = useStylesCard();
+
   const [show, setShow] = useState(false);
   const [stateOfGame, setStateOfGame] = useState("BEGIN");
 
@@ -52,37 +69,43 @@ function PalabrasPerdidas() {
       enunciado="Oh, no!. Las palabras se han perdido y no saben como volver a sus oraciones. Ayudalas a volver a casa."
       backgroundImage={BackgroundImage}
     >
-      <Grid container spacing={3} className="row">
-        <Grid item lg={3} md={3} xs={5}>
-          <div className="boxPalabras">
-            <Board id="board-0" className="board">
-              {row.map((item) => (
-                <Card id={item.id} draggable="true">
-                  {" "}
-                  <p> {item.palabra} </p>{" "}
-                </Card>
-              ))}
-            </Board>
-          </div>
-        </Grid>
+        <Paper classes={clasessPaper}>
+          <Grid container spacing={3} className="row">
+            <Grid item lg={3} md={3} xs={12}>
+            <Paper className={clasessPaper.rootBlack}>
+                <Board id="board-0" className="board">
+                  {row.map((item) => (
+                    <Card id={item.id} draggable="true" classes={clasessCard}>
+                      {" "}
+                      <p> {item.palabra} </p>{" "}
+                    </Card>
+                  ))}
+                </Board>
+              </Paper>
+            </Grid>
 
-        <Grid item lg={9} md={9} xs={12}>
-          <div>
-            {row.map((item) => (
-              <div className="clearfix">
-                <p>
-                  {" "}
-                  {item.frase_frente}
-                  <div className="flexbox">
-                    <Board id="board-1" className="board"></Board>
+            <Grid item lg={9} md={9} xs={12}>
+              <div>
+              <Divider />
+                {row.map((item) => (
+                  <div className="clearfix">
+                    <p>
+                      {" "}
+                      {item.frase_frente}
+                      <div className="flexbox">
+                        <Board id="board-1" className="board"></Board>
+                      </div>
+                      {item.frase_atras}{" "}
+                    </p>
+                    <Divider />
                   </div>
-                  {item.frase_atras}{" "}
-                </p>
+                  
+                ))}
               </div>
-            ))}
-          </div>
-        </Grid>
-      </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+
     </LayoutGame>
   );
 }

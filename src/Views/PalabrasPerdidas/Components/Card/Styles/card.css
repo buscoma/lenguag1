@@ -1,6 +1,7 @@
 .card {
   padding: 15px 25px;
   background-color: snow;
+  opacity: 1;
   font-style: italic;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   cursor: pointer;

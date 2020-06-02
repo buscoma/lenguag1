@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: '20px',
         height: '92vh',
+        overflow : "hidden",
+        [theme.breakpoints.down('sm')]: {
+            overflowY : "scroll"
+        },
     },
     rootImage: {
         backgroundImage: `url(${props.backgroundImage})`,
@@ -45,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100vh",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
+        overflow : "hidden",
     },
     rootPaper: {
         width: '100%',

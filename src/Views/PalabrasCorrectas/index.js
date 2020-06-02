@@ -148,10 +148,10 @@ const PalabrasCorrectas = (props) => {
                                     </Alert>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={playAgain} fullWidth> Volver a juegar </Button>
+                                    <Button variant="contained" className={clasessButtom.buttomOther} href="/landing_page" fullWidth> Juegar a otra cosa </Button>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={playAgain} fullWidth> Juegar a otra cosa </Button>
+                                    <Button variant="contained" className={clasessButtom.buttomOther} onClick={playAgain} fullWidth> Volver a juegar </Button>
                                 </Grid>
                             </Grid>
                         </Collapse>
