@@ -5,9 +5,11 @@ import BackgroundImage from './background.jpg';
 import Button from '@material-ui/core/Button';
 
 export default function Example(props){
-
+    //ok
     const [puntos, setPuntos] = useState(0);
     const [nivel, setNivel] = useState(1);
+    
+    //OLD
     const [dialog, setDialog] = useState("bienvenido");
     const [show, setShow] = useState(false);
     const [nextLevel, setNextLevel] = useState(false);
@@ -15,8 +17,11 @@ export default function Example(props){
     return (
          <MyComponent
             level={nivel}
-            nextLevel={nextLevel}
             points={puntos}
+
+
+
+            nextLevel={nextLevel}
             show={show}
             setShow={setShow}
             stateOfGame={dialog}
@@ -42,7 +47,7 @@ export default function Example(props){
                                 SUMAR PUTNOS
                             </Button>
                             <Button variant="contained" color="primary"  onClick={()=> setNivel(nivel + 1)}>
-                                SUBIR DE NIVEL
+                                SUBIR DE NIVEL {nivel}
                             </Button>
         </MyComponent>
     );

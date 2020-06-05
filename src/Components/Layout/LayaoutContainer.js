@@ -7,13 +7,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../../Components/NavBar';
 import Button from '@material-ui/core/Button';
 import NewDialog from './Components/NewDialog';
-import PoperDialog from './Components/PoperDialog';
 
-import PerdisteSvg from './icon.svg';
-import GanasteSvg from './ganaste.svg';
-import JuegoTerminado from './JuegoTerminado.svg';
-import IconGame from './Svg/IconJuego.svg';
-import {DialogPanel, DialogNextLevel, DialogFinishGame} from './Components'
+
+import {
+    DialogPanel,
+    DialogNextLevel, 
+    DialogFinishGame,
+    DialogLoserGame,
+} from './Components'
 
 const mensaje = [
     {
@@ -88,23 +89,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
     const classes = useStyles();
-    const [panelDialogOpen, setPanelDialogOpen] = useState(false);
 
-    const [startGame, setStartGame] = useState(true);
-    
+    const [panelDialogOpen, setPanelDialogOpen] = useState(false);
+    const handlePanel = () => {setPanelDialogOpen(!panelDialogOpen)};
+
     const [nextLevelDialogOpen, setNextLevelDialogOpen] = useState(false);
     const handleNextLevel = () => { setNextLevelDialogOpen(!nextLevelDialogOpen)};
 
-    const [loserDialogOpen, setLoserDiagloOpen] = useState(true);
+    const [loserDialogOpen, setLoserDiagloOpen] = useState(false);
     const handleLoser = () => {setLoserDiagloOpen(!loserDialogOpen)};
 
-    const handleStartGame = () => {
-        setStartGame(!startGame);
-    }
-
-    const handlePanel = () => {
-        setPanelDialogOpen(!panelDialogOpen)
-    }
+    const [finishGameDialogOpen, setFinishGameDiagloOpen] = useState(false);
+    const handleFinish = () => {setFinishGameDiagloOpen(!finishGameDialogOpen)};
 
     const handleCloseDialog = () => props.setShow(false);
 
@@ -113,16 +109,6 @@ const useStyles = makeStyles((theme) => ({
             <NavBar User={{ Name: 'Ale' }} showPanel={panelDialogOpen} handleShowPanel={handlePanel} />
             <CssBaseline />
             
-            <NewDialog 
-                showDialog={(startGame || (props.show && props.stateOfGame === "BEGIN")) && false} 
-                setShowDialog={handleStartGame} 
-                title={props.title}
-                description={props.enunciado}
-                icon={IconGame}>
-                    <Button href="/landing_page"> Elejir otro juego </Button>
-                    <Button onClick={handleStartGame}> Jugar </Button>
-            </NewDialog>
-
             <DialogPanel 
                 open={panelDialogOpen}
                 onClose={handlePanel}
@@ -138,41 +124,17 @@ const useStyles = makeStyles((theme) => ({
             />
 
             <DialogFinishGame 
-                open={loserDialogOpen}
-                onClose={handleLoser}
+                open={finishGameDialogOpen}
+                onClose={handleFinish}
                 level={props.level}               
                 points={props.points}
             />
-            
-            <NewDialog 
-                showDialog={props.show && props.stateOfGame === "WINNER"} 
-                setShowDialog={handleCloseDialog} 
-                title={"Ganaste"}
-                description={"Felicitaciones, ganaste el nivel."}
-                icon={GanasteSvg}>
-                    <Button href="/landing_page"> Elejir otro juego </Button>
-                    <Button onClick={handleCloseDialog}> Seguir jugando </Button>
-            </NewDialog>
 
-            <NewDialog 
-                showDialog={props.show && props.stateOfGame === "LOSER"} 
-                setShowDialog={handleCloseDialog} 
-                title={"Perdiste"}
-                description={"Perdiste, ganaste el nivel."}
-                icon={PerdisteSvg}>
-                    <Button href="/landing_page"> Elejir otro juego </Button>
-                    <Button onClick={() => handleCloseDialog}> Volvera a jugar </Button>
-            </NewDialog>
-
-            <NewDialog 
-                showDialog={props.show && props.stateOfGame === "END"} 
-                setShowDialog={handleCloseDialog} 
-                title={"Se termino el juego"}
-                description={"Se termino el juego"}
-                icon={JuegoTerminado}>
-                    <Button href="/landing_page"> Elejir otro juego </Button>
-                    <Button onClick={() => handleCloseDialog}> Volvera a jugar </Button>
-            </NewDialog>
+            <DialogLoserGame 
+                open={loserDialogOpen}
+                onClose={handleLoser}
+                points={props.points}
+            />
             
             <Container maxWidth="xl" className={classes.root} >
                 <Grid container>

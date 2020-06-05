@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -21,6 +21,13 @@ export default function CustomizedDialogs(props) {
   const classes = useStyles();
   const classesTypografy = useStylesTypografy();
   const classesButtom = useStylesButtom();
+  const [levelNow, setLevelNow] = useState(props.level);
+
+  useEffect(() => {
+    if(props.level !== levelNow)
+      props.onClose()
+      
+    }, [levelNow, props.level]);
 
   return (
     <Dialog
