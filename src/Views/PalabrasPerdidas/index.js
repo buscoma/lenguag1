@@ -51,16 +51,20 @@ function PalabrasPerdidas() {
   const clasessPaper = useStylesPaper();
   const clasessCard = useStylesCard();
 
-  const [show, setShow] = useState(false);
-  const [stateOfGame, setStateOfGame] = useState("BEGIN");
+  const [state, setState] = useState({
+    level : 1,
+    posints : 0,
+    winner: false,
+    loser: false,
+  });
 
   return (
     <LayoutGame
-      show={show}
-      setShow={setShow}
-      stateOfGame={stateOfGame}
-      title="Palabras perdiddas"
-      enunciado="Oh, no!. Las palabras se han perdido y no saben como volver a sus oraciones. Ayudalas a volver a casa."
+      level={state.level}
+      points={state.posints}
+      winner={state.winner}
+      loser={state.loser}
+      game="PalabrasPerdidas"
       backgroundImage={BackgroundImage}
     >
       <Paper classes={clasessPaper}>
