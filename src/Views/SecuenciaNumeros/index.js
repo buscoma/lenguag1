@@ -34,14 +34,13 @@ export default function SecuenciaDeNumeros(props) {
 	//const [clockTimer, setClockTimer] = useState(30);
 	const [result, setResult] = useState();
 	//const [caption, setCaption] = useState();
+	
 
-	//LAYOUT HOOK
-	const[showDialog, setShowDialog] = useState(false);
-	const[stateOfGame, setStateOfGame] = useState("bienvenido");
+	//LAYOUT HOOK NEW
 	const [level, setLevel] = useState(1);
 	const [points, setPoints] = useState(0);
-
-
+    const [winner, setWinner] = useState(false);
+    const [loser, setLoser] = useState(false);
 
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
@@ -50,6 +49,8 @@ export default function SecuenciaDeNumeros(props) {
 			setLastID(id);
 			if (values.length === arraySize - 1) {
 				endLevel(true);
+				//ACA SE SUPONE QUE EL USUARIO GANO EL JUEGO, LOS 3 NIVELES?cREO QUE NO
+				setWinner(true);
 			}
 		}
 		else {
@@ -61,14 +62,11 @@ export default function SecuenciaDeNumeros(props) {
 		if (value === false) {//PERDISTE
 			setResult(false);
 			//Set the state to show the dialog with right mensage
-			setStateOfGame("LOSER");
-			setShowDialog(true);
+			setLoser(true);
 		} else {//GANASTE
 			setLevel(level + 1);
 			setResult(true);
 			//Set the state to show the dialog with right mensage
-			setStateOfGame("WINNER");
-			setShowDialog(true);
 		}
 	}
 
@@ -82,14 +80,13 @@ export default function SecuenciaDeNumeros(props) {
 
 	return (
 		<LayoutGame
-			backgroundImage={BackgroundMat}
 			points={points}
-			show={showDialog}
-			setShow={setShowDialog}
-			stateOfGame={stateOfGame}
-			title="Secuencia de numeros"
-			enunciado="Los numeros estan desordenados. Ayudanos a ordenarlos por favor"
-		>
+			level={level}
+			winner={winner}
+			loser={loser}
+			game="SecuenciaDeNumeros"
+			backgroundImage={BackgroundMat}
+			>
 			<Paper className={clasessPaper.root}>
 				<Grid container style={{ marginBottom: '1rem' }}>
 					<Grid Item xs={12}>
