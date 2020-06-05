@@ -16,7 +16,7 @@ function json(){
             title: "Palabras Correctas",
             description: "Oh, no. Las palabras se han perdido y necesitan ayuda para volver a sus oraciones. Arrastra la palabra a su oracion."
         },
-        ComprensionDeTextos: {
+        CompresionLectora: {
             id_game: 3,
             title: "Palabras Correctas",
             description: "Oh, no. Las palabras se han perdido y necesitan ayuda para volver a sus oraciones. Arrastra la palabra a su oracion."

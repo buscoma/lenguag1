@@ -92,8 +92,9 @@ const ComprensionLectora = (props) => {
   });
 
   //Layout hook
-  const[show, setShow] = useState(false);
-  const[stateOfGame, setStateOfGame] = useState("Enunciado");
+  const [puntos, setPuntos] = useState(0);
+  const [winner, setWinner] = useState(false);
+  const [loser, setLoser] = useState(false);
 
   const [gameState, setGameState] = useState({
     perdio: false,
@@ -101,23 +102,19 @@ const ComprensionLectora = (props) => {
 
   const opcionClickHandler = (opcion) => {
     if (opcion.Correcta === true) {
-      setStateOfGame("WINNER");
-      setShow(true);
       console.log("Correcta!");
       subirNivel();
     } else {
-      setStateOfGame("LOSER");
-      setShow(true);
+      setLoser(true);
       console.log("Incorrecta");
-      setGameState({ perdio: true });
     }
   };
 
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
       //alert("ganaste!");
-      setStateOfGame("END");
-      setShow(true);
+      //EL juego termino.
+      setWinner(true);
       return;
     }
 
@@ -139,12 +136,12 @@ const ComprensionLectora = (props) => {
 
   return (
     <LayaoutGame 
+      level={nivelState.dificultad}
+      points={puntos}
+      winner={winner}
+      loser={loser}
+      game="CompresionLectora"
       backgroundImage={Background}
-      title="Compresion lectora"
-      enunciado="Entiende el enunciado y no jodas"
-      show={show}
-      setShow={setShow}
-      stateOfGame={stateOfGame}
     >
       <div className={classes.root}>
         <Container className={classes.container}>
