@@ -33,7 +33,7 @@ export default function CustomizedDialogs(props) {
         </IconButton>
         <Grid container spacing={4}>
           <Grid item xs={12} md={12}>
-            <Typography className={[classesTypografy.titleGame].join(" ")}> Palabras correctas </Typography>
+            <Typography className={[classesTypografy.titleGame].join(" ")}> {props.title} </Typography>
           </Grid>
           <Grid item xs={6} >
             <Grid container >
@@ -61,7 +61,7 @@ export default function CustomizedDialogs(props) {
             </Grid>
             <Grid item xs={12}>
               <Typography className={[classesTypografy.textEnunciado].join(" ")}>
-                Intenta reconocer los errores ortograficos, y determinar si la palabra esta correctamente escrita o no.
+                {props.description}
               </Typography>
             </Grid>
           </Grid>

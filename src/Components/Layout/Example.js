@@ -12,33 +12,32 @@ export default function Example(props){
     //OLD
     const [dialog, setDialog] = useState("bienvenido");
     const [show, setShow] = useState(false);
+    const [winner, setWinner] = useState(false);
+    const [loser, setLoser] = useState(false);
+
     const [nextLevel, setNextLevel] = useState(false);
 
     return (
          <MyComponent
             level={nivel}
             points={puntos}
-
-
-
-            nextLevel={nextLevel}
+            game="Example"
+            winner={winner}
+            loser={loser}
+            
             show={show}
             setShow={setShow}
             stateOfGame={dialog}
             backgroundImage={BackgroundImage}
-            color="white"
-            backgroundPaper="rgba(0,0,0,.3)"
-            title="Palabras perdidas"
-            enunciado={"un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!l"}
-        >
-                            <Button variant="contained" color="primary"  onClick={()=> {setDialog("Ganaste");setShow(true);}}>
-                                GANAE
+            >
+                            <Button variant="contained" color="primary"  onClick={()=> {setWinner(true)}}>
+                                GANAE {winner}
                             </Button>
                             <Button variant="contained" onClick={()=> {setDialog("Perdiste");setShow(true);}} color="primary" >
                                 Suinte nivel
                             </Button>
-                            <Button variant="contained" onClick={()=> {setDialog("Perdiste");setShow(true);}} color="primary" >
-                                PERDI
+                            <Button variant="contained" onClick={()=> {setLoser(true)}} color="primary" >
+                                PERDI 
                             </Button>
                             <Button variant="contained" onClick={()=> {setDialog("Fin");setShow(true);}} color="primary" >
                                 Fin

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   Button,
@@ -25,11 +25,19 @@ export default function CustomizedDialogs(props) {
   const classesButtom = useStylesButtom();
   const classesIcon = useStylesIcon();
 
+  const [open,setOpen] = useState(false);
+
+  useEffect(() => {
+    if(props.openFlag)
+      setOpen(true);
+      
+    }, [props.openFlag]);
+
   return (
     <Dialog
       
       maxWidth="md"
-      open={props.open}
+      open={open}
     >
       <Container maxWidth="xl" className={[classes.root,].join(" ")} >
         <Grid container spacing={4}>

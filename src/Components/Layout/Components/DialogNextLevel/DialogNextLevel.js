@@ -21,22 +21,22 @@ export default function CustomizedDialogs(props) {
   const classes = useStyles();
   const classesTypografy = useStylesTypografy();
   const classesButtom = useStylesButtom();
-  const [levelNow, setLevelNow] = useState(props.level);
+  const [levelNow, setLevelNow] = useState(props.flagAndLevel);
+  const [open,setOpen] = useState(false);
 
   useEffect(() => {
-    if(props.level !== levelNow)
-      props.onClose()
-      
-    }, [levelNow, props.level]);
+    if(props.flagAndLevel !== levelNow)
+      setOpen(!open);
+    }, [levelNow, props.flagAndLevel]);
 
   return (
     <Dialog
       fullWidth
       maxWidth="xl"
-      open={props.open}
+      open={open}
     >
       <Container maxWidth="xl" className={[classes.root,].join(" ")} >
-        <IconButton className={classes.closeButtom} onClick={props.onClose} >
+        <IconButton className={classes.closeButtom} onClick={()=> setOpen(!open)} >
           <CloseIcon />
         </IconButton>
         <Grid container spacing={4}>
@@ -70,7 +70,7 @@ export default function CustomizedDialogs(props) {
           </Grid>
           <Grid container item xs={12} >
             <Grid item xs={12} sm={6} className={[classesButtom.root].join(" ")}>
-              <Button onClick={props.onClose} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}>  Jugar siguiente nivel </Button>
+              <Button onClick={()=> setOpen(!open)} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}>  Jugar siguiente nivel </Button>
             </Grid>
             <Grid item xs={12} sm={6}  className={[classesButtom.root].join(" ")}>
               <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elejir otro juego </Button>

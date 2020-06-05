@@ -5,9 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../../Components/NavBar';
-import Button from '@material-ui/core/Button';
-import NewDialog from './Components/NewDialog';
-
+import Enunciados from './Components/Enunciados';
 
 import {
     DialogPanel,
@@ -16,24 +14,6 @@ import {
     DialogLoserGame,
 } from './Components'
 
-const mensaje = [
-    {
-        title:"Ganaste",
-        description: "Felicitaciones ganaste el juego!!",
-        type:"WIN"
-    },
-    {
-        title:"Perdiste",
-        description: "Felicitaciones ganaste el juego!!",
-        type:"LOSER"
-    },
-    {
-        title:"Fin del juego",
-        description: "Felicitaciones ganaste el juego!!",
-        type:"END"
-    }
-
-];
 
 export default function LayoutContainer(props) {
 
@@ -65,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
     //TEXT STYLE
     TitleH1: {
         fontSize: '3rem',
-        color: props.color,
         fontWeight: "bold"
     },
     TitleH3: {
@@ -89,20 +68,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
     const classes = useStyles();
-
-    const [panelDialogOpen, setPanelDialogOpen] = useState(false);
+    const [panelDialogOpen, setPanelDialogOpen] = useState(true);
     const handlePanel = () => {setPanelDialogOpen(!panelDialogOpen)};
-
-    const [nextLevelDialogOpen, setNextLevelDialogOpen] = useState(false);
-    const handleNextLevel = () => { setNextLevelDialogOpen(!nextLevelDialogOpen)};
-
-    const [loserDialogOpen, setLoserDiagloOpen] = useState(false);
-    const handleLoser = () => {setLoserDiagloOpen(!loserDialogOpen)};
-
-    const [finishGameDialogOpen, setFinishGameDiagloOpen] = useState(false);
-    const handleFinish = () => {setFinishGameDiagloOpen(!finishGameDialogOpen)};
-
-    const handleCloseDialog = () => props.setShow(false);
 
     return (
         <div className={classes.rootImage}>
@@ -114,26 +81,24 @@ const useStyles = makeStyles((theme) => ({
                 onClose={handlePanel}
                 level={props.level}
                 points={props.points}
+                title={Enunciados[props.game].title}
+                description={Enunciados[props.game].description}
             />
 
             <DialogNextLevel 
-                open={nextLevelDialogOpen}
-                onClose={handleNextLevel}
-                level={props.level}               
+                flagAndLevel={props.level}               
                 points={props.points}
             />
 
             <DialogFinishGame 
-                open={finishGameDialogOpen}
-                onClose={handleFinish}
                 level={props.level}               
                 points={props.points}
+                openFlag={props.winner}
             />
 
             <DialogLoserGame 
-                open={loserDialogOpen}
-                onClose={handleLoser}
                 points={props.points}
+                openFlag={props.loser}
             />
             
             <Container maxWidth="xl" className={classes.root} >
@@ -146,12 +111,4 @@ const useStyles = makeStyles((theme) => ({
         </div>
     );
 
-}  /*   <DialogoDatos
-showDialog={(startGame || (props.show && props.stateOfGame === "BEGIN"))} 
-setShowDialog={handleStartGame} 
-level={props.level}
-points={props.points}
->
-    <Button href="/landing_page"> Elejir otro juego </Button>
-    <Button onClick={handleStartGame}> Jugar </Button>
-</DialogoDatos>*/
+} 
