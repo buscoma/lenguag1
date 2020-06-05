@@ -10,11 +10,12 @@ export default function Example(props){
     const [nivel, setNivel] = useState(1);
     const [dialog, setDialog] = useState("bienvenido");
     const [show, setShow] = useState(false);
-
+    const [nextLevel, setNextLevel] = useState(false);
 
     return (
          <MyComponent
             level={nivel}
+            nextLevel={nextLevel}
             points={puntos}
             show={show}
             setShow={setShow}
@@ -25,8 +26,11 @@ export default function Example(props){
             title="Palabras perdidas"
             enunciado={"un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!lEl juego se trata de no romper las bolar a los padres por un par de horas, por favor?!!?!l"}
         >
-           <Button variant="contained" color="primary"  onClick={()=> {setDialog("Ganaste");setShow(true);}}>
+                            <Button variant="contained" color="primary"  onClick={()=> {setDialog("Ganaste");setShow(true);}}>
                                 GANAE
+                            </Button>
+                            <Button variant="contained" onClick={()=> {setDialog("Perdiste");setShow(true);}} color="primary" >
+                                Suinte nivel
                             </Button>
                             <Button variant="contained" onClick={()=> {setDialog("Perdiste");setShow(true);}} color="primary" >
                                 PERDI

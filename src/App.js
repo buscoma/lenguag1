@@ -4,10 +4,13 @@ import routes from "./routes";
 import { AuthProvider } from "./Components/Auth";
 import PrivateRoute from "./PrivateRoute";
 import { createBrowserHistory } from "history";
+import theme from './theme';
+import { ThemeProvider } from '@material-ui/styles';
 
 class App extends Component {
   render() {
     return (
+      <ThemeProvider theme={theme}>
       <AuthProvider>
         <Router history={createBrowserHistory()}>
           <Switch>
@@ -33,6 +36,7 @@ class App extends Component {
           </Switch>
         </Router>
       </AuthProvider>
+      </ThemeProvider>
     );
   }
 }

@@ -57,7 +57,15 @@ export default function NavBar(props) {
           >
             <ArrowBackIosRoundedIcon />
           </IconButton>
-
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={props.handleShowPanel}
+            color="inherit"
+          >
+            <ArrowBackIosRoundedIcon />
+          </IconButton>
           <Typography variant="subtitle1" className={classes.title}>
             {props.AppName}
           </Typography>
