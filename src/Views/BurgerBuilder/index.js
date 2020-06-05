@@ -74,8 +74,6 @@ class BurgerBuilder extends Component {
       };
 
     if (nivel === 2) {
-      this.setShow(true);
-      this.setStateOfGame("WINNER");
       return {
         numero: nivel,
         orden: {
@@ -90,8 +88,6 @@ class BurgerBuilder extends Component {
 
 
     if (nivel === 3){
-      this.setShow(true);
-      this.setStateOfGame("WINNER");
       return {
         numero: nivel,
         orden: {
@@ -116,13 +112,8 @@ class BurgerBuilder extends Component {
     },
     openDialog: false,
     perdiste: false,
-    //Layout state
-    show: false,
-    stateOfGame: "Enunciado"
   };
 
-  setShow = (state) => { this.setState({ show: state, }) }
-  setStateOfGame = (state) => { this.setState({ stateOfGame: state, }) }
 
   addIngridientHandler = (type) => {
     this.setState({
@@ -159,10 +150,12 @@ class BurgerBuilder extends Component {
 
   handleDialogClose = () => {
     console.log("handleDialogClose called!");
+    debugger
     if (
       this.state.nivel.operacion.respuesta !==
-      this.state.nivel.operacion.respuestaUsuario
+      parseInt(this.state.nivel.operacion.respuestaUsuario)
     ) {
+      //LOSER
       this.setState({
         perdiste: true,
       });
@@ -251,12 +244,9 @@ class BurgerBuilder extends Component {
     return (
       <LayoutGame
         backgroundImage={BackgroundImage}
-        title="Burger Builder"
-        enunciado="Tienes hambre, vamos a hacer burgers"
-        show={this.state.show}
-        setShow={this.setShow}
-        stateOfGame={this.state.stateOfGame}
+        game="BurgerBilder"
         level={this.state.nivel.numero}
+        points={0}
       >
         <div className="BurgerBuilder">
 
@@ -308,12 +298,3 @@ class BurgerBuilder extends Component {
 }
 
 export default BurgerBuilder;
-/*{this.state.startGame ? (
-          <Dialog
-            bienvenida={this.state.startGame}
-            show={this.handleStartGame}
-            volverPagAnterior="landing_page"
-            tipo="Burger"
-            nivel={this.state.nivel.numero}
-          />
-        ) : null} */
