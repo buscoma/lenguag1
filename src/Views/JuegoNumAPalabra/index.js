@@ -23,19 +23,18 @@ const JuegoNumAPalabra = (props) => {
     perdio: false,
   });
 
-  //Layout hook
-  const [show, setShow] = useState(false);
-  const [stateOfGame, setStateOfGame] = useState("Enunciado");
+  //LAYOUT HOOK NEW
+  const [winner, setWinner] = useState(false);
+  const [loser, setLoser] = useState(false);
+  const [points, setPoints] = useState(0);
 
   const opcionClickHandler = (opcion) => {
     if (opcion.Correcta === true) {
-      setStateOfGame("WINNER");
-      setShow(true);
+      //WIINER
       console.log("Correcta!");
       subirNivel();
     } else {
-      setStateOfGame("LOSER");
-      setShow(true);
+      //LOSER
       console.log("Incorrecta");
       setGameState({ perdio: true });
     }
@@ -43,8 +42,8 @@ const JuegoNumAPalabra = (props) => {
 
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
-      setStateOfGame("END");
-      setShow(true);
+      //GAME IS OVER, THE USER WINNER
+      setWinner(true);
       return;
     }
 
@@ -56,7 +55,6 @@ const JuegoNumAPalabra = (props) => {
   };
 
   const reiniciar = () => {
-    setGameState({ perdio: false });
 
     setNivelState({
       dificultad: 1,
@@ -66,12 +64,12 @@ const JuegoNumAPalabra = (props) => {
 
   return (
     <LayoutGame
+      level={nivelState.nivel.nivel}
+      points={points}
+      game="PalabrasNumeros"
+      winner={winner}
+      loser={loser}
       backgroundImage={Background}
-      title="Numeros a palabras"
-      enunciado="Selecciona el como se escribe el numero en la parte superiro"
-      show={show}
-      setShow={setShow}
-      stateOfGame={stateOfGame}
     >
       <Container className={classes.container}>
         <Typography variant="h2" style={{ fontWeight: "bold" }}>

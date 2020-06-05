@@ -44,7 +44,7 @@ export default function CustomizedDialogs(props) {
             <Typography className={[classesTypografy.titleGame].join(" ")}> Perdiste </Typography>
           </Grid>
           <Grid item xs={12} className={classesIcon.root}>
-            <img className={classesIcon.icon} src={LoserIcon} /> 
+            <img className={classesIcon.icon} src={LoserIcon} alt="icon"/> 
           </Grid>
           <Grid item xs={12} >
             <Typography className={[classesTypografy.titlePanel].join(" ")}> Puntos</Typography>
