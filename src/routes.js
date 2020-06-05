@@ -18,7 +18,7 @@ import BurgerBuilder from "./Views/BurgerBuilder";
 import SecuenciaNumeros from "./Views/SecuenciaNumeros";
 
 //Layout
-import ExampleLayout from "./Components/Layout/Example";
+import ExampleLayout from "./Components/Layout/Example/Example";
 
 const routes = [
   {

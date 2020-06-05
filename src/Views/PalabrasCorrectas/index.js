@@ -35,11 +35,14 @@ const PalabrasCorrectas = (props) => {
         text: PalabrasCorrectasControler(),
         position: 0,
         mensaje: '',
+        level: 1,
+        points : 0,
+        winner : false,
+        loser : false,
+
         rightAnswer: false,
         wrongAnswer: false,
         playNextWord: false,
-        stateOfGame: "BEGIN",
-        show: false,
     });
 
     const checkIfCorrect = () => {
@@ -98,12 +101,12 @@ const PalabrasCorrectas = (props) => {
 
     return (
         <LayoutGame
+            level={state.level}
+            points={state.points}
+            game="PalabrasCorrectas"
+            winner={state.winner}
+            loser={state.loser}
             backgroundImage={background}
-            title="Palabras Correctas"
-            enunciado="Sos bueno escribiendo. Identifica si la palabra esta escrita correctamente o no."
-            show={state.show}
-            //setShow={setShow}
-            stateOfGame={state.stateOfGame}
         >
             <Container>
                 <Grid container spacing={3} style={{paddingTop:"15px"}}>
