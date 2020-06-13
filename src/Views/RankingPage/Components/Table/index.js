@@ -87,21 +87,42 @@ const useStylesRanking = makeStyles((theme) => ({
   },
 }));
 
-export default function TableResponsive() {
+export default function TableResponsive(props) {
   const classes = useStylesRanking();
 
   const [refresh, setRefresh] = useState(false);
   const [setErrors] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [row, setRow] = useState([]);
+
+
+  const orderArray = (array) => {
+    array.sort((a, b) => (a.points < b.points) ? 1 : -1)
+    for (var i = 0; i < array.length; i++) {
+      console.log(i)
+      array[i]["posicion"] = i + 1
+    }
+  }
 
   async function fetchApi() {
     try {
       setLoading(true);
-      const res = await fetch(url);
+      let token = localStorage.getItem("token");
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + token);
+
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders
+      };
+
+      const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
       await res.json().then((json) => {
-        setRow(json);
-        console.log(json);
+        
+        console.log(orderArray(json.data));
+        setRow(json.data);
       });
     } catch (e) {
       setErrors(e);
@@ -110,10 +131,39 @@ export default function TableResponsive() {
     }
   }
 
+
   useEffect(() => {
     fetchApi();
     setRefresh(false);
   }, [refresh]);
+
+  async function fetchApi2() {
+    try {
+      setLoading(true);
+      let token = localStorage.getItem("token");
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + token);
+
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders
+      };
+
+      const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
+      await res.json().then((json) => {
+        
+      console.log(orderArray(json.data));
+/*         setRow(json.data);
+ */      });
+    } catch (e) {
+      setErrors(e);
+    } finally {
+      setLoading(false);
+    }
+  }
+
 
   return (
     <div
@@ -126,62 +176,62 @@ export default function TableResponsive() {
       {loading ? (
         "Loading"
       ) : (
-        <Container maxWidth="md">
-          <Grid container wrap="wrap" spacing={2}>
-            <Grid item xs={12} md={12}>
-              <Typography className={classes.font} variant="h3" noWrap>
-                {" "}
+          <Container maxWidth="md">
+            <Grid container wrap="wrap" spacing={2}>
+              <Grid item xs={12} md={12}>
+                <Typography className={classes.font} variant="h3" noWrap>
+                  {" "}
                 Mi Ranking{" "}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <AutoGridNoWrap
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                {/*  <AutoGridNoWrap
                 posicion={row[2].posicion}
                 nombre={row[2].nombre}
                 puntos={row[2].puntos}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography className={classes.font} variant="h3" noWrap>
-                {" "}
+              /> */}
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.font} variant="h3" noWrap>
+                  {" "}
                 Ranking{" "}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6} style={{ textAlign: "Left" }}>
-              <Grid
-                container
-                justify="center"
-                alignItems="flex-end"
-                wrap="wrap"
-                spacing={2}
-              >
-                <Grid item xs={9}>
-                  <TextField
-                    id="standard-search"
-                    label="Buscate a tus amigos"
-                    fullWidth
-                    type="search"
-                  />
-                </Grid>
-                <Grid item xs={3}>
-                  <Button variant="outlined" size="medium" color="primary">
-                    BUSCAR
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6} style={{ textAlign: "Left" }}>
+                <Grid
+                  container
+                  justify="center"
+                  alignItems="flex-end"
+                  wrap="wrap"
+                  spacing={2}
+                >
+                  <Grid item xs={9}>
+                    <TextField
+                      id="standard-search"
+                      label="Buscate a tus amigos"
+                      fullWidth
+                      type="search"
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Button variant="outlined" onClick={() => fetchApi2()} size="medium" color="primary">
+                      BUSCAR
                   </Button>
+                  </Grid>
                 </Grid>
               </Grid>
+              <Grid item xs={12}>
+                {row.map((data) => (
+                  <AutoGridNoWrap
+                    posicion={data.posicion}
+                    nombre={data.name}
+                    puntos={data.points}
+                  />
+                ))}
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              {row.map((data) => (
-                <AutoGridNoWrap
-                  posicion={data.posicion}
-                  nombre={data.nombre}
-                  puntos={data.puntos}
-                />
-              ))}
-            </Grid>
-          </Grid>
-        </Container>
-      )}
+          </Container>
+        )}
     </div>
   );
 }
