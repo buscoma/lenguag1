@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const url = "http://www.mocky.io/v2/5ea453e13000006e00ce2cc9";
 
 const useStylesAutoGridNoWrap = makeStyles((theme) => ({
   root: {
@@ -103,7 +102,7 @@ export default function TableResponsive(props) {
       array[i]["posicion"] = i + 1
     }
   }
-
+/* 
   async function fetchApi() {
     try {
       setLoading(true);
@@ -111,7 +110,7 @@ export default function TableResponsive(props) {
       let token = localStorage.getItem("token");
 
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjAwMTA5OCwiZXhwIjoxNTkyMDg3NDk4fQ.IO4fZ7SYqOTm1V4kw2B1RNNGdeE5reVIdzkBdcPLOiU" );
+      myHeaders.append("Authorization", "Bearer " + token );
 
       var requestOptions = {
         method: 'GET',
@@ -121,9 +120,8 @@ export default function TableResponsive(props) {
 
       const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
       await res.json().then((json) => {
-        
         console.log(orderArray(json.data));
-        setRow(json.data);
+        setRow( json.data);
       });
     } catch (e) {
       setErrors(e);
@@ -135,9 +133,36 @@ export default function TableResponsive(props) {
   useEffect(() => {
     fetchApi();
     setRefresh(false);
-  }, [refresh]);
+  }, [refresh]); */
 
+  useEffect(() => {
+		async function fetchApi() {
+			try {
+				setLoading(true);
+				localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
+				let token = localStorage.getItem("token");
 
+				var myHeaders = new Headers();
+				myHeaders.append("Authorization", "Bearer " + token);
+
+				var requestOptions = {
+					method: 'GET',
+					redirect: 'follow',
+					headers: myHeaders
+				};
+
+				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
+				await res.json().then((json) => { console.log(json.data); setRow(orderArray(json.data)) });
+			} catch (e) {
+				setErrors(e);
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchApi();
+		setRefresh(false);
+	}, [refresh]);
 
 
   return (
@@ -146,6 +171,7 @@ export default function TableResponsive(props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        height: "100%"
       }}
     >
       {loading ? (
