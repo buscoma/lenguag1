@@ -44,18 +44,8 @@ const PalabrasCorrectas = (props) => {
     const checkIfCorrect = () => {
 
         if (state.text.length - 1 === state.position) {
-            alert("nivel completado")
-            setState((prev) => ({
-                ...prev,
-                level: prev.level + 1,
-                rightAnswer: false,
-                wrongAnswer: false,
-                playNextWord: false,
-                position: 0
-            }));
-         }
-
-        if (state.text[state.position].EsCorrecta === true) {
+            levelUp();
+         }else if (state.text[state.position].EsCorrecta === true) {
             setState((prev) => ({
                 ...prev,
                 mensaje: 'Es correcto, la palabra esta escrita bien.',
@@ -76,18 +66,8 @@ const PalabrasCorrectas = (props) => {
     const checkIfInCorrect = () => {
 
         if (state.text.length - 1 === state.position) {
-            alert("nivel completado")
-            setState((prev) => ({
-                ...prev,
-                level: prev.level + 1,
-                rightAnswer: false,
-                wrongAnswer: false,
-                playNextWord: false,
-                position: 0
-            }));
-        }
-
-        if (state.text[state.position].EsCorrecta === false) {
+            levelUp();
+        }else if (state.text[state.position].EsCorrecta === false) {
             setState((prev) => ({
                 ...prev,
                 mensaje: 'Es correcto, la palabra esta escrita mal.',
@@ -104,6 +84,24 @@ const PalabrasCorrectas = (props) => {
         }
     };
 
+    const levelUp = () => {
+        if(state.level < 3){
+            setState((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                playNextWord: false,
+                rightAnswer: false,
+                wrongAnswer: false,
+                position: 0
+            }));
+        }else{
+            setState((prev) => ({
+                ...prev,
+                winner : true,
+            }))
+        }
+    }
+
     const readyForNextWord = () => {
         if (state.position < state.text.length - 1) {
             setState((prev) => ({
@@ -118,9 +116,7 @@ const PalabrasCorrectas = (props) => {
         }
     };
 
-    const playAgain = () => {
-        alert('Aca hay que volver a iniciar juego');
-    };
+
 
 
     useEffect(() => {
@@ -256,7 +252,7 @@ const PalabrasCorrectas = (props) => {
                                         <Button
                                             variant="contained"
                                             className={clasessButtom.buttomOther}
-                                            onClick={playAgain}
+                                            href="/palabras_correctas"
                                             fullWidth
                                         >
                                             {' '}
