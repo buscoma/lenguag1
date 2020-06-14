@@ -59,7 +59,7 @@ export default function CustomizedDialogs(props) {
             <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elejir otro juego </Button>
           </Grid>
           <Grid container item xs={12} md={6} className={[classesButtom.root].join(" ")} >
-            <Button href="/landing_page" variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}> Volver a jugar </Button>
+            <Button href={props.urlGameAgein} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}> Volver a jugar </Button>
           </Grid>
         </Grid>
       </Container>

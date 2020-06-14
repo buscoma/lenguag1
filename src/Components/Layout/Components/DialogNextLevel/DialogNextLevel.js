@@ -24,9 +24,15 @@ export default function CustomizedDialogs(props) {
   const [levelNow, setLevelNow] = useState(props.flagAndLevel);
   const [open,setOpen] = useState(false);
 
+  const changeOpen = () => {setOpen(prevState => !prevState);}
+
   useEffect(() => {
-    if(props.flagAndLevel !== levelNow)
-      setOpen(!open);
+
+    if(props.flagAndLevel !== levelNow){
+      setLevelNow(props.flagAndLevel)
+      changeOpen()
+    }
+        
     }, [levelNow, props.flagAndLevel]);
 
   return (

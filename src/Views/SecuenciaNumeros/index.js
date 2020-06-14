@@ -71,6 +71,7 @@ export default function SecuenciaDeNumeros(props) {
 		if (level < 3) {/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
 			setLevel(level + 1);
 			setValues([]); //Vacio la lista de numeros seleccionados.
+			setLastID(0);
 			setStopTimer(true);
 		} else {/* Termino el juego, y GANASTE!!!!! */
 			setWinner(true);

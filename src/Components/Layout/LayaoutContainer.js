@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
             <DialogLoserGame 
                 points={props.points}
                 openFlag={props.loser}
+                urlGameAgein={Enunciados[props.game].urlGame}
             />
             
             <Container maxWidth="xl" className={classes.root} >
