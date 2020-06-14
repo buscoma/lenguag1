@@ -91,7 +91,7 @@ export default function TableResponsive(props) {
   const classes = useStylesRanking();
 
   const [refresh, setRefresh] = useState(false);
-  const [setErrors] = useState(false);
+  const [errors, setErrors] = useState(false);
   const [loading, setLoading] = useState(false);
   const [row, setRow] = useState([]);
 
@@ -107,10 +107,11 @@ export default function TableResponsive(props) {
   async function fetchApi() {
     try {
       setLoading(true);
+      localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
       let token = localStorage.getItem("token");
 
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + token);
+      myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjAwMTA5OCwiZXhwIjoxNTkyMDg3NDk4fQ.IO4fZ7SYqOTm1V4kw2B1RNNGdeE5reVIdzkBdcPLOiU" );
 
       var requestOptions = {
         method: 'GET',
@@ -131,38 +132,12 @@ export default function TableResponsive(props) {
     }
   }
 
-
   useEffect(() => {
     fetchApi();
     setRefresh(false);
   }, [refresh]);
 
-  async function fetchApi2() {
-    try {
-      setLoading(true);
-      let token = localStorage.getItem("token");
 
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + token);
-
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow',
-        headers: myHeaders
-      };
-
-      const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
-      await res.json().then((json) => {
-        
-      console.log(orderArray(json.data));
-/*         setRow(json.data);
- */      });
-    } catch (e) {
-      setErrors(e);
-    } finally {
-      setLoading(false);
-    }
-  }
 
 
   return (
@@ -214,7 +189,7 @@ export default function TableResponsive(props) {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <Button variant="outlined" onClick={() => fetchApi2()} size="medium" color="primary">
+                    <Button variant="outlined"  size="medium" color="primary">
                       BUSCAR
                   </Button>
                   </Grid>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 //Librerias
-import { 
+import {
 	Grid,
 	Paper
 } from '@material-ui/core';
@@ -16,16 +16,16 @@ import ButtonComponent from './Components/ButtonComponent';
 import Clock from './Components/Clock';
 import controller from './Controller';
 import {
-    useStylesPaper,
-    useStylesButtom,
-        } from './Styles';
+	useStylesPaper,
+	useStylesButtom,
+} from './Styles';
 
 
 
 export default function SecuenciaDeNumeros(props) {
 
 	const clasessPaper = useStylesPaper();
-    const clasessButtom = useStylesButtom();
+	const clasessButtom = useStylesButtom();
 
 	const buttonsData = controller();
 	const [values, setValues] = useState([]);
@@ -34,29 +34,36 @@ export default function SecuenciaDeNumeros(props) {
 	//const [clockTimer, setClockTimer] = useState(30);
 	const [result, setResult] = useState();
 	//const [caption, setCaption] = useState();
-	
+	const [refresh, setRefresh] = useState(false);
+	const [errors, setErrors] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [secuencia, setSecuencia] = useState([]);
 
 	//LAYOUT HOOK NEW
 	const [level, setLevel] = useState(1);
 	const [points, setPoints] = useState(0);
-    const [winner, setWinner] = useState(false);
-    const [loser, setLoser] = useState(false);
+	const [winner, setWinner] = useState(false);
+	const [loser, setLoser] = useState(false);
 
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
-		if (id > lastID) {
+		
+		if (id => lastID) {
+			
 			setValues(values.concat(id));
 			setLastID(id);
+			console.log(values.length === arraySize - 1)
 			if (values.length === arraySize - 1) {
-				endLevel(true);
-				//ACA SE SUPONE QUE EL USUARIO GANO EL JUEGO, LOS 3 NIVELES?cREO QUE NO
-				setWinner(true);
+				//Gano el nivel!!!
+				console.log("acaca")
+				levelUp();
 			}
 		}
 		else {
 			endLevel(false);
 		}
 	};
+
 	//FUNCTION TO IDENTIFY WHEN TIME EXPIRES or FUNCTION TO STOP CLOCK AND ADD LEVEL 
 	const endLevel = (value) => {
 		if (value === false) {//PERDISTE
@@ -70,13 +77,55 @@ export default function SecuenciaDeNumeros(props) {
 		}
 	}
 
-	//FUNCTION TO CONTROL LEVEL DETAILS
-	//const gameHandler = (showLevel) => { }
+	const levelUp = () => {
+		
+		if (level < 3) {
+			setLevel(level + 1);
+			setValues([])
+			/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
+			//endLevel(true);
+		} else {
+			/* Termino el juego, y GANASTE!!!!! */
+			setWinner(true);
+		}
+	}
 
-	//FUNCTION TO GO TO LANDING PAGE AFTER EXITING BUTTON ON GAME 
-	/*const goBack = () => {
 
-	}*/
+	
+
+	useEffect(() => {
+
+		async function fetchApi() {
+			try {
+				setLoading(true);
+				localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
+				let token = localStorage.getItem("token");
+	
+				var myHeaders = new Headers();
+				myHeaders.append("Authorization", "Bearer " + token);
+	
+				var requestOptions = {
+					method: 'GET',
+					redirect: 'follow',
+					headers: myHeaders
+				};
+	
+				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/secuenciaNumeros?nivel="+ level, requestOptions);
+				await res.json().then((json) => {
+	
+					console.log(json.data);
+					setSecuencia(json.data);
+				});
+			} catch (e) {
+				setErrors(e);
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchApi();
+		setRefresh(false);
+	}, [refresh, level, errors]);
 
 	return (
 		<LayoutGame
@@ -86,7 +135,7 @@ export default function SecuenciaDeNumeros(props) {
 			loser={loser}
 			game="SecuenciaDeNumeros"
 			backgroundImage={BackgroundMat}
-			>
+		>
 			<Paper className={clasessPaper.root}>
 				<Grid container style={{ marginBottom: '1rem' }}>
 					<Grid Item xs={12}>
@@ -94,7 +143,7 @@ export default function SecuenciaDeNumeros(props) {
 					</Grid>
 				</Grid>
 				<Grid container >
-					{buttonsData.map((image) => (
+					{ loading ? " LOADING" : secuencia.map((image) => (
 						<Grid Item xs={6} sm={3} align="center">
 							<ButtonComponent className={clasessButtom.buttomNumber} id={image.id} methodAddId={methodAddId} />
 						</Grid>

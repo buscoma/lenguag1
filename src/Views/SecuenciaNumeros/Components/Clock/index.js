@@ -12,13 +12,14 @@ export default function Clock(props) {
   const [counter, setCounter] = useState(props.time);
   // const [stopTimer, setStopTimer] = useState(props.stopTimer);
 
-  const endTime = () => {
-    props.endLevel(false);
-  };
+  
 
   useEffect(() => {
+    const endTime = () => {
+      props.endLevel(false);
+    };
     counter > 0 ? setTimeout(() => setCounter(counter - 1), 1000) : endTime();
-  }, [counter]);
+  }, [counter, props]);
 
   return (
     <div>
