@@ -23,7 +23,7 @@ const PalabrasCorrectas = (props) => {
     const clasessButtom = useStylesButtom();
     const classesAlert = useStyleAlert();
 
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         text: PalabrasCorrectasControler(),
         position: 0,
         mensaje: '',
@@ -32,31 +32,28 @@ const PalabrasCorrectas = (props) => {
         winner: false,
         loser: false,
 
-        
-
         rightAnswer: false,
         wrongAnswer: false,
         playNextWord: false
     });
 
-    const [ refresh, setRefresh ] = useState(false);
-    const [ errors, setErrors ] = useState(false);
-    const [ loading, setLoading ] = useState(true);
+    const [refresh, setRefresh] = useState(false);
+    const [errors, setErrors] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const checkIfCorrect = () => {
-       
-        if (state.text.length-1==state.position){
-            alert ("nivel completado")
+
+        if (state.text.length - 1 === state.position) {
+            alert("nivel completado")
             setState((prev) => ({
                 ...prev,
-                level: prev.level+1,
+                level: prev.level + 1,
                 rightAnswer: false,
                 wrongAnswer: false,
                 playNextWord: false,
-                position:0
+                position: 0
             }));
-            levelUp();
-        }
+         }
 
         if (state.text[state.position].EsCorrecta === true) {
             setState((prev) => ({
@@ -64,7 +61,7 @@ const PalabrasCorrectas = (props) => {
                 mensaje: 'Es correcto, la palabra esta escrita bien.',
                 rightAnswer: true,
                 playNextWord: true
-                
+
             }));
         } else {
             setState((prev) => ({
@@ -78,17 +75,16 @@ const PalabrasCorrectas = (props) => {
 
     const checkIfInCorrect = () => {
 
-        if (state.text.length-1==state.position){
-            alert ("nivel completado")
+        if (state.text.length - 1 === state.position) {
+            alert("nivel completado")
             setState((prev) => ({
                 ...prev,
-                level: prev.level+1,
+                level: prev.level + 1,
                 rightAnswer: false,
                 wrongAnswer: false,
                 playNextWord: false,
                 position: 0
             }));
-            levelUp();
         }
 
         if (state.text[state.position].EsCorrecta === false) {
@@ -126,63 +122,42 @@ const PalabrasCorrectas = (props) => {
         alert('Aca hay que volver a iniciar juego');
     };
 
-    async function fetchApi() {
-        try {
-            localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
-            let token = localStorage.getItem('token');
-
-            var myHeaders = new Headers();
-            myHeaders.append('Authorization', 'Bearer ' + token);
-
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow',
-                headers: myHeaders
-            };
-
-            const res = await fetch(
-                'https://backendlenguamaticag1.herokuapp.com/api/games/palabrasCorrectas?nivel=1',
-                requestOptions
-            );
-            setLoading(false);
-            await res.json().then((json) => {
-                console.log(state.text)
-                setState((prev) => ({
-                    ...prev,
-                    text: json.data.preguntas
-                }));
-                console.log(json.data.preguntas[0].palabra);
-                
-            });
-        } catch (e) {
-            setErrors(e);
-        } finally {
-            setLoading(true);
-        }
-    }
 
     useEffect(() => {
-            fetchApi();
-            setRefresh(false);
-        },[ refresh ]);
+        async function fetchApi() {
+            try {
+                setLoading(true);
+                localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
+                let token = localStorage.getItem("token");
 
-    const levelUp = () => {
-        let token = localStorage.getItem('token');
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer " + token);
 
-        var myHeaders = new Headers();
-        myHeaders.append('Authorization', 'Bearer ' + token);
+                var requestOptions = {
+                    method: 'GET',
+                    redirect: 'follow',
+                    headers: myHeaders
+                };
 
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow',
-            headers: myHeaders
-        };
+                const res = await fetch('https://backendlenguamaticag1.herokuapp.com/api/games/palabrasCorrectas?nivel=' + state.level, requestOptions);
+                await res.json().then((json) => {
+                    console.log(json.data)
+                    setState((prev) => ({
+                        ...prev,
+                        text: json.data.preguntas
+                    }));
+                });
+            } catch (e) {
+                setErrors(e);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchApi();
+        setRefresh(false);
+    }, [refresh, state.level, errors]);
 
-        fetch('https://backendlenguamaticag1.herokuapp.com/api/games/palabrasCorrectas?nivel='+ state.level, requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
-            .catch((error) => console.log('error', error));
-    };
+
 
     return (
         <LayoutGame
@@ -193,106 +168,106 @@ const PalabrasCorrectas = (props) => {
             loser={state.loser}
             backgroundImage={background}
         >
-        {loading ? ("Loading") : 
-            (<Container>
-                <Grid container spacing={3} style={{ paddingTop: '15px' }}>
-                    <Grid item xs={12}>
-                        <Paper className={clasess.root}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <Typography className={clasessTypografy.questionTitle}>
-                                        {' '}
+            {loading ? ("Loading") :
+                (<Container>
+                    <Grid container spacing={3} style={{ paddingTop: '15px' }}>
+                        <Grid item xs={12}>
+                            <Paper className={clasess.root}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <Typography className={clasessTypografy.questionTitle}>
+                                            {' '}
                                         La palabra esta escrita correctamente?
                                     </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography className={clasessTypografy.wordSubTitle}>
+                                            {' '}
+                                        "{state.text[state.position].palabra}"{' '}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Button
+                                            variant="contained"
+                                            className={clasessButtom.buttomYesOn}
+                                            disabled={state.playNextWord}
+                                            onClick={checkIfCorrect}
+                                            fullWidth
+                                        >
+                                            SI{' '}
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Button
+                                            variant="contained"
+                                            className={clasessButtom.buttomYesOn}
+                                            disabled={state.playNextWord}
+                                            onClick={checkIfInCorrect}
+                                            fullWidth
+                                        >
+                                            NO{' '}
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Typography className={clasessTypografy.wordSubTitle}>
-                                        {' '}
-                                        "{ state.text[state.position].palabra}"{' '}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Button
-                                        variant="contained"
-                                        className={clasessButtom.buttomYesOn}
-                                        disabled={state.playNextWord}
-                                        onClick={checkIfCorrect}
-                                        fullWidth
-                                    >
-                                        SI{' '}
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Button
-                                        variant="contained"
-                                        className={clasessButtom.buttomYesOn}
-                                        disabled={state.playNextWord}
-                                        onClick={checkIfInCorrect}
-                                        fullWidth
-                                    >
-                                        NO{' '}
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Collapse in={state.rightAnswer}>
-                            <Grid container spacing={3} justify="center">
-                                <Grid item xs={12}>
-                                    <Alert icon=" " severity="success" className={classesAlert.alert}>
-                                        <AlertTitle className={classesAlert.alert}>RESPUESTA CORRECTO</AlertTitle>
-                                        {state.mensaje}
-                                    </Alert>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Button
-                                        variant="contained"
-                                        className={clasessButtom.buttomOther}
-                                        onClick={readyForNextWord}
-                                        fullWidth
-                                    >
-                                        {' '}
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Collapse in={state.rightAnswer}>
+                                <Grid container spacing={3} justify="center">
+                                    <Grid item xs={12}>
+                                        <Alert icon=" " severity="success" className={classesAlert.alert}>
+                                            <AlertTitle className={classesAlert.alert}>RESPUESTA CORRECTO</AlertTitle>
+                                            {state.mensaje}
+                                        </Alert>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Button
+                                            variant="contained"
+                                            className={clasessButtom.buttomOther}
+                                            onClick={readyForNextWord}
+                                            fullWidth
+                                        >
+                                            {' '}
                                         ESTAS LISTO PARA CONTINUAR{' '}
-                                    </Button>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Collapse>
-                        <Collapse in={state.wrongAnswer}>
-                            <Grid container spacing={3} justify="center">
-                                <Grid item xs={12}>
-                                    <Alert icon=" " severity="error" className={classesAlert.alert}>
-                                        <AlertTitle className={classesAlert.alert}>RESPUESTA INCORRECTA</AlertTitle>
-                                        {state.mensaje}
-                                    </Alert>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Button
-                                        variant="contained"
-                                        className={clasessButtom.buttomOther}
-                                        href="/landing_page"
-                                        fullWidth
-                                    >
-                                        {' '}
+                            </Collapse>
+                            <Collapse in={state.wrongAnswer}>
+                                <Grid container spacing={3} justify="center">
+                                    <Grid item xs={12}>
+                                        <Alert icon=" " severity="error" className={classesAlert.alert}>
+                                            <AlertTitle className={classesAlert.alert}>RESPUESTA INCORRECTA</AlertTitle>
+                                            {state.mensaje}
+                                        </Alert>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Button
+                                            variant="contained"
+                                            className={clasessButtom.buttomOther}
+                                            href="/landing_page"
+                                            fullWidth
+                                        >
+                                            {' '}
                                         Juegar a otra cosa{' '}
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Button
-                                        variant="contained"
-                                        className={clasessButtom.buttomOther}
-                                        onClick={playAgain}
-                                        fullWidth
-                                    >
-                                        {' '}
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <Button
+                                            variant="contained"
+                                            className={clasessButtom.buttomOther}
+                                            onClick={playAgain}
+                                            fullWidth
+                                        >
+                                            {' '}
                                         Volver a juegar{' '}
-                                    </Button>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Collapse>
+                            </Collapse>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>)}
+                </Container>)}
         </LayoutGame>
     );
 };
