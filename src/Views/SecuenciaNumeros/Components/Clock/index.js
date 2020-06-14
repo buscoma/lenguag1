@@ -7,25 +7,23 @@ import {
 export default function Clock(props) {
 
   const clasessTypografy = useStyleTypografy();
-   
-
   const [counter, setCounter] = useState(props.time);
-  // const [stopTimer, setStopTimer] = useState(props.stopTimer);
-
-  
 
   useEffect(() => {
-    const endTime = () => {
-      props.endLevel(false);
-    };
-    counter > 0 ? setTimeout(() => setCounter(counter - 1), 1000) : endTime();
+      if(props.stopTimer === true){
+        setCounter(props.time / props.level)
+      }else{
+        counter > 0 ? setTimeout(() => setCounter(counter - 1), 1000) : props.timeIsUp();
+      }
+      
   }, [counter, props]);
 
   return (
     <div>
       <Typography classes={clasessTypografy}>
         {" "}
-        Tiempo {counter}
+        {props.stopTimer ? "HAS CLICK PARA INICIAR EL TIEMPO" :  counter }
+        
       </Typography>
     </div>
   );
