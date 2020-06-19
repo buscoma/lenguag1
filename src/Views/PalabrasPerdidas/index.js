@@ -1,6 +1,6 @@
 // Librerias
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Divider } from '@material-ui/core';
+import { Grid, Paper, Divider, Button } from '@material-ui/core';
 
 // Componentes externos
 import LayoutGame from '../../Components/Layout/LayaoutContainer';
@@ -27,6 +27,36 @@ function PalabrasPerdidas() {
 	const [ refresh, setRefresh ] = useState(false);
 	const [ errors, setErrors ] = useState(false);
   const [ loading, setLoading ] = useState(false);
+  
+
+  const [duplasCardBoard, setDuplasCardBoard] = useState([]);
+
+  const juegoTerminado = () => {
+      //console.log(duplasCardBoard);
+      if(duplasCardBoard.length === 4) {
+
+          for (let index = 0; index < duplasCardBoard.length; index++) {
+
+            if (duplasCardBoard[index].uno !== duplasCardBoard[index].dos) {
+              alert("Perdiste!");
+              return ;
+            }
+          }
+          //alert("Ganaste!");
+          pasarSigNivel() ;
+      }
+
+      else {
+        alert("Faltan palabras por unir");
+      }
+  };
+
+  const pasarSigNivel = () => {
+    //setState((prev) => ({...prev, level: prev.level+1}) )
+    
+  }
+
+
   
 	useEffect(
 		() => {
@@ -79,7 +109,9 @@ function PalabrasPerdidas() {
 			backgroundImage={BackgroundImage}
 		>
 			<Paper classes={clasessPaper}>
+
 				<Grid container spacing={3} className="row">
+
 					<Grid item lg={3} md={3} xs={12} className="center">
 						<Paper className={clasessPaper.rootBlack}>
 							<Board id="board-0" className="board">
@@ -101,7 +133,7 @@ function PalabrasPerdidas() {
 									<div className="clearfix">
 										<p> {item.frase_frente}</p>
 										<div className="flexbox">
-											<Board id="board-1" empty={true} className="board" />
+											<Board id="board-1" idBoard={item.id} empty={true} className="board" addDupla={setDuplasCardBoard} />
 										</div>
 										<p>{item.frase_atras} </p>
 									</div>
@@ -110,8 +142,16 @@ function PalabrasPerdidas() {
 							))}
 						</div>
 					</Grid>
+
 				</Grid>
+        
+        <Button onClick={juegoTerminado}> Corregir
+        </Button>
+
 			</Paper>
+
+                
+
 		</LayoutGame>
 	);
 }
