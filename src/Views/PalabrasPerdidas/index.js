@@ -15,49 +15,49 @@ import { useStylesPaper, useStylesCard } from './Styles';
 function PalabrasPerdidas() {
 	const clasessPaper = useStylesPaper();
 	const clasessCard = useStylesCard();
-	const [ frasesBackend, setFrasesBackend] = useState([]);
+	const [frasesBackend, setFrasesBackend] = useState([]);
 
-	const [ state, setState ] = useState({
+	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
 		winner: false,
 		loser: false
 	});
 
-	const [ refresh, setRefresh ] = useState(false);
-	const [ errors, setErrors ] = useState(false);
-  const [ loading, setLoading ] = useState(false);
-  
-
-  const [duplasCardBoard, setDuplasCardBoard] = useState([]);
-
-  const juegoTerminado = () => {
-      //console.log(duplasCardBoard);
-      if(duplasCardBoard.length === 4) {
-
-          for (let index = 0; index < duplasCardBoard.length; index++) {
-
-            if (duplasCardBoard[index].uno !== duplasCardBoard[index].dos) {
-              alert("Perdiste!");
-              return ;
-            }
-          }
-          //alert("Ganaste!");
-          pasarSigNivel() ;
-      }
-
-      else {
-        alert("Faltan palabras por unir");
-      }
-  };
-
-  const pasarSigNivel = () => {
-    //setState((prev) => ({...prev, level: prev.level+1}) )
-    
-  }
+	const [refresh, setRefresh] = useState(false);
+	const [errors, setErrors] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 
-  
+	const [duplasCardBoard, setDuplasCardBoard] = useState([]);
+
+	const juegoTerminado = () => {
+		//console.log(duplasCardBoard);
+		if (duplasCardBoard.length === 4) {
+
+			for (let index = 0; index < duplasCardBoard.length; index++) {
+
+				if (duplasCardBoard[index].uno !== duplasCardBoard[index].dos) {
+					alert("Perdiste!");
+					return;
+				}
+			}
+			//alert("Ganaste!");
+			pasarSigNivel();
+		}
+
+		else {
+			alert("Faltan palabras por unir");
+		}
+	};
+
+	const pasarSigNivel = () => {
+		setState((prev) => ({...prev, level: prev.level+1}) )
+
+	}
+
+
+
 	useEffect(
 		() => {
 			async function fetchApi() {
@@ -83,8 +83,8 @@ function PalabrasPerdidas() {
 						requestOptions
 					);
 					await res.json().then((json) => {
-            console.log(json.data['0'].frases)
-            setFrasesBackend(json.data['0'].frases);
+						console.log(json.data['0'].frases)
+						setFrasesBackend(json.data['0'].frases);
 					});
 				} catch (e) {
 					setErrors(e);
@@ -96,7 +96,7 @@ function PalabrasPerdidas() {
 			fetchApi();
 			setRefresh(false);
 		},
-		[ refresh, state.level, errors ]
+		[refresh, state.level, errors]
 	);
 
 	return (
@@ -115,7 +115,7 @@ function PalabrasPerdidas() {
 					<Grid item lg={3} md={3} xs={12} className="center">
 						<Paper className={clasessPaper.rootBlack}>
 							<Board id="board-0" className="board">
-								{ loading ? 'Loading...' : frasesBackend.map((item) => (
+								{loading ? 'Loading...' : frasesBackend.map((item) => (
 									<Card id={item.id} draggable="true" empty={false} classes={clasessCard}>
 										{' '}
 										<p> {item.palabra} </p>{' '}
@@ -144,13 +144,13 @@ function PalabrasPerdidas() {
 					</Grid>
 
 				</Grid>
-        
-        <Button onClick={juegoTerminado}> Corregir
+
+				<Button onClick={juegoTerminado}> Corregir
         </Button>
 
 			</Paper>
 
-                
+
 
 		</LayoutGame>
 	);
