@@ -12,16 +12,16 @@ import Card from './Components/Card';
 import BackgroundImage from './Assets/background.jpg';
 import { useStylesPaper, useStylesCard } from './Styles';
 
-function PalabrasPerdidas() {
+const  PalabrasPerdidas = (props) => {
 	const clasessPaper = useStylesPaper();
 	const clasessCard = useStylesCard();
-	const [frasesBackend, setFrasesBackend] = useState([]);
 
 	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
 		winner: false,
-		loser: false
+		loser: false,
+		frasesBackend : []
 	});
 
 	const [refresh, setRefresh] = useState(false);
@@ -29,21 +29,21 @@ function PalabrasPerdidas() {
 	const [loading, setLoading] = useState(false);
 
 
-	const [duplasCardBoard, setDuplasCardBoard] = useState([]);
-
+	const [duplasCardBoard, setDuplasCardBoard] = useState(true);
+	const [flag, setFlag] = useState(true);
 	const juegoTerminado = () => {
 		//console.log(duplasCardBoard);
-		if (duplasCardBoard.length === 4) {
+		if (true/* duplasCardBoard.length === 4 */) {
 
-			for (let index = 0; index < duplasCardBoard.length; index++) {
 
-				if (duplasCardBoard[index].uno !== duplasCardBoard[index].dos) {
-					alert("Perdiste!");
+				if (!duplasCardBoard) {
+					setState((prev) => ({...prev, loser: true}) )
 					return;
 				}
-			}
-			//alert("Ganaste!");
+				setLoading(true);
+				setDuplasCardBoard([])
 			pasarSigNivel();
+			
 		}
 
 		else {
@@ -53,51 +53,44 @@ function PalabrasPerdidas() {
 
 	const pasarSigNivel = () => {
 		setState((prev) => ({...prev, level: prev.level+1}) )
-
+		setLoading(false);
+		setFlag(true)
 	}
 
+	const checkIfCorrect = (id1, id2) => {
+/* 		alert(`id1 : ${id1} id2:${id2}`)
+ */		if(duplasCardBoard === true && id1 !== id2){
+			setDuplasCardBoard(false);
+		}
+	}
+
+    useEffect(() => {
+       if(flag){
+		setFlag(false)
+		   intento();
+		   
+	   }
+    }, [flag, state]); 
 
 
-	useEffect(
-		() => {
-			async function fetchApi() {
-				try {
-					setLoading(true);
-					localStorage.setItem(
-						'token',
-						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio'
-					);
-					let token = localStorage.getItem('token');
+	const intento = async function (){
+		localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio');
+		let token = localStorage.getItem("token");
 
-					var myHeaders = new Headers();
-					myHeaders.append('Authorization', 'Bearer ' + token);
+		var myHeaders = new Headers();
+		myHeaders.append("Authorization", "Bearer " + token);
 
-					var requestOptions = {
-						method: 'GET',
-						redirect: 'follow',
-						headers: myHeaders
-					};
-
-					const res = await fetch(
-						'https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=' + state.level,
-						requestOptions
-					);
-					await res.json().then((json) => {
-						console.log(json.data['0'].frases)
-						setFrasesBackend(json.data['0'].frases);
-					});
-				} catch (e) {
-					setErrors(e);
-				} finally {
-					setLoading(false);
-				}
-			}
-
-			fetchApi();
-			setRefresh(false);
-		},
-		[refresh, state.level, errors]
-	);
+		var requestOptions = {
+			method: 'GET',
+			redirect: 'follow',
+			headers: myHeaders
+		};
+		  console.log("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel="+ state.level)
+		  fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel="+ state.level, requestOptions)
+			.then(response => response.text())
+			.then(result =>{ console.log(JSON.parse(result).data["0"].frases); setState((prev) => ({...prev, frasesBackend : JSON.parse(result).data["0"].frases}))})
+			.catch(error => console.log('error', error));
+	}
 
 	return (
 		<LayoutGame
@@ -115,7 +108,7 @@ function PalabrasPerdidas() {
 					<Grid item lg={3} md={3} xs={12} className="center">
 						<Paper className={clasessPaper.rootBlack}>
 							<Board id="board-0" className="board">
-								{loading ? 'Loading...' : frasesBackend.map((item) => (
+								{loading ? 'Loading...' : state.frasesBackend.map((item) => (
 									<Card id={item.id} draggable="true" empty={false} classes={clasessCard}>
 										{' '}
 										<p> {item.palabra} </p>{' '}
@@ -128,12 +121,12 @@ function PalabrasPerdidas() {
 					<Grid item lg={9} md={9} xs={12}>
 						<div>
 							<Divider />
-							{loading ? 'Loading...' : frasesBackend.map((item) => (
+							{loading ? 'Loading...' : state.frasesBackend.map((item) => (
 								<div>
 									<div className="clearfix">
 										<p> {item.frase_frente}</p>
 										<div className="flexbox">
-											<Board id="board-1" idBoard={item.id} empty={true} className="board" addDupla={setDuplasCardBoard} />
+											<Board id="board-1" idBoard={item.id} empty={true} className="board" function={checkIfCorrect} />
 										</div>
 										<p>{item.frase_atras} </p>
 									</div>
@@ -147,6 +140,8 @@ function PalabrasPerdidas() {
 
 				<Button onClick={juegoTerminado}> Corregir
         </Button>
+	{/* 	<Button onClick={intento}> Corregir
+        </Button> */}
 
 			</Paper>
 

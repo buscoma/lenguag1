@@ -18,7 +18,7 @@ function Board(props) {
     //alert(card_id);
     //alert(props.idBoard);
 
-    props.addDupla( (prev) => [...prev, {uno : card_id, dos:props.idBoard}] );
+    props.function( card_id, props.idBoard );
   };
 
   const dragOver = (e) => {
