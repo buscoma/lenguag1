@@ -38,55 +38,74 @@ function PalabrasPerdidas() {
 			for (let index = 0; index < duplasCardBoard.length; index++) {
 
 				if (duplasCardBoard[index].uno !== duplasCardBoard[index].dos) {
-					setState((prev)=>({...prev, loser: true}));
+					alert("Perdiste!");
 					return;
 				}
-            }
-            console.log(state.level)
-            setState((prev)=>({...prev, level: prev.level +1}));
-            console.log(state.level)
+			}
+			//alert("Ganaste!");
+			setRefresh(false);
+			setLevel(2);
+
+			pasarSigNivel();
 		}
 
 		else {
 			alert("Faltan palabras por unir");
 		}
-    };
-    
+	};
 
-	useEffect(() => {
-		async function fetchApi() {
-			try {
-				setLoading(true);
-				localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio");
-				let token = localStorage.getItem("token");
+	const pasarSigNivel = () => {
+		
+		debugger
+		//setLevel(level + 1);
+	}
 
-				var myHeaders = new Headers();
-				myHeaders.append("Authorization", "Bearer " + token);
 
-				var requestOptions = {
-					method: 'GET',
-					redirect: 'follow',
-					headers: myHeaders
-				};
 
-				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + level, requestOptions);
-				await res.json().then((json) => { setFrasesBackend(json.data['0'].frases); });
-			} catch (e) {
-				setErrors(e);
-			} finally {
-				setLoading(false);
+	useEffect(
+		() => {
+			async function fetchApi() {
+				try {
+					setLoading(true);
+					localStorage.setItem(
+						'token',
+						'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio'
+					);
+					let token = localStorage.getItem('token');
+
+					var myHeaders = new Headers();
+					myHeaders.append('Authorization', 'Bearer ' + token);
+
+					var requestOptions = {
+						method: 'GET',
+						redirect: 'follow',
+						headers: myHeaders
+					};
+
+					const res = await fetch(
+						'https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=' + level,
+						requestOptions
+					);
+					await res.json().then((json) => {
+						console.log(json.data['0'].frases)
+						setFrasesBackend(json.data['0'].frases);
+					});
+				} catch (e) {
+					setErrors(e);
+				} finally {
+					setLoading(false);
+				}
 			}
-		}
 
-		fetchApi();
-		setRefresh(false);
-	}, [refresh, level, errors]);
-
-
+			fetchApi();
+			setRefresh(false);
+		},
+		[refresh, level, errors]
+	);
 
 	return (
 		<LayoutGame
-			level={ state.level}
+			level={level}
 			points={state.posints}
 			winner={state.winner}
 			loser={state.loser}
