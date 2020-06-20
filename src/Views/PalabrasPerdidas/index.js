@@ -16,7 +16,7 @@ function PalabrasPerdidas() {
 	const clasessPaper = useStylesPaper();
 	const clasessCard = useStylesCard();
 	const [frasesBackend, setFrasesBackend] = useState([]);
-	const [level, setLevel] = useState(1);
+	const [up, setUp] = useState(true);
 	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
@@ -42,15 +42,23 @@ function PalabrasPerdidas() {
 					return;
 				}
             }
-            console.log(state.level)
-            setState((prev)=>({...prev, level: prev.level +1}));
-            console.log(state.level)
+            nestLevel();
 		}
 
 		else {
 			alert("Faltan palabras por unir");
 		}
     };
+
+    const nestLevel = () => {
+        if(state.level < 3){
+            setState((prev)=>({...prev, level: prev.level +1}));
+            setUp(true);
+        }else{
+            setState((prev)=>({...prev, winner: true}));
+        }
+        
+    }
     
 
 	useEffect(() => {
@@ -68,9 +76,11 @@ function PalabrasPerdidas() {
 					redirect: 'follow',
 					headers: myHeaders
 				};
-
-				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + level, requestOptions);
-				await res.json().then((json) => { setFrasesBackend(json.data['0'].frases); });
+                if(up === true){
+                    const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level, requestOptions);
+                    await res.json().then((json) => { setFrasesBackend(json.data['0'].frases); console.log(json.data['0'].frases) });
+                    setUp(false)
+                }
 			} catch (e) {
 				setErrors(e);
 			} finally {
@@ -80,8 +90,9 @@ function PalabrasPerdidas() {
 
 		fetchApi();
 		setRefresh(false);
-	}, [refresh, level, errors]);
+	}, [refresh, state.level, up, errors]);
 
+    
 
 
 	return (
