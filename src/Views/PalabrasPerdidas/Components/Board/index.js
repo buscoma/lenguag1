@@ -14,6 +14,11 @@ function Board(props) {
     card.style.display = "block";
 
     e.target.appendChild(card);
+
+    //alert(card_id);
+    //alert(props.idBoard);
+
+    props.addDupla( (prev) => [...prev, {uno : card_id, dos:props.idBoard}] );
   };
 
   const dragOver = (e) => {
