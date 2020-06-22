@@ -6,6 +6,7 @@ const useStylesPaper = makeStyles({
     root: {
         opacity: 0.85,
         padding: "20px",
+        maxWidth : "1024PX",
     },
     rootBlack:{
         opacity: 0.85,
@@ -16,29 +17,14 @@ const useStylesPaper = makeStyles({
     }
 });
 
-const useStylesCard = makeStyles((theme) => ({
-    root:{
-        backgroundColor : "white",
-    }
-}));
 
 const useStyleTypografy = makeStyles((theme) => ({
-    questionTitle: {
+    Title: {
         textAlign: "center",
-        fontSize: "1.2rem",
-        fontWeight: "750",
-        [theme.breakpoints.up('md')]: {
-            fontSize: "2.5rem",
-        },
+        textDecoration : "underline",
+        fontWeight : "750",
     },
-    wordSubTitle: {
-        textAlign: "center",
-        fontSize: "1.5rem",
-        fontWeight: "1000",
-        [theme.breakpoints.up('md')]: {
-            fontSize: "2.5rem",
-        },
-    }
+   
 }));
 
 const useStylesButtom = makeStyles((theme) => ({
@@ -54,10 +40,19 @@ const useStylesButtom = makeStyles((theme) => ({
     },
 }));
 
+const useStyleCenter = makeStyles((theme) => ({
+    center: {
+      display : "flex",
+      justifyContent: "center",
+      alignItems : "center",
+      height : "100%"
+    },
+  
+}));
 
 export {
     useStylesPaper,
     useStyleTypografy,
     useStylesButtom,
-    useStylesCard,
+    useStyleCenter
 };

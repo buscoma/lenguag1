@@ -1,6 +1,6 @@
 // Librerias
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Divider, Button } from '@material-ui/core';
+import { Grid, Paper, Divider, Button, Typography } from '@material-ui/core';
 
 // Componentes externos
 import LayoutGame from '../../Components/Layout/LayaoutContainer';
@@ -8,15 +8,17 @@ import LayoutGame from '../../Components/Layout/LayaoutContainer';
 // Componentes internos
 import './Styles/palabrasPerdidas.css';
 import BackgroundImage from './Assets/background.jpg';
-import { useStylesPaper, useStylesCard } from './Styles';
+import { useStylesPaper, useStyleTypografy, useStyleCenter } from './Styles';
 import Botonera from './Components/Botonera';
 import Frases from './Components/Frases';
 import { object } from 'prop-types';
 
 
 
-const PalabrasPerdidas = (props) => {
+const PalabrasPerdidas = () => {
 	const clasessPaper = useStylesPaper();
+	const clasessTypografy = useStyleTypografy();
+	const classesCenter = useStyleCenter();
 
 	const [state, setState] = useState({
 		level: 1,
@@ -54,18 +56,18 @@ const PalabrasPerdidas = (props) => {
 		fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level, requestOptions)
 			.then(response => response.text())
 			.then(result => {
-				
+
 				let list = JSON.parse(result).data["0"].frases;
 
 				list.forEach(item => {
-					let looseWord = {idWord : item.id, word: item.palabra, isUsed: false}
+					let looseWord = { idWord: item.id, word: item.palabra, isUsed: false }
 					let aux = looseWords;
 					aux.push(looseWord);
 					setLooseWords(aux);
 				})
 
 				list.forEach(item => {
-					let emptySentence = {idSentence : item.id, begin: item.frase_frente, end : item.frase_atras, idWord : undefined, word : undefined}
+					let emptySentence = { idSentence: item.id, begin: item.frase_frente, end: item.frase_atras, idWord: undefined, word: undefined }
 					let aux = emptySentences;
 					aux.push(emptySentence);
 					setEmptySentences(aux);
@@ -83,18 +85,18 @@ const PalabrasPerdidas = (props) => {
 		let threeIsEmptySentence = emptySentences.some(e => (e.idWord === undefined));
 		console.log(emptySentences)
 		console.log(!threeIsEmptySentence)
-		if(!threeIsEmptySentence){
+		if (!threeIsEmptySentence) {
 			let isLevelComplete = emptySentences.some(e => (e.idWord === e.idSentence));
 			console.log(isLevelComplete)
-			if(isLevelComplete){
+			if (isLevelComplete) {
 				pasarSigNivel();
-			}else{
+			} else {
 				alert("you losse")
 			}
-		}else{
+		} else {
 			alert("faltan palabras")
 		}
-	
+
 	};
 
 	const pasarSigNivel = () => {
@@ -113,7 +115,7 @@ const PalabrasPerdidas = (props) => {
 		let wordFind;
 		let arrayAux = looseWords;
 		arrayAux.forEach(element => {
-			if(element.idWord === idWord){
+			if (element.idWord === idWord) {
 				element.isUsed = !element.isUsed;
 				wordFind = element;
 			}
@@ -125,7 +127,7 @@ const PalabrasPerdidas = (props) => {
 	const fullSentence = (idSentence, word) => {
 		let arrayAux = emptySentences;
 		arrayAux.forEach(element => {
-			if(element.idSentence === idSentence){
+			if (element.idSentence === idSentence) {
 				element.idWord = word.idWord;
 				element.word = word.word;
 			}
@@ -142,10 +144,10 @@ const PalabrasPerdidas = (props) => {
 
 	const recuperarPalabra = (idSentence, idWord) => {
 		changeUsedWord(idWord);
-		fullSentence(idSentence, {word: undefined, idWord: undefined});
+		fullSentence(idSentence, { word: undefined, idWord: undefined });
 	}
 
-	
+
 	return (
 		<LayoutGame
 			level={state.level}
@@ -155,34 +157,44 @@ const PalabrasPerdidas = (props) => {
 			game="PalabrasPerdidas"
 			backgroundImage={BackgroundImage}
 		>
-			<Paper classes={clasessPaper}>
+			<div id="center" className={classesCenter.center}>
+				<Paper classes={clasessPaper}>
 
-				<Grid container spacing={3} className="row">
+					<Grid container spacing={3} className="row">
 
-					<Grid container item lg={3} md={9} xs={12}>
-						{loading ? 'Loading...' : 
-							looseWords.map((item) => (
+						<Grid container item lg={3} md={9} xs={12}>
+							<Grid item xs={12}>
+								<Typography className={clasessTypografy.Title} variant="h5"> Palabras perdidas</Typography>
+							</Grid>
+							{loading ? 'Loading...' :
+								looseWords.map((item) => (
+									<Grid item xs={12}>
+										<Botonera word={item} looserWordSelected={looserWordSelected} onClick={setLooserWordSelected} />
+									</Grid>
+								))}
+						</Grid>
+
+						<Grid container item lg={9} md={9} xs={12}>
+							<Grid item xs={12}>
+								<Typography className={clasessTypografy.Title} variant="h5"> Frases a completar</Typography>
+							</Grid>
+							{loading ? 'Loading...' : emptySentences.map((item) => (
 								<Grid item xs={12}>
-									<Botonera word={item} looserWordSelected={looserWordSelected}  onClick={setLooserWordSelected} />	
+									<Frases sentence={item} onClickSelectMe={completarFrase} thereIsWordSelected={looserWordSelected !== undefined} setPalabra={recuperarPalabra} />
 								</Grid>
 							))}
-					</Grid>
 
-					<Grid container item lg={9} md={9} xs={12}>
-					
-					{loading ? 'Loading...' : emptySentences.map((item) => (
-						<Grid item xs={12}>
-							<Frases sentence={item} onClickSelectMe={completarFrase} thereIsWordSelected={looserWordSelected !== undefined} setPalabra={recuperarPalabra}/>
 						</Grid>
-					))}
-					
+						<Grid item xs={12}>
+							<Button onClick={juegoTerminado}> Corregir </Button>
+						</Grid>
 					</Grid>
 
-				</Grid>
 
-				<Button onClick={juegoTerminado}> Corregir </Button>
 
-			</Paper>
+				</Paper>
+
+			</div>
 
 
 

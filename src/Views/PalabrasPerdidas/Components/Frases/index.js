@@ -8,15 +8,15 @@ const Frase = (props) => {
     const [isFull, setIsFull] = useState(false);
 
     const select = () => {
-        if (props.thereIsWordSelected ) {
-            if (!isFull) {
-                props.onClickSelectMe(props.sentence.idSentence);
-            } else {
-                props.setPalabra(props.sentence.idSentence, props.sentence.idWord)
-            }
+        if (props.thereIsWordSelected && !isFull) {
+            props.onClickSelectMe(props.sentence.idSentence);
+            setIsFull(prev => !prev);
+        } else if (isFull) {
+            props.setPalabra(props.sentence.idSentence, props.sentence.idWord)
             setIsFull(prev => !prev);
         }
     }
+
 
     return (
         <div>
