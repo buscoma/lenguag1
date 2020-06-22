@@ -1,29 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Styles/card.css";
 
 function Card(props) {
-  const dragStart = (e) => {
-    const target = e.target;
+ 
+  const [isChecked, setIsChecked] = useState(false);
 
-    e.dataTransfer.setData("card_id", target.id);
+  const onClick = () => {
+    let resultado = props.handleItemSelect(props.id, "palabra")
+    setIsChecked(resultado);
+  }
 
-    // este timeout es el que hace que cuando tenga la carta seleccionada, "desaparezca" de la board donde esta puesta
-    setTimeout(() => {
-      target.style.display = "visible";
-    }, 0);
-  };
-
-  const dragOver = (e) => {
-    e.stopPropagation();
-  };
 
   return (
     <div
       id={props.id}
-      draggable={props.draggable}
-      onDragStart={dragStart}
-      onDragOver={dragOver}
-      className="card"
+      className={(isChecked ? "card cardSelect" : "card " )}
+      
+      onClick={onClick}
     >
       {props.children}
     </div>

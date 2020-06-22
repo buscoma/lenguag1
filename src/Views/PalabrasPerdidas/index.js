@@ -7,74 +7,39 @@ import LayoutGame from '../../Components/Layout/LayaoutContainer';
 
 // Componentes internos
 import './Styles/palabrasPerdidas.css';
-import Board from './Components/Board';
-import Card from './Components/Card';
 import BackgroundImage from './Assets/background.jpg';
 import { useStylesPaper, useStylesCard } from './Styles';
+import Botonera from './Components/Botonera';
+import Frases from './Components/Frases';
+import { object } from 'prop-types';
 
-const  PalabrasPerdidas = (props) => {
+
+
+const PalabrasPerdidas = (props) => {
 	const clasessPaper = useStylesPaper();
-	const clasessCard = useStylesCard();
 
 	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
 		winner: false,
 		loser: false,
-		frasesBackend : []
+		frasesBackend: [],
 	});
 
-	const [refresh, setRefresh] = useState(false);
-	const [errors, setErrors] = useState(false);
+	const [emptySentences, setEmptySentences] = useState([]);
+	const [looseWords, setLooseWords] = useState([]);
+	const [flag, setFlag] = useState(true);
 	const [loading, setLoading] = useState(false);
 
-
-	const [duplasCardBoard, setDuplasCardBoard] = useState(true);
-	const [flag, setFlag] = useState(true);
-	const juegoTerminado = () => {
-		//console.log(duplasCardBoard);
-		if (true/* duplasCardBoard.length === 4 */) {
-
-
-				if (!duplasCardBoard) {
-					setState((prev) => ({...prev, loser: true}) )
-					return;
-				}
-				setLoading(true);
-				setDuplasCardBoard([])
-			pasarSigNivel();
-			
+	useEffect(() => {
+		if (flag) {
+			setFlag(false)
+			intento();
 		}
+	}, [flag, state]);
 
-		else {
-			alert("Faltan palabras por unir");
-		}
-	};
-
-	const pasarSigNivel = () => {
-		setState((prev) => ({...prev, level: prev.level+1}) )
-		setLoading(false);
-		setFlag(true)
-	}
-
-	const checkIfCorrect = (id1, id2) => {
-/* 		alert(`id1 : ${id1} id2:${id2}`)
- */		if(duplasCardBoard === true && id1 !== id2){
-			setDuplasCardBoard(false);
-		}
-	}
-
-    useEffect(() => {
-       if(flag){
-		setFlag(false)
-		   intento();
-		   
-	   }
-    }, [flag, state]); 
-
-
-	const intento = async function (){
-		localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio');
+	const intento = async function () {
+		localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5Mjc4NDYxNCwiZXhwIjoxNTkyODcxMDE0fQ.3Gvz9Yn1VFGerOTKBj6K3bpzHamAkT2kECE0_gqxtMc');
 		let token = localStorage.getItem("token");
 
 		var myHeaders = new Headers();
@@ -85,13 +50,102 @@ const  PalabrasPerdidas = (props) => {
 			redirect: 'follow',
 			headers: myHeaders
 		};
-		  console.log("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel="+ state.level)
-		  fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel="+ state.level, requestOptions)
+		console.log("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level)
+		fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level, requestOptions)
 			.then(response => response.text())
-			.then(result =>{ console.log(JSON.parse(result).data["0"].frases); setState((prev) => ({...prev, frasesBackend : JSON.parse(result).data["0"].frases}))})
+			.then(result => {
+				
+				let list = JSON.parse(result).data["0"].frases;
+
+				list.forEach(item => {
+					let looseWord = {idWord : item.id, word: item.palabra, isUsed: false}
+					let aux = looseWords;
+					aux.push(looseWord);
+					setLooseWords(aux);
+				})
+
+				list.forEach(item => {
+					let emptySentence = {idSentence : item.id, begin: item.frase_frente, end : item.frase_atras, idWord : undefined, word : undefined}
+					let aux = emptySentences;
+					aux.push(emptySentence);
+					setEmptySentences(aux);
+				})
+				console.log(emptySentences)
+
+				//viejo
+				setState((prev) => ({ ...prev, frasesBackend: list }));
+			})
 			.catch(error => console.log('error', error));
 	}
 
+	const juegoTerminado = () => {
+
+		let threeIsEmptySentence = emptySentences.some(e => (e.idWord === undefined));
+		console.log(emptySentences)
+		console.log(!threeIsEmptySentence)
+		if(!threeIsEmptySentence){
+			let isLevelComplete = emptySentences.some(e => (e.idWord === e.idSentence));
+			console.log(isLevelComplete)
+			if(isLevelComplete){
+				pasarSigNivel();
+			}else{
+				alert("you losse")
+			}
+		}else{
+			alert("faltan palabras")
+		}
+	
+	};
+
+	const pasarSigNivel = () => {
+		setEmptySentences([]);
+		setLooseWords([]);
+		setState((prev) => ({ ...prev, level: prev.level + 1 }))
+		setLoading(false);
+		setFlag(true)
+	}
+
+
+
+	const [looserWordSelected, setLooserWordSelected] = useState(undefined);
+
+	const changeUsedWord = (idWord) => {
+		let wordFind;
+		let arrayAux = looseWords;
+		arrayAux.forEach(element => {
+			if(element.idWord === idWord){
+				element.isUsed = !element.isUsed;
+				wordFind = element;
+			}
+		});
+		setLooseWords(arrayAux);
+		return wordFind;
+	}
+
+	const fullSentence = (idSentence, word) => {
+		let arrayAux = emptySentences;
+		arrayAux.forEach(element => {
+			if(element.idSentence === idSentence){
+				element.idWord = word.idWord;
+				element.word = word.word;
+			}
+		});
+		setEmptySentences(arrayAux);
+	}
+
+
+	const completarFrase = (idSentence) => {
+		let word = changeUsedWord(looserWordSelected);
+		fullSentence(idSentence, word);
+		setLooserWordSelected(undefined)
+	}
+
+	const recuperarPalabra = (idSentence, idWord) => {
+		changeUsedWord(idWord);
+		fullSentence(idSentence, {word: undefined, idWord: undefined});
+	}
+
+	
 	return (
 		<LayoutGame
 			level={state.level}
@@ -105,43 +159,28 @@ const  PalabrasPerdidas = (props) => {
 
 				<Grid container spacing={3} className="row">
 
-					<Grid item lg={3} md={3} xs={12} className="center">
-						<Paper className={clasessPaper.rootBlack}>
-							<Board id="board-0" className="board">
-								{loading ? 'Loading...' : state.frasesBackend.map((item) => (
-									<Card id={item.id} draggable="true" empty={false} classes={clasessCard}>
-										{' '}
-										<p> {item.palabra} </p>{' '}
-									</Card>
-								))}
-							</Board>
-						</Paper>
+					<Grid container item lg={3} md={9} xs={12}>
+						{loading ? 'Loading...' : 
+							looseWords.map((item) => (
+								<Grid item xs={12}>
+									<Botonera word={item} looserWordSelected={looserWordSelected}  onClick={setLooserWordSelected} />	
+								</Grid>
+							))}
 					</Grid>
 
-					<Grid item lg={9} md={9} xs={12}>
-						<div>
-							<Divider />
-							{loading ? 'Loading...' : state.frasesBackend.map((item) => (
-								<div>
-									<div className="clearfix">
-										<p> {item.frase_frente}</p>
-										<div className="flexbox">
-											<Board id="board-1" idBoard={item.id} empty={true} className="board" function={checkIfCorrect} />
-										</div>
-										<p>{item.frase_atras} </p>
-									</div>
-									<Divider />
-								</div>
-							))}
-						</div>
+					<Grid container item lg={9} md={9} xs={12}>
+					
+					{loading ? 'Loading...' : emptySentences.map((item) => (
+						<Grid item xs={12}>
+							<Frases sentence={item} onClickSelectMe={completarFrase} thereIsWordSelected={looserWordSelected !== undefined} setPalabra={recuperarPalabra}/>
+						</Grid>
+					))}
+					
 					</Grid>
 
 				</Grid>
 
-				<Button onClick={juegoTerminado}> Corregir
-        </Button>
-	{/* 	<Button onClick={intento}> Corregir
-        </Button> */}
+				<Button onClick={juegoTerminado}> Corregir </Button>
 
 			</Paper>
 

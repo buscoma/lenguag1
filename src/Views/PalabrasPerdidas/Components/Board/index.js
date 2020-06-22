@@ -7,6 +7,7 @@ function Board(props) {
   const classesBoard = useStylesBoard();
   
   const drop = (e) => {
+    
     e.preventDefault();
     const card_id = e.dataTransfer.getData("card_id");
 
@@ -18,7 +19,7 @@ function Board(props) {
     //alert(card_id);
     //alert(props.idBoard);
 
-    props.function( card_id, props.idBoard );
+    props.function( card_id, props.idBoard, props.valido );
   };
 
   const dragOver = (e) => {
