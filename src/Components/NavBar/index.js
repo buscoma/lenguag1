@@ -7,15 +7,15 @@ import ArrowBackIosRoundedIcon from "@material-ui/icons/ArrowBackIosRounded";
 import Avatar from "@material-ui/core/Avatar";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { withRouter } from "react-router-dom";
 
 // Componentes externos
-import firebaseAuth from "../Firebase";
-import { AvatarZombie, WoodGrain } from "./Assets";
+import { AvatarZombie } from "./Assets";
 
 // Componentes internos
 import {useStyles} from "./Styles";
 
-export default function NavBar(props) {
+function NavBar(props) {
   const classes = useStyles();
   //const [auth, setAuth] = React.useState(true);
   const [auth] = React.useState(true);
@@ -36,7 +36,9 @@ export default function NavBar(props) {
 
   const handleBack = () => {
     console.log("handleBackClicked");
-    firebaseAuth.auth().signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh");
+    this.props.history.push("/")
   };
 
   const handleHome = () => {
@@ -81,7 +83,7 @@ export default function NavBar(props) {
             <div>
               <Avatar alt="nombre" src={AvatarZombie} />
               {mediaQueryMatch ? (
-                <span className={classes.usuario}>{props.User.Name}</span>
+                <span className={classes.usuario}>{props.user.name}</span>
               ) : (
                 ""
               )}
@@ -92,3 +94,5 @@ export default function NavBar(props) {
     </div>
   );
 }
+
+export default withRouter(NavBar);

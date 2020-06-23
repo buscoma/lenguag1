@@ -10,9 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import CuadrupleBoton from "./Components/CuadrupleBoton";
 import { TitleH1, TitleH3 } from "./Styles";
 import "./Styles/LandingPage.css";
+import { withRouter } from "react-router-dom";
 
-// Componentes externos
-import NavBar from "../../Components/NavBar";
 
 const useStyles = makeStyles({
   TitleH1,
@@ -23,12 +22,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LandingPage() {
-  let user = { Name: "Ale" };
+export default withRouter(function LandingPage() {
   const classes = useStyles();
   return (
     <div  className="root">
-      <NavBar User={user} />
       <CssBaseline />
       <div className="root__container">
         <Grid container  justify="center">
@@ -66,4 +63,4 @@ export default function LandingPage() {
         </div>
     </div>
   );
-}
+});

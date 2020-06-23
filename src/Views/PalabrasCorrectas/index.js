@@ -42,7 +42,7 @@ const PalabrasCorrectas = (props) => {
 	const [ loading, setLoading ] = useState(false);
 
 	const checkIfCorrect = () => {
-		if (state.text.length - 1 == state.position) {
+		if (state.text.length - 1 === state.position) {
 			alert('nivel completado');
 			levelUp();
 		}
@@ -65,7 +65,7 @@ const PalabrasCorrectas = (props) => {
 	};
 
 	const checkIfInCorrect = () => {
-		if (state.text.length - 1 == state.position) {
+		if (state.text.length - 1 === state.position) {
 			alert('nivel completado');
 			levelUp();
 		}

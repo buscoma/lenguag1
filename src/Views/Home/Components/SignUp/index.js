@@ -1,15 +1,12 @@
 // Librerias
-import React, { useContext, useState, useCallback } from "react";
-import { useHistory, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { TextField, Button, Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-
-// Componentes externos
-import { AuthContext } from "../../../../Components/Auth";
-import firebaseAuth from "../../../../Components/Firebase";
+import axios from "axios";
 
 // Componentes internos
 import { RegistrarLogo, CloseLogo } from "./Assets";
@@ -22,9 +19,10 @@ import {
   logoClose,
 } from "./Styles/BaseLineDialog";
 
-export default function SignUp(props) {
+function SignUp(props) {
+  const API_URL = "https://backendlenguamaticag1.herokuapp.com";
   const [values, setValues] = useState({
-    email: "",
+    name: "",
     password: "",
   });
   const useStyles = makeStyles({
@@ -39,32 +37,29 @@ export default function SignUp(props) {
     TextBold,
     buttom,
   });
-  const history = useHistory();
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      try {
-        await firebaseAuth
-          .auth()
-          .createUserWithEmailAndPassword(values.email, values.password);
-        history.push("/landing_page");
-      } catch (error) {
-        alert(error);
-      }
-    },
-    [history, values]
-  );
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(API_URL + '/api/player/authenticate', {
+      name: values.name,
+      password: values.password,
+    }).then(res => {
+      console.log(res.data)
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('refresh', res.data.refresh);
+      props.history.push('/landing_page')
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
   const classes = useStyles(props);
-  const { currentUser } = useContext(AuthContext);
-  if (currentUser) {
-    return <Redirect to="/landing_page" />;
-  }
+  
   return (
     <Dialog open={true} classes={classes} onBackdropClick={props.show}>
-      <form onSubmit={handleSubmit} noValidate autoComplete="on">
+      <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
         <Container>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} style={{ textAlign: "right" }}>
@@ -96,10 +91,10 @@ export default function SignUp(props) {
             >
               <TextField
                 className={classes.textField}
-                value={values.email}
-                onChange={handleChange("email")}
+                value={values.name}
+                onChange={handleChange("name")}
                 fullWidth
-                placeholder="Email"
+                placeholder="Nombre de usuario"
               />
             </Grid>
             <Grid
@@ -116,7 +111,7 @@ export default function SignUp(props) {
                 type="password"
                 fullWidth
                 autoComplete="current-password"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </Grid>
             <Grid
@@ -141,3 +136,5 @@ export default function SignUp(props) {
     </Dialog>
   );
 }
+
+export default withRouter(SignUp);

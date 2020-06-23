@@ -17,9 +17,6 @@ import JuegoNumAPalabra from "./Views/JuegoNumAPalabra";
 import BurgerBuilder from "./Views/BurgerBuilder";
 import SecuenciaNumeros from "./Views/SecuenciaNumeros";
 
-//Layout
-import ExampleLayout from "./Components/Layout/Example/Example";
-
 const routes = [
   {
     key: 1,
@@ -32,20 +29,19 @@ const routes = [
   {
     key: 2,
     public: false,
-    name: "RankingPage",
-    path: "/ranking_page",
-    exact: true,
-    main: () => <RankingPage />,
-  },
-  {
-    key: 3,
-    public: false,
     name: "LandingPage",
     path: "/landing_page",
     exact: true,
     main: () => <LandingPage />,
   },
-
+  {
+    key: 3,
+    public: false,
+    name: "RankingPage",
+    path: "/ranking_page",
+    exact: true,
+    main: () => <RankingPage />,
+  },
   {
     key: 4,
     public: false,
@@ -96,15 +92,7 @@ const routes = [
     path: "/secuencia_numeros",
     exact: true,
     main: () => <SecuenciaNumeros />,
-  },
-  {
-    key: 10,
-    public: false,
-    name: "Secuencia números",
-    path: "/example_rapa",
-    exact: true,
-    main: () => <ExampleLayout />,
-  },
+  }
 ];
 
 export default routes;
