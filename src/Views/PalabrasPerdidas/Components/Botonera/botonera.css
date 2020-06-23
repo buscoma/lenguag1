@@ -1,5 +1,11 @@
 
+
+
 .cardSelect{
   background-color: teal !important;
- 
+}
+
+.cardDisabled{
+  opacity: 0.85;
+  text-decoration: line-through;
 }

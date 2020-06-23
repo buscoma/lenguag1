@@ -7,6 +7,7 @@ const useStylesPaper = makeStyles({
         opacity: 0.85,
         padding: "20px",
         maxWidth : "1024PX",
+        backgroundColor: "grey",
     },
     rootBlack:{
         opacity: 0.85,
@@ -23,6 +24,7 @@ const useStyleTypografy = makeStyles((theme) => ({
         textAlign: "center",
         textDecoration : "underline",
         fontWeight : "750",
+        color: "white"
     },
    
 }));

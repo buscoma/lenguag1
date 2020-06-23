@@ -81,20 +81,23 @@ const PalabrasPerdidas = () => {
 	}
 
 	const juegoTerminado = () => {
-
-		let threeIsEmptySentence = emptySentences.some(e => (e.idWord === undefined));
-		console.log(emptySentences)
-		console.log(!threeIsEmptySentence)
-		if (!threeIsEmptySentence) {
-			let isLevelComplete = emptySentences.some(e => (e.idWord === e.idSentence));
-			console.log(isLevelComplete)
-			if (isLevelComplete) {
-				pasarSigNivel();
+		if(state.level < 3){
+			let threeIsEmptySentence = emptySentences.some(e => (e.idWord === undefined));
+			console.log(emptySentences)
+			console.log(!threeIsEmptySentence)
+			if (!threeIsEmptySentence) {
+				let isLevelComplete = emptySentences.some(e => (e.idWord === e.idSentence));
+				console.log(isLevelComplete)
+				if (isLevelComplete) {
+					pasarSigNivel();
+				} else {
+					setState((prev) => ({ ...prev, loser: true }))
+				}
 			} else {
-				alert("you losse")
+				alert("faltan palabras")
 			}
-		} else {
-			alert("faltan palabras")
+		}else{
+			setState((prev) => ({ ...prev, winner: true }))
 		}
 
 	};
@@ -185,8 +188,8 @@ const PalabrasPerdidas = () => {
 							))}
 
 						</Grid>
-						<Grid item xs={12}>
-							<Button onClick={juegoTerminado}> Corregir </Button>
+						<Grid item xs={12}  className={classesCenter.center}>
+							<Button variant="contained" color="secondary" onClick={juegoTerminado}> Corregir </Button>
 						</Grid>
 					</Grid>
 

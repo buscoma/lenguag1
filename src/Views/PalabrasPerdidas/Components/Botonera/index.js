@@ -8,21 +8,27 @@ function Botonera(props) {
     const [idSelect, setIdSelect] = useState(-1);
 
     const select = (e) => {
-        setIdSelect(e.target.id);
-        props.onClick(e.target.id);
+        if (!props.word.isUsed) {
+            setIdSelect(e.target.id);
+            props.onClick(e.target.id);
+        }
+
     }
 
     const colorear = (id) => {
-        return id === props.looserWordSelected;
+        if (!props.word.isUsed) {
+            return id === props.looserWordSelected;
+        }
     }
 
     return (
-        <div>
-            <Collapse in={!props.word.isUsed}>
-                <Paper id={props.word.idWord} onClick={select} className={colorear(props.word.idWord) ? "cardSelect" : ""} style={{ padding: "20px", margin: "10px" }}>
-                    {props.word.word}
-                </Paper>
-            </Collapse>
+        <div className={!props.word.isUsed ? "" : "cardDisabled" } style={{textAlign:"center"}}>
+            <Paper id={props.word.idWord}
+                onClick={select}
+                className={colorear(props.word.idWord) ? "cardSelect" : ""}
+                style={{ padding: "20px", margin: "10px" }}>
+                {props.word.word}
+            </Paper>
         </div>
     );
 
