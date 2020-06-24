@@ -22,8 +22,6 @@ export default function SecuenciaDeNumeros(props) {
 
 	const buttonsData = controller();
 	const [values, setValues] = useState([]);
-	const [lastID, setLastID] = useState(0);
-	const [arraySize] = useState(buttonsData.length);
 	const [refresh, setRefresh] = useState(false);
 	const [errors, setErrors] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -38,12 +36,35 @@ export default function SecuenciaDeNumeros(props) {
 	const [stopTimer, setStopTimer] = useState(true);
 	const time = 30;
 
+
+	const nextIdIsRight = (id) => {
+		const isRight = secuencia.some(e => (e.id < id && e.disabled === false));
+		return !isRight
+	}
+
+
+	const levelIsFinish = () => {
+		let result = secuencia.every(e => (e.disabled === true))
+		return result
+	}
+
+	const updateButtomsState = (id) => {
+		let aux = [];
+		secuencia.forEach(e => {aux.push(e)});
+		aux.forEach(e => {
+			if (e.id === id) {
+				e.disabled = true;
+			}
+		});
+		setSecuencia(aux)
+	}
+
+
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
-		if (id > lastID) {
-			setValues(values.concat(id));
-			setLastID(id);
-			if (values.length === arraySize - 1) {
+		updateButtomsState(id);
+		if (nextIdIsRight(id)) {
+			if (levelIsFinish()) {
 				levelUp();
 			}
 		}
@@ -61,8 +82,6 @@ export default function SecuenciaDeNumeros(props) {
 	const levelUp = () => {
 		if (level < 3) {/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
 			setLevel(level + 1);
-			setValues([]); //Vacio la lista de numeros seleccionados.
-			setLastID(0);
 			setStopTimer(true);
 		} else {/* Termino el juego, y GANASTE!!!!! */
 			setWinner(true);
@@ -78,15 +97,16 @@ export default function SecuenciaDeNumeros(props) {
 		async function fetchApi() {
 			try {
 				setLoading(true);
-				
+
 				authFetch(
-                    "https://backendlenguamaticag1.herokuapp.com/api/games/secuenciaNumeros?nivel=" +
-                        level
-                )
-                    .then((res) => res.json())
-                    .then((json) => {
-                        setSecuencia(json.data);
-                    });
+					"https://backendlenguamaticag1.herokuapp.com/api/games/secuenciaNumeros?nivel=" +
+					level
+				)
+					.then((res) => res.json())
+					.then((json) => {
+						let data = json.data.map(e => ({ id: e.id, disabled: false }))
+						setSecuencia(data);
+					});
 			} catch (e) {
 				setErrors(e);
 			} finally {
@@ -115,16 +135,16 @@ export default function SecuenciaDeNumeros(props) {
 				</Grid>
 				<Collapse in={stopTimer} >
 					<Grid container>
-						<Grid Item xs={12} style={{textAlign:"center"}}>
+						<Grid Item xs={12} style={{ textAlign: "center" }}>
 							<Button variant="contained" onClick={startNextLevel} > Comenzar</Button>
 						</Grid>
-						</Grid>
-					</Collapse>
+					</Grid>
+				</Collapse>
 				<Collapse in={!stopTimer} >
 					<Grid container >
 						{loading ? " LOADING" : secuencia.map((image) => (
 							<Grid Item xs={6} sm={3} align="center">
-								<ButtonComponent className={clasessButtom.buttomNumber} id={image.id} methodAddId={methodAddId} />
+								<ButtonComponent className={clasessButtom.buttomNumber} id={image.id} disabled={image.disabled} methodAddId={methodAddId} />
 							</Grid>
 						))}
 					</Grid>
