@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import routes from "./routes";
-import AuthComponent from "./Components/AuthComponent";
-// import { createBrowserHistory } from "history";
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
-//  history={createBrowserHistory()}
 import { useAuth } from "./AuthProvider";
 import PrivateRoute from "./Components/PrivateRoute";
 

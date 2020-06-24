@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+import {authFetch} from '../../../../AuthProvider';
 
 const useStylesAutoGridNoWrap = makeStyles((theme) => ({
   root: {
@@ -102,56 +102,13 @@ export default function TableResponsive(props) {
       array[i]["posicion"] = i + 1
     }
   }
-/* 
-  async function fetchApi() {
-    try {
-      setLoading(true);
-      localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
-      let token = localStorage.getItem("token");
-
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + token );
-
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow',
-        headers: myHeaders
-      };
-
-      const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
-      await res.json().then((json) => {
-        console.log(orderArray(json.data));
-        setRow( json.data);
-      });
-    } catch (e) {
-      setErrors(e);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchApi();
-    setRefresh(false);
-  }, [refresh]); */
 
   useEffect(() => {
 		async function fetchApi() {
 			try {
 				setLoading(true);
-				localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5MjEzMzU0NSwiZXhwIjoxNTkyMjE5OTQ1fQ.q0PSJFC03u3sIpPyu_VN1EQjOXziiGmKDmfyWja77Qk");
-				let token = localStorage.getItem("token");
-
-				var myHeaders = new Headers();
-				myHeaders.append("Authorization", "Bearer " + token);
-
-				var requestOptions = {
-					method: 'GET',
-					redirect: 'follow',
-					headers: myHeaders
-				};
-
-				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking", requestOptions);
+				
+				const res = await authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking");
 				await res.json().then((json) => { console.log(json.data); setRow(orderArray(json.data)) });
 			} catch (e) {
 				setErrors(e);

@@ -11,6 +11,7 @@ import Board from './Components/Board';
 import Card from './Components/Card';
 import BackgroundImage from './Assets/background.jpg';
 import { useStylesPaper, useStylesCard } from './Styles';
+import {authFetch} from '../../AuthProvider';
 
 function PalabrasPerdidas() {
 	const clasessPaper = useStylesPaper();
@@ -65,19 +66,9 @@ function PalabrasPerdidas() {
 		async function fetchApi() {
 			try {
 				setLoading(true);
-				localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio");
-				let token = localStorage.getItem("token");
-
-				var myHeaders = new Headers();
-				myHeaders.append("Authorization", "Bearer " + token);
-
-				var requestOptions = {
-					method: 'GET',
-					redirect: 'follow',
-					headers: myHeaders
-				};
+				
                 if(up === true){
-                    const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level, requestOptions);
+                    const res = await authFetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level);
                     await res.json().then((json) => { setFrasesBackend(json.data['0'].frases); console.log(json.data['0'].frases) });
                     setUp(false)
                 }
