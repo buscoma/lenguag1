@@ -41,7 +41,7 @@ export default function CustomizedDialogs(props) {
                 <Typography className={[classesTypografy.titlePanel].join(" ")}> Nivel </Typography>
               </Grid>
               <Grid item xs={12} >
-                <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
+                <Typography className={[classesTypografy.textPanel].join(" ")}>{props.level}</Typography>
               </Grid>
             </Grid>
           </Grid>

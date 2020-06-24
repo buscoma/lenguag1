@@ -10,7 +10,6 @@ import LayoutGame from "../../Components/Layout/LayaoutContainer";
 import { BackgroundMat } from "./Assets";
 import ButtonComponent from "./Components/ButtonComponent";
 import Clock from "./Components/Clock";
-import controller from "./Controller";
 import { useStylesPaper, useStylesButtom } from "./Styles";
 
 import { authFetch } from "../../AuthProvider";
@@ -20,8 +19,6 @@ export default function SecuenciaDeNumeros(props) {
 	const clasessPaper = useStylesPaper();
 	const clasessButtom = useStylesButtom();
 
-	const buttonsData = controller();
-	const [values, setValues] = useState([]);
 	const [refresh, setRefresh] = useState(false);
 	const [errors, setErrors] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -29,12 +26,11 @@ export default function SecuenciaDeNumeros(props) {
 
 	//LAYOUT HOOK NEW
 	const [level, setLevel] = useState(1);
-	const [points, setPoints] = useState(0);
 	const [winner, setWinner] = useState(false);
 	const [loser, setLoser] = useState(false);
 
 	const [stopTimer, setStopTimer] = useState(true);
-	const time = 30;
+	const time = 45;
 
 
 	const nextIdIsRight = (id) => {
@@ -50,21 +46,31 @@ export default function SecuenciaDeNumeros(props) {
 
 	const updateButtomsState = (id) => {
 		let aux = [];
-		secuencia.forEach(e => {aux.push(e)});
+		secuencia.forEach(e => { aux.push(e) });
 		aux.forEach(e => {
 			if (e.id === id) {
 				e.disabled = true;
 			}
 		});
-		setSecuencia(aux)
+		setSecuencia(aux);
 	}
 
+	const getPoints = () => {
+		console.log(level)
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=secuenciaNumeros&level=" + level)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+			})
+			.catch(error => console.log('error', error));
+	}
 
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
 		updateButtomsState(id);
 		if (nextIdIsRight(id)) {
 			if (levelIsFinish()) {
+				getPoints();
 				levelUp();
 			}
 		}
@@ -81,6 +87,7 @@ export default function SecuenciaDeNumeros(props) {
 
 	const levelUp = () => {
 		if (level < 3) {/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
+			
 			setLevel(level + 1);
 			setStopTimer(true);
 		} else {/* Termino el juego, y GANASTE!!!!! */
@@ -95,6 +102,7 @@ export default function SecuenciaDeNumeros(props) {
 
 	useEffect(() => {
 		async function fetchApi() {
+			console.log(level)
 			try {
 				setLoading(true);
 
@@ -118,9 +126,10 @@ export default function SecuenciaDeNumeros(props) {
 		setRefresh(false);
 	}, [refresh, level, errors]);
 
+
+
 	return (
 		<LayoutGame
-			points={points}
 			level={level}
 			winner={winner}
 			loser={loser}
