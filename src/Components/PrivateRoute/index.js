@@ -11,7 +11,7 @@ class PrivateRoute extends React.Component {
                     {...rest}
                     render={(props) =>
                         this.props.authenticated ? (
-                            <Component {...props} />
+                            <Component points={JSON.parse(sessionStorage.getItem("User")).points} {...props } />
                         ) : (
                             <Redirect to={"/"} />
                         )

@@ -51,13 +51,13 @@ export default function CustomizedDialogs(props) {
             <Typography className={[classesTypografy.titlePanel].join(" ")}> Puntos</Typography>
           </Grid>
           <Grid item xs={12} >
-            <Typography className={[classesTypografy.textPanel].join(" ")}>{props.points}</Typography>
+            <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
           </Grid>
           <Grid container item xs={12}  >
-            <Typography  className={[classesTypografy.titleEnunciado].join(" ")}> Has superado todos los nivels sadisfactoriamente </Typography>
+            <Typography  className={[classesTypografy.titleEnunciado].join(" ")}> Superaste todos los niveles! </Typography>
           </Grid>
           <Grid container item xs={12} className={[classesButtom.root].join(" ")} >
-            <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elejir otro juego </Button>
+            <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elegir otro juego </Button>
           </Grid>
         </Grid>
       </Container>

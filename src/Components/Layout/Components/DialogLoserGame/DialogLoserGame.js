@@ -50,13 +50,13 @@ export default function CustomizedDialogs(props) {
             <Typography className={[classesTypografy.titlePanel].join(" ")}> Puntos</Typography>
           </Grid>
           <Grid item xs={12} >
-            <Typography className={[classesTypografy.textPanel].join(" ")}>{props.points}</Typography>
+            <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
           </Grid>
           <Grid container item xs={12}  >
             <Typography  className={[classesTypografy.titleEnunciado].join(" ")}> No has superado el nivel correctamente. </Typography>
           </Grid>
           <Grid container item xs={12} md={6} className={[classesButtom.root].join(" ")} >
-            <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elejir otro juego </Button>
+            <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elegir otro juego </Button>
           </Grid>
           <Grid container item xs={12} md={6} className={[classesButtom.root].join(" ")} >
             <Button href={props.urlGameAgein} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}> Volver a jugar </Button>

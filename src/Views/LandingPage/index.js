@@ -75,7 +75,7 @@ export default withRouter(function LandingPage() {
                                     <Typography
                                         className={[classes.TitleH3].join(" ")}
                                     >
-                                        Matematica
+                                        Matemática
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={10}>

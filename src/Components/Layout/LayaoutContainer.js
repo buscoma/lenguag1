@@ -81,21 +81,21 @@ export default function LayoutContainer(props) {
                 open={panelDialogOpen}
                 onClose={handlePanel}
                 level={props.level}
-                points={props.points}
+                points={JSON.parse(sessionStorage.getItem("User")).points}
                 title={Enunciados[props.game].title}
                 description={Enunciados[props.game].description}
             />
 
-            <DialogNextLevel flagAndLevel={props.level} points={props.points} />
+            <DialogNextLevel flagAndLevel={props.level} points={JSON.parse(sessionStorage.getItem("User")).points} />
 
             <DialogFinishGame
                 level={props.level}
-                points={props.points}
+                points={JSON.parse(sessionStorage.getItem("User")).points}
                 openFlag={props.winner}
             />
 
             <DialogLoserGame
-                points={props.points}
+                points={JSON.parse(sessionStorage.getItem("User")).points}
                 openFlag={props.loser}
                 urlGameAgein={Enunciados[props.game].urlGame}
             />

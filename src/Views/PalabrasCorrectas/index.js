@@ -233,7 +233,7 @@ const PalabrasCorrectas = (props) => {
                                             fullWidth
                                         >
                                             {' '}
-                                        Juegar a otra cosa{' '}
+                                        Jugar a otra cosa{' '}
                                         </Button>
                                     </Grid>
                                     <Grid item xs={12} md={6}>
@@ -244,7 +244,7 @@ const PalabrasCorrectas = (props) => {
                                             fullWidth
                                         >
                                             {' '}
-                                        Volver a juegar{' '}
+                                        Volver a jugar{' '}
                                         </Button>
                                     </Grid>
                                 </Grid>

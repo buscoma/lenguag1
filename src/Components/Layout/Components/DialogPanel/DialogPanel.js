@@ -41,7 +41,7 @@ export default function CustomizedDialogs(props) {
                 <Typography className={[classesTypografy.titlePanel].join(" ")}> Nivel </Typography>
               </Grid>
               <Grid item xs={12} >
-                <Typography className={[classesTypografy.textPanel].join(" ")}>{props.level}</Typography>
+                <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -51,7 +51,7 @@ export default function CustomizedDialogs(props) {
                 <Typography className={[classesTypografy.titlePanel].join(" ")}> Puntos</Typography>
               </Grid>
               <Grid item xs={12} >
-                <Typography className={[classesTypografy.textPanel].join(" ")}>{props.points}</Typography>
+                <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -70,7 +70,7 @@ export default function CustomizedDialogs(props) {
               <Button onClick={props.onClose} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}> Jugar </Button>
             </Grid>
             <Grid item xs={12} sm={6}  className={[classesButtom.root].join(" ")}>
-              <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elejir otro juego </Button>
+              <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elegir otro juego </Button>
             </Grid>
           </Grid>
         </Grid>
