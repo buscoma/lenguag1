@@ -101,6 +101,8 @@ export default function TableResponsive(props) {
       console.log(i)
       array[i]["posicion"] = i + 1
     }
+
+    return array;
   }
 
   useEffect(() => {
@@ -108,8 +110,15 @@ export default function TableResponsive(props) {
 			try {
 				setLoading(true);
 				
-				const res = await authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/ranking");
-				await res.json().then((json) => { console.log(json.data); setRow(orderArray(json.data)) });
+        await authFetch(
+            "https://backendlenguamaticag1.herokuapp.com/api/player/ranking"
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data);
+                setRow(orderArray(data.data));
+            });
+
 			} catch (e) {
 				setErrors(e);
 			} finally {
@@ -179,13 +188,13 @@ export default function TableResponsive(props) {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                {row.map((data) => (
+                {row ? row.map((data) => (
                   <AutoGridNoWrap
                     posicion={data.posicion}
                     nombre={data.name}
                     puntos={data.points}
                   />
-                ))}
+                )) : ''}
               </Grid>
             </Grid>
           </Container>

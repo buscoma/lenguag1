@@ -8,7 +8,7 @@ import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import Avatar from "@material-ui/core/Avatar";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 // Componentes internos
 import { useStyles } from "./Styles";
@@ -29,14 +29,14 @@ function NavBar(props) {
 
     useEffect(() => {
         initUser();
-    });
+    }, []);
 
     const handleBack = () => {
       logout();
     };
 
     const handleHome = () => {
-        console.log("handleHomeClicked");
+        props.history.push('/landing_page');
     };
 
 
