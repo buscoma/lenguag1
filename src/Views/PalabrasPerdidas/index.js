@@ -8,10 +8,11 @@ import LayoutGame from '../../Components/Layout/LayaoutContainer';
 // Componentes internos
 import './Styles/palabrasPerdidas.css';
 import BackgroundImage from './Assets/background.jpg';
-import { useStylesPaper, useStyleTypografy, useStyleCenter } from './Styles';
+import { useStylesPaper, useStyleTypografy, useStyleCenter} from './Styles';
 import Botonera from './Components/Botonera';
 import Frases from './Components/Frases';
 import { object } from 'prop-types';
+import {authFetch} from '../../AuthProvider';
 
 
 
@@ -20,6 +21,8 @@ const PalabrasPerdidas = () => {
 	const clasessTypografy = useStyleTypografy();
 	const classesCenter = useStyleCenter();
 
+	const [frasesBackend, setFrasesBackend] = useState([]);
+	const [up, setUp] = useState(true);
 	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
@@ -41,19 +44,8 @@ const PalabrasPerdidas = () => {
 	}, [flag, state]);
 
 	const intento = async function () {
-		localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMxZTIxMzczZjRjMDAxODE3MWZlNSIsImlhdCI6MTU5Mjc4NDYxNCwiZXhwIjoxNTkyODcxMDE0fQ.3Gvz9Yn1VFGerOTKBj6K3bpzHamAkT2kECE0_gqxtMc');
-		let token = localStorage.getItem("token");
-
-		var myHeaders = new Headers();
-		myHeaders.append("Authorization", "Bearer " + token);
-
-		var requestOptions = {
-			method: 'GET',
-			redirect: 'follow',
-			headers: myHeaders
-		};
-		console.log("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level)
-		fetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level, requestOptions)
+		
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level)
 			.then(response => response.text())
 			.then(result => {
 
@@ -153,7 +145,7 @@ const PalabrasPerdidas = () => {
 
 	return (
 		<LayoutGame
-			level={state.level}
+			level={ state.level}
 			points={state.posints}
 			winner={state.winner}
 			loser={state.loser}

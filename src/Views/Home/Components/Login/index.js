@@ -1,14 +1,11 @@
 // Librerias
-import React, { useContext, useState, useCallback } from "react";
-import { useHistory, Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { TextField, Button, Dialog, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-
-// Componentes externos
-import { AuthContext } from "../../../../Components/Auth";
-import firebaseAuth from "../../../../Components/Firebase";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 // Componentes internos
 import { TextBold, TextBlackShadow } from "./Styles";
@@ -21,10 +18,12 @@ import {
   input,
 } from "./Styles/BaseLineDialog";
 import { RegistrarLogo, CloseLogo } from "./Assets";
+import {login} from "../../../../AuthProvider";
 
-export default function Login(props) {
+function Login(props) {
+  const API_URL = "https://backendlenguamaticag1.herokuapp.com";
   const [values, setValues] = useState({
-    email: "",
+    name: "",
     password: "",
   });
   const useStyles = makeStyles({
@@ -50,21 +49,24 @@ export default function Login(props) {
     buttom,
     input,
   });
-  const history = useHistory();
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      try {
-        await firebaseAuth
-          .auth()
-          .signInWithEmailAndPassword(values.email, values.password);
-        history.push("/landing_page");
-      } catch (error) {
-        alert(error);
-      }
-    },
-    [history, values]
-  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(API_URL + '/api/player/authenticate', {
+      name: values.name,
+      password: values.password,
+    }).then(res => {
+      console.log(res.data)
+      // localStorage.setItem('token', res.data.token);
+      // localStorage.setItem('refresh', res.data.refresh);
+      login(res.data);
+      props.history.push('/landing_page')
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -73,16 +75,13 @@ export default function Login(props) {
     props.showSignUp();
   };
   const classes = useStyles(props);
-  const { currentUser } = useContext(AuthContext);
-  if (currentUser) {
-    return <Redirect to="/landing_page" />;
-  }
+  
   return (
     <Dialog open={true} classes={classes} onBackdropClick={props.show}>
-      <form onSubmit={handleSubmit} noValidate autoComplete="on">
+      <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
         <Container>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} style={{ textAlign: "right" }}>
+          <Grid flex container spacing={2} alignItems="center">
+            <Grid flex item xs={12} style={{ textAlign: "right" }}>
               <img
                 src={CloseLogo}
                 onClick={props.show}
@@ -119,10 +118,10 @@ export default function Login(props) {
             >
               <TextField
                 className={classes.textField}
-                value={values.email}
-                onChange={handleChange("email")}
+                value={values.name}
+                onChange={handleChange("name")}
                 fullWidth
-                placeholder="Email"
+                placeholder="Nombre de usuario"
               />
             </Grid>
             <Grid
@@ -139,7 +138,7 @@ export default function Login(props) {
                 type="password"
                 fullWidth
                 autoComplete="current-password"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </Grid>
             <Grid
@@ -192,3 +191,5 @@ export default function Login(props) {
     </Dialog>
   );
 }
+
+export default withRouter(Login);

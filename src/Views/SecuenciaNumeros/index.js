@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from "react";
 
 //Librerias
-import {
-	Grid,
-	Paper,
-	Button,
-	Collapse
-} from '@material-ui/core';
+import { Grid, Paper, Button, Collapse } from "@material-ui/core";
 
 // Componentes externos
-import LayoutGame from '../../Components/Layout/LayaoutContainer';
+import LayoutGame from "../../Components/Layout/LayaoutContainer";
 
 // Componentes internos
-import { BackgroundMat } from './Assets';
-import ButtonComponent from './Components/ButtonComponent';
-import Clock from './Components/Clock';
-import controller from './Controller';
-import {
-	useStylesPaper,
-	useStylesButtom,
-} from './Styles';
+import { BackgroundMat } from "./Assets";
+import ButtonComponent from "./Components/ButtonComponent";
+import Clock from "./Components/Clock";
+import controller from "./Controller";
+import { useStylesPaper, useStylesButtom } from "./Styles";
 
-
+import { authFetch } from "../../AuthProvider";
 
 export default function SecuenciaDeNumeros(props) {
 
@@ -87,20 +78,15 @@ export default function SecuenciaDeNumeros(props) {
 		async function fetchApi() {
 			try {
 				setLoading(true);
-				localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio');
-				let token = localStorage.getItem("token");
-
-				var myHeaders = new Headers();
-				myHeaders.append("Authorization", "Bearer " + token);
-
-				var requestOptions = {
-					method: 'GET',
-					redirect: 'follow',
-					headers: myHeaders
-				};
-
-				const res = await fetch("https://backendlenguamaticag1.herokuapp.com/api/games/secuenciaNumeros?nivel=" + level, requestOptions);
-				await res.json().then((json) => { setSecuencia(json.data); });
+				
+				authFetch(
+                    "https://backendlenguamaticag1.herokuapp.com/api/games/secuenciaNumeros?nivel=" +
+                        level
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        setSecuencia(json.data);
+                    });
 			} catch (e) {
 				setErrors(e);
 			} finally {

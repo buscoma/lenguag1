@@ -16,6 +16,7 @@ import { useStylesPaper, useStyleTypografy, useStylesButtom, useStyleAlert } fro
 // Componentes externos
 import LayoutGame from '../../Components/Layout/LayaoutContainer';
 import background from './Assets/background.jpg';
+import {authFetch} from '../../AuthProvider';
 
 const PalabrasCorrectas = (props) => {
     const clasess = useStylesPaper();
@@ -116,27 +117,14 @@ const PalabrasCorrectas = (props) => {
         }
     };
 
-
-
-
     useEffect(() => {
         async function fetchApi() {
             try {
                 setLoading(true);
-                localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGMwNjlkMzczZjRjMDAxODE3MWZlMyIsImlhdCI6MTU5MjYwMzczNSwiZXhwIjoxNTkyNjkwMTM1fQ.unOU6Qs-jhEbBjYyipgfro8b8jeEteV7AOlcli8hxio');
-                let token = localStorage.getItem("token");
-
-                var myHeaders = new Headers();
-                myHeaders.append("Authorization", "Bearer " + token);
-
-                var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow',
-                    headers: myHeaders
-                };
-
-                const res = await fetch('https://backendlenguamaticag1.herokuapp.com/api/games/palabrasCorrectas?nivel=' + state.level, requestOptions);
-                await res.json().then((json) => {
+                
+                authFetch('https://backendlenguamaticag1.herokuapp.com/api/games/palabrasCorrectas?nivel=' + state.level)
+                .then(res=>res.json())
+                .then((json) => {
                     console.log(json.data)
                     setState((prev) => ({
                         ...prev,

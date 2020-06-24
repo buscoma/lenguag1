@@ -1,12 +1,10 @@
 // Librerias
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Container, Typography } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { withRouter } from "react-router-dom";
 
-// Componentes externos
-import { AuthContext } from "../../Components/Auth";
-import axios from 'axios';
 
 // Componentes internos
 import Login from "./Components/Login";
@@ -30,7 +28,7 @@ const useStyles = makeStyles({
   container: ContainerCenter,
 });
 
-export default function Home(props) {
+export default withRouter(function Home(props) {
   const [dialogLogin, setDialogLogin] = useState(false);
   const [dialogSignUp, setDialogSignUp] = useState(false);
   const handleLoginClick = () => {
@@ -41,85 +39,7 @@ export default function Home(props) {
   };
 
   const classes = useStyles(props);
-  const { currentUser } = useContext(AuthContext);
-
-  React.useEffect(() => {
-    getData();
-    // eslint-disable-next-line
-  }, [])
-
-  let fechdata = async () => {
-    let response2 = await fetch("https://backendlenguamaticag1.herokuapp.com/api/player/game");
-		let result2 = await response2.json();
-  }
-  /*
-   async function getUser()
-   {
-           const options = {
-             method:'POST',
-             mode: "cors",
-             headers: {'Content-Type': 'application/json'},
-             body: JSON.stringify({name : "matias", password: "laputamadre"})
-         };
-         try {
-             const res = await fetch('https://backendlenguamaticag1.herokuapp.com/api/player/authenticate', options);
-             const resObject = await res.json();
-             console.log(resObject);
-         } catch (error) {
-             console.error('Error: ', error);
-         }
-   };*/
-
-
-  const getData = () => {
-
-    const options = {
-      mode : "cors",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: "ma3as", password: "laputamadre" })
-    };
-    return axios.post("https://backendlenguamaticag1.herokuapp.com/api/player/authenticate", options)
-      .then((response) => {
-        console.log("hola aca");
-        console.log(response.token);
-      }).catch((err) => {
-        console.log("ESTE ERROR")
-        console.log(err);
-      });
-  }
-
-/*  const insertUser = async (userData) => {
-      
-      console.log(userData);
-      const endpoint = `${url}`;
-      const options = {
-          method:'POST',
-          mode: "cors",
-          headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json'},
-          body: JSON.stringify(userData)
-      };
-      try {
-          const res = await fetch(endpoint, options);
-          if(res.ok === true) {
-              alert("Se ha agregado el usuario");
-          } else {
-              const resObject = await res.json();
-              console.log(resObject);
-          }
-      } catch(error) {
-          console.error('Error: ', error);
-      }
-  };*/
-
-  if (currentUser) {
-    console.log({ currentUser: currentUser });
-  }
-
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -142,4 +62,5 @@ export default function Home(props) {
       </Container>
     </div>
   );
-}
+});
+
