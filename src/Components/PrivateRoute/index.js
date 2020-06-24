@@ -5,13 +5,14 @@ import NavBar from "../NavBar";
 class PrivateRoute extends React.Component {
     render() {
         const { component: Component, ...rest } = this.props;
+        let player = JSON.parse(sessionStorage.getItem("User"));
         return (
             <div>
                 <Route
                     {...rest}
                     render={(props) =>
                         this.props.authenticated ? (
-                            <Component points={JSON.parse(sessionStorage.getItem("User")).points} {...props } />
+                            <Component points={player ? player.points : 0} {...props } />
                         ) : (
                             <Redirect to={"/"} />
                         )
