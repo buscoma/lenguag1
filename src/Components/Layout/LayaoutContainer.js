@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
     return (
         <div className={classes.rootImage}>
-            <NavBar User={{ Name: 'Ale' }} showPanel={panelDialogOpen} handleShowPanel={handlePanel} />
+            {/* <NavBar User={{ Name: 'Ale' }} showPanel={panelDialogOpen} handleShowPanel={handlePanel} /> */}
             <CssBaseline />
             
             <DialogPanel 

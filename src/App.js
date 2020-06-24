@@ -6,37 +6,40 @@ import AuthComponent from "./Components/AuthComponent";
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
 //  history={createBrowserHistory()}
-class App extends Component {
-	render() {
-		return (
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<Switch>
-						{routes.map((route) =>
-							route.public ? 
-								<Route
-									key={route.key}
-									name={route.name}
-									exact={route.exact}
-									path={route.path}
-									component={route.main}
-								/>
-							: 
-								<AuthComponent key={route.key}>
-									<Route
-										key={route.key}
-										name={route.name}
-										exact={route.exact}
-										path={route.path}
-										component={route.main}
-									/>
-								</AuthComponent>
-						)}
-					</Switch>
-				</BrowserRouter>
-			</ThemeProvider>
-		);
-	}
-}
+import { useAuth } from "./AuthProvider";
+import PrivateRoute from "./Components/PrivateRoute";
+
+const App = () => {
+    let [logged] = useAuth();
+
+    return (
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <Switch>
+                    {routes.map((route) =>
+                        route.public ? (
+                            <Route
+                                key={route.key}
+                                name={route.name}
+                                exact={route.exact}
+                                path={route.path}
+                                component={route.main}
+                            />
+                        ) : (
+                            <PrivateRoute
+                                key={route.key}
+                                name={route.name}
+                                exact={route.exact}
+                                path={route.path}
+                                component={route.main}
+                                authenticated={logged}
+                            />
+                        )
+                    )}
+                </Switch>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
+};
 
 export default App;

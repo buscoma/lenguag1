@@ -18,6 +18,7 @@ import {
   input,
 } from "./Styles/BaseLineDialog";
 import { RegistrarLogo, CloseLogo } from "./Assets";
+import {login} from "../../../../AuthProvider";
 
 function Login(props) {
   const API_URL = "https://backendlenguamaticag1.herokuapp.com";
@@ -56,8 +57,9 @@ function Login(props) {
       password: values.password,
     }).then(res => {
       console.log(res.data)
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('refresh', res.data.refresh);
+      // localStorage.setItem('token', res.data.token);
+      // localStorage.setItem('refresh', res.data.refresh);
+      login(res.data);
       props.history.push('/landing_page')
     }).catch((err) => {
       console.log(err);
