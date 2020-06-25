@@ -1,6 +1,6 @@
 // Librerias
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Divider, Button, Typography } from '@material-ui/core';
+import { Grid, Paper, Button, Typography } from '@material-ui/core';
 
 // Componentes externos
 import LayoutGame from '../../Components/Layout/LayaoutContainer';
@@ -11,7 +11,6 @@ import BackgroundImage from './Assets/background.jpg';
 import { useStylesPaper, useStyleTypografy, useStyleCenter} from './Styles';
 import Botonera from './Components/Botonera';
 import Frases from './Components/Frases';
-import { object } from 'prop-types';
 import {authFetch} from '../../AuthProvider';
 
 
@@ -21,8 +20,6 @@ const PalabrasPerdidas = () => {
 	const clasessTypografy = useStyleTypografy();
 	const classesCenter = useStyleCenter();
 
-	const [frasesBackend, setFrasesBackend] = useState([]);
-	const [up, setUp] = useState(true);
 	const [state, setState] = useState({
 		level: 1,
 		posints: 0,
@@ -36,12 +33,6 @@ const PalabrasPerdidas = () => {
 	const [flag, setFlag] = useState(true);
 	const [loading, setLoading] = useState(false);
 
-	useEffect(() => {
-		if (flag) {
-			setFlag(false)
-			intento();
-		}
-	}, [flag, state]);
 
 	const intento = async function () {
 		
@@ -71,6 +62,15 @@ const PalabrasPerdidas = () => {
 			})
 			.catch(error => console.log('error', error));
 	}
+
+	useEffect(() => {
+		if (flag) {
+			setFlag(false)
+			intento();
+		}
+	}, [flag, state]);
+
+	
 
 	const juegoTerminado = () => {
 		if(state.level < 3){
@@ -157,19 +157,19 @@ const PalabrasPerdidas = () => {
 
 					<Grid container spacing={3} className="row">
 
-						<Grid container item lg={3} md={9} xs={12}>
+						<Grid container item  xs={12} md={3}>
 							<Grid item xs={12}>
 								<Typography className={clasessTypografy.Title} variant="h5"> Palabras perdidas</Typography>
 							</Grid>
 							{loading ? 'Loading...' :
 								looseWords.map((item) => (
-									<Grid item xs={12}>
+									<Grid item xs={6} md={12}>
 										<Botonera word={item} looserWordSelected={looserWordSelected} onClick={setLooserWordSelected} />
 									</Grid>
 								))}
 						</Grid>
 
-						<Grid container item lg={9} md={9} xs={12}>
+						<Grid container item  xs={12} md={9}>
 							<Grid item xs={12}>
 								<Typography className={clasessTypografy.Title} variant="h5"> Frases a completar</Typography>
 							</Grid>

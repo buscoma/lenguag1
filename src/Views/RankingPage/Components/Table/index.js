@@ -3,9 +3,9 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { Button, Paper, FilledInput } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import { authFetch } from '../../../../AuthProvider';
-import { useStylesPaper, useStylesCenter } from './Style';
+import { useStylesPaper } from './Style';
 import FindBox from './Components/FindFriends';
 
 const useStylesAutoGridNoWrap = makeStyles((theme) => ({
@@ -94,16 +94,12 @@ const useStylesRanking = makeStyles((theme) => ({
 
 export default function TableResponsive(props) {
   const classesPaper = useStylesPaper();
-  const classesCenter = useStylesCenter();
   const classes = useStylesRanking();
 
   const [refresh, setRefresh] = useState(false);
   const [errors, setErrors] = useState(false);
   const [loading, setLoading] = useState(false);
   const [row, setRow] = useState([]);
-  const [name, setName] = useState("");
-  const [friend, setFriend] = useState({});
-  const [isFindFriend, setIsFindFriend] = useState(false);
 
   const orderArray = (array) => {
     array.sort((a, b) => (a.points < b.points) ? 1 : -1)
@@ -113,20 +109,6 @@ export default function TableResponsive(props) {
     return array;
   }
 
-  const findFriend = () => {
-    let copyArray = [];
-    setIsFindFriend(false)
-    row.forEach(e => copyArray.push(e));
-    let result = copyArray.filter(e => e.name === name)
-    if (result.length === 0) {
-      setIsFindFriend(false)
-    } else {
-      setFriend(result[0])
-      setIsFindFriend(true)
-      console.log(friend)
-    }
-  }
-   
 
   const myRanking = () => {
     return row.filter(e => e.name === JSON.parse(sessionStorage.getItem("User")).name)

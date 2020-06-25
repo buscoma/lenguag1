@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 
 // Componentes internos
 import Table from "./Components/Table";
-import { BackgroundPlaya } from "./Assets";
 import { useStyles, useStyleImage } from "./Styles";
 import NavBar from "../../Components/NavBar";
 

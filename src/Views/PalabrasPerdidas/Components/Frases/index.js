@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Paper, Divider, Button } from '@material-ui/core';
+import { Grid, Paper} from '@material-ui/core';
 
 
 const Frase = (props) => {
@@ -20,15 +20,15 @@ const Frase = (props) => {
 
     return (
         <div>
-            <Paper onClick={select} style={{ padding: "20px", margin: "10px" }}>
+            <Paper onClick={select} style={{ padding: "20px", margin: "10px", textAlign : "center" }}>
                 <Grid container>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} md={4}>
                         {props.sentence.begin}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} md={4} style={{fontStyle:"italic", backgroundColor : "black", color : "white"}}>
                         {props.sentence.word === undefined ? "______" : props.sentence.word}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} md={4}>
                         {props.sentence.end}
                     </Grid>
                 </Grid>

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { Grid, Paper, Divider, Button, Collapse } from '@material-ui/core';
+import React from 'react';
+import {  Paper } from '@material-ui/core';
 import "./botonera.css";
 
 
 function Botonera(props) {
 
-    const [idSelect, setIdSelect] = useState(-1);
 
     const select = (e) => {
         if (!props.word.isUsed) {
-            setIdSelect(e.target.id);
             props.onClick(e.target.id);
         }
 

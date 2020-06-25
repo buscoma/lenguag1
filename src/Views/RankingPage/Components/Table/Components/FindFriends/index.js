@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Container from "@material-ui/core/Container";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Button, Paper, FilledInput } from "@material-ui/core";
-import { useStylesPaper, useStylesCenter } from './Style';
+import { useStylesCenter } from './Style';
 
 
 function ColorRanking(posicion) {
@@ -51,7 +50,6 @@ const useStylesAutoGridNoWrap = makeStyles((theme) => ({
 export default function AutoGridNoWrap(props) {
 
     const classes = useStylesAutoGridNoWrap();
-    const [data] = useState(props);
     const [name, setName] = useState("");
     const [friend, setFriend] = useState({});
     const [isFindFriend, setIsFindFriend] = useState(false);
@@ -74,7 +72,7 @@ export default function AutoGridNoWrap(props) {
     }
 
     return (
-        <div id={data.posicion + 1} className={classes.root}>
+        <div id={friend.posicion + 1} className={classes.root}>
             <Grid container>
                 <Grid item xs={12} md={6}>
                     <Typography className={classes.font} variant="h3" noWrap>Buscar a un amigo</Typography>
