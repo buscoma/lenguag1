@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { Button, Paper, FilledInput, Collapse } from "@material-ui/core";
+import { Button, Paper, FilledInput } from "@material-ui/core";
 import { authFetch } from '../../../../AuthProvider';
 import { useStylesPaper, useStylesCenter } from './Style';
 
@@ -115,6 +115,7 @@ export default function TableResponsive(props) {
 
   const findFriend = () => {
     let copyArray = [];
+    setIsFindFriend(false)
     row.forEach(e => copyArray.push(e));
     let result = copyArray.filter(e => e.name === name)
     if (result.length === 0) {
@@ -122,9 +123,10 @@ export default function TableResponsive(props) {
     } else {
       setFriend(result[0])
       setIsFindFriend(true)
+      console.log(friend)
     }
-    console.log(result)
   }
+   
 
   const myRanking = () => {
     return row.filter(e => e.name === JSON.parse(sessionStorage.getItem("User")).name)
@@ -198,6 +200,7 @@ export default function TableResponsive(props) {
                           placeholder="Nombre de tu amigo"
                           fullWidth
                           type="search"
+                          
                           onChange={(e) => { setName(e.target.value); }}
                         />
                       </Grid>
@@ -206,11 +209,14 @@ export default function TableResponsive(props) {
                       </Grid>
                       <Grid item xs={12} style={{ textAlign: "center" }}>
                         {isFindFriend ?
-                          <AutoGridNoWrap
+  
+                            <AutoGridNoWrap
                             posicion={friend.posicion}
                             nombre={friend.name}
                             puntos={friend.points}
                           />
+                          
+                         
                           :
                           <Typography variant="h6">
                             No has buscado ningun amigo o bien el nombre es incorrecto

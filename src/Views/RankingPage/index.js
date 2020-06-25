@@ -6,14 +6,14 @@ import Grid from "@material-ui/core/Grid";
 // Componentes internos
 import Table from "./Components/Table";
 import { BackgroundPlaya } from "./Assets";
-import { useStyles } from "./Styles";
+import { useStyles, useStyleImage } from "./Styles";
 import NavBar from "../../Components/NavBar";
 
 export default function Ranking() {
     const classes = useStyles();
-
+    const classesBackgroundImage = useStyleImage();
     return (
-        <div style={{ backgroundImage: "url(" + BackgroundPlaya + ")", height:"100%" }}>
+        <div className={classesBackgroundImage.rootImage}>
             <NavBar />
             <Container
                 maxWidth="xl"

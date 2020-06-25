@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { BackgroundPlaya } from "../Assets";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,5 +28,14 @@ const useStylesPaper = makeStyles({
   }
 });
 
+const useStyleImage = makeStyles({
+  rootImage: {
+    backgroundImage: `url(${BackgroundPlaya})`,
+    backgroundSize: "cover",
+    height: "100%",
+    backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+},
+})
 
-export { useStyles, useStylesPaper };
+export { useStyles, useStylesPaper,useStyleImage };

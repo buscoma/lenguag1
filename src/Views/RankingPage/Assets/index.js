@@ -1,1 +1,1 @@
-export const BackgroundPlaya = require("./playa.jpg");
+export const BackgroundPlaya = require("./fondo.jpg");
