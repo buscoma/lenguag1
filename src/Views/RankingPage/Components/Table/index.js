@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { Button, Paper, FilledInput } from "@material-ui/core";
 import { authFetch } from '../../../../AuthProvider';
 import { useStylesPaper, useStylesCenter } from './Style';
-
+import FindBox from './Components/FindFriends';
 
 const useStylesAutoGridNoWrap = makeStyles((theme) => ({
   root: {
@@ -189,44 +189,7 @@ export default function TableResponsive(props) {
               </Grid>
               <Grid item xs={12}>
                 <Paper className={classesPaper.root}>
-                  <Grid container>
-                    <Grid item xs={12} md={6}>
-                      <Typography className={classes.font} variant="h3" noWrap>Buscar a un amigo</Typography>
-                    </Grid>
-                    <Grid container item xs={12} spacing={3} justify="space-around">
-                      <Grid item xs={9}>
-                        <FilledInput
-                          id="standard-search"
-                          placeholder="Nombre de tu amigo"
-                          fullWidth
-                          type="search"
-                          
-                          onChange={(e) => { setName(e.target.value); }}
-                        />
-                      </Grid>
-                      <Grid item xs={3} className={classesCenter.center}>
-                        <Button variant="contained" size="large" onClick={() => findFriend()} color="primary">BUSCAR</Button>
-                      </Grid>
-                      <Grid item xs={12} style={{ textAlign: "center" }}>
-                        {isFindFriend ?
-  
-                            <AutoGridNoWrap
-                            posicion={friend.posicion}
-                            nombre={friend.name}
-                            puntos={friend.points}
-                          />
-                          
-                         
-                          :
-                          <Typography variant="h6">
-                            No has buscado ningun amigo o bien el nombre es incorrecto
-                            </Typography>
-
-                        }
-
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                  <FindBox list={row} />
                 </Paper>
               </Grid>
               <Grid item xs={12}>
