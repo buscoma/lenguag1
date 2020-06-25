@@ -46,6 +46,7 @@ const PalabrasPerdidas = () => {
 					let looseWord = { idWord: item.id, word: item.palabra, isUsed: false }
 					let aux = looseWords;
 					aux.push(looseWord);
+					aux.sort(function(){return Math.random() - 0.5})
 					setLooseWords(aux);
 				})
 
@@ -53,6 +54,7 @@ const PalabrasPerdidas = () => {
 					let emptySentence = { idSentence: item.id, begin: item.frase_frente, end: item.frase_atras, idWord: undefined, word: undefined }
 					let aux = emptySentences;
 					aux.push(emptySentence);
+					aux.sort(function(){return Math.random() - 0.5})
 					setEmptySentences(aux);
 				})
 				console.log(emptySentences)
