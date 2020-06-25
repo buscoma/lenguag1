@@ -1,14 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
 
-  font: {
-    fontWeight: "bolder",
-  },
-}));
 
 
 const useStylesPaper = makeStyles({
@@ -16,7 +8,7 @@ const useStylesPaper = makeStyles({
       opacity: 0.85,
       padding: "20px",
       maxWidth : "1024PX",
-      backgroundColor: "grey",
+      backgroundColor: "white",
   },
   rootBlack:{
       opacity: 0.85,
@@ -27,5 +19,13 @@ const useStylesPaper = makeStyles({
   }
 });
 
+const useStylesCenter = makeStyles({
+  center: {
+      display : "flex",
+      justifyContent: "center",
+      alignItems: "center"
+  },
+  
+});
 
-export { useStyles, useStylesPaper };
+export {  useStylesPaper, useStylesCenter };

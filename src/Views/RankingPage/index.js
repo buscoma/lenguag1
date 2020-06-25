@@ -13,11 +13,10 @@ export default function Ranking() {
     const classes = useStyles();
 
     return (
-        <div>
+        <div style={{ backgroundImage: "url(" + BackgroundPlaya + ")", height:"100%" }}>
             <NavBar />
             <Container
                 maxWidth="xl"
-                style={{ backgroundImage: "url(" + BackgroundPlaya + ")" }}
             >
                 <div className={classes.root}>
                     <Grid
