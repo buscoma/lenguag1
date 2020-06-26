@@ -1,300 +1,304 @@
 // Librerias
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Typography, Button } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
 // Componentes externos
-import LayoutGame from '../../Components/Layout/LayaoutContainer';
-import BackgroundImage from './Assets/FastFood.jpg';
+import LayoutGame from "../../Components/Layout/LayaoutContainer";
+import BackgroundImage from "./Assets/FastFood.jpg";
 
 // Componentes internos
 import Burger from "./Components/Burger";
 import BuildControls from "./Components/Burger/Components/BuildControls";
-import "./Styles/BurgerBuilder.css";
+// import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
 
+const BurgerBuilder = () => {
+        const [loadingState, setLoadingState] = useState(true);
+        const [gameState, setGameState] = useState({
+          nivel: null,
+          ingredients: {
+            meat: 0,
+            cheese: 0,
+            salad: 0,
+            bacon: 0,
+          },
+          openDialog: false,
+          perdiste: false,
+        });
 
+     
+        
+        const randomInt = (min, max) => {
+          return min + Math.floor((max - min) * Math.random());
+        };
 
-class BurgerBuilder extends Component {
-  randomInt = (min, max) => {
-    return min + Math.floor((max - min) * Math.random());
-  };
+        const recuperarOperacion = (nivel) => {
+          console.log("recuperarOperacion called");
+          var operacion = null;
 
-  recuperarOperacion = (nivel) => {
-    console.log("recuperarOperacion called");
+          if (nivel === 1) {
+            let n1 = randomInt(1, 9);
+            let n2 = randomInt(1, 9);
+            let respuesta = n1 + n2;
+            operacion = {
+              numero1: n1,
+              numero2: n2,
+              operador: "+",
+              respuesta: respuesta,
+            };
+          }
 
-    if (nivel === 1) {
-      let n1 = this.randomInt(1, 9);
-      let n2 = this.randomInt(1, 9);
-      let respuesta = n1 + n2;
-      return {
-        numero1: n1,
-        numero2: n2,
-        operador: "+",
-        respuesta: respuesta,
-      };
-    }
+          if (nivel === 2) {
+            let n1 = randomInt(1, 100);
+            let n2 = randomInt(1, 30);
+            let respuesta = n1 + n2;
+            operacion = {
+              numero1: n1,
+              numero2: n2,
+              operador: "+",
+              respuesta: respuesta,
+            };
+          }
 
-    if (nivel === 2) {
-      let n1 = this.randomInt(1, 100);
-      let n2 = this.randomInt(1, 30);
-      let respuesta = n1 + n2;
-      return {
-        numero1: n1,
-        numero2: n2,
-        operador: "+",
-        respuesta: respuesta,
-      };
-    }
+          if (nivel === 3) {
+            let n1 = randomInt(16, 100);
+            let n2 = randomInt(1, 16);
+            let respuesta = n1 - n2;
+            operacion = {
+              numero1: n1,
+              numero2: n2,
+              operador: "-",
+              respuesta: respuesta,
+            };
+          }
 
-    if (nivel === 3) {
-      let n1 = this.randomInt(16, 100);
-      let n2 = this.randomInt(1, 16);
-      let respuesta = n1 - n2;
-      return {
-        numero1: n1,
-        numero2: n2,
-        operador: "-",
-        respuesta: respuesta,
-      };
-    }
-  };
+          return operacion;
+        };
 
-  configurarNivel = (nivel) => {
-    if (nivel === 1)
-      return {
-        numero: nivel,
-        orden: {
-          lechuga: 0,
-          panceta: 0,
-          queso: 1,
-          carne: 1,
-        },
-        operacion: this.recuperarOperacion(nivel),
-      };
+        const configurarNivel = (nivel) => {
+          console.log("configurarNivel called");
+          var nuevoNivel = null;
+          if (nivel === 1)
+          nuevoNivel = {
+              numero: nivel,
+              orden: {
+                lechuga: 0,
+                panceta: 0,
+                queso: 1,
+                carne: 1,
+              },
+              operacion: recuperarOperacion(nivel),
+            };
 
-    if (nivel === 2) {
-      return {
-        numero: nivel,
-        orden: {
-          lechuga: 0,
-          panceta: 1,
-          queso: 1,
-          carne: 1,
-        },
-        operacion: this.recuperarOperacion(nivel),
-      };
-    }
+          if (nivel === 2) {
+            nuevoNivel = {
+              numero: nivel,
+              orden: {
+                lechuga: 0,
+                panceta: 1,
+                queso: 1,
+                carne: 1,
+              },
+              operacion: recuperarOperacion(nivel),
+            };
+          }
 
+          if (nivel === 3) {
+            nuevoNivel = {
+              numero: nivel,
+              orden: {
+                lechuga: 1,
+                panceta: 1,
+                queso: 1,
+                carne: 1,
+              },
+              operacion: recuperarOperacion(nivel),
+            };
+          }
 
-    if (nivel === 3){
-      return {
-        numero: nivel,
-        orden: {
-          lechuga: 1,
-          panceta: 1,
-          queso: 1,
-          carne: 1,
-        },
-        operacion: this.recuperarOperacion(nivel),
-      };
-    }
-      
-  };
+          setGameState({nivel: nuevoNivel});
+          console.log(gameState);
+          setLoadingState(false);
+       
+        };
 
-  state = {
-    nivel: this.configurarNivel(1),
-    ingredients: {
-      meat: 0,
-      cheese: 0,
-      salad: 0,
-      bacon: 0,
-    },
-    openDialog: false,
-    perdiste: false,
-  };
+        
+        useEffect(()=>{configurarNivel(1)}, []);
 
+        //configurarNivel(1);
+        
+        // const addIngridientHandler = (type) => {
+        //   setGameState({ openDialog: true });
 
-  addIngridientHandler = (type) => {
-    this.setState({
-      openDialog: true,
-    });
+        //   const oldCount = gameState.ingredients[type];
+        //   const updatedCount = oldCount + 1;
+        //   const updatedIngredients = {
+        //     ...gameState.ingredients,
+        //   };
+        //   updatedIngredients[type] = updatedCount;
 
-    const oldCount = this.state.ingredients[type];
-    const updatedCount = oldCount + 1;
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    };
-    updatedIngredients[type] = updatedCount;
+        //   setGameState({
+        //     ingredients: updatedIngredients,
+        //   });
+        // };
 
-    this.setState({
-      ingredients: updatedIngredients,
-    });
-  };
+        // const removeIngridientHandler = (type) => {
+        //   const oldCount = gameState.ingredients[type];
+        //   if (oldCount <= 0) {
+        //     return;
+        //   }
+        //   const updatedCount = oldCount - 1;
+        //   const updatedIngredients = {
+        //     ...gameState.ingredients,
+        //   };
+        //   updatedIngredients[type] = updatedCount;
 
-  removeIngridientHandler = (type) => {
-    const oldCount = this.state.ingredients[type];
-    if (oldCount <= 0) {
-      return;
-    }
-    const updatedCount = oldCount - 1;
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    };
-    updatedIngredients[type] = updatedCount;
+        //   setGameState({
+        //     ingredients: updatedIngredients,
+        //   });
+        // };
 
-    this.setState({
-      ingredients: updatedIngredients,
-    });
-  };
+        // const handleDialogClose = () => {
+        //   console.log("handleDialogClose called!");
+        //   debugger;
+        //   if (
+        //     gameState.nivel.operacion.respuesta !==
+        //     parseInt(gameState.nivel.operacion.respuestaUsuario)
+        //   ) {
+        //     //LOSER
+        //     setGameState({
+        //       perdiste: true,
+        //     });
+        //   } else {
+        //     const nivelActual = gameState.nivel;
+        //     nivelActual.operacion = recuperarOperacion(nivelActual.numero);
+        //     setGameState({
+        //       openDialog: false,
+        //       nivel: nivelActual,
+        //     });
+        //   }
+        // };
 
-  handleDialogClose = () => {
-    console.log("handleDialogClose called!");
-    debugger
-    if (
-      this.state.nivel.operacion.respuesta !==
-      parseInt(this.state.nivel.operacion.respuestaUsuario)
-    ) {
-      //LOSER
-      this.setState({
-        perdiste: true,
-      });
-    } else {
-      const nivelActual = this.state.nivel;
-      nivelActual.operacion = this.recuperarOperacion(nivelActual.numero);
-      this.setState({
-        openDialog: false,
-        nivel: nivelActual,
-      });
-    }
-  };
+        // const handleRespuestaChanged = (event) => {
+        //   console.log("handlerespuestachanged called!");
 
-  handleRespuestaChanged = (event) => {
-    console.log("handlerespuestachanged called!");
+        //   const nivelActual = gameState.nivel;
+        //   nivelActual.operacion.respuestaUsuario = event.target.value;
+        //   setGameState({
+        //     nivel: nivelActual,
+        //   });
+        // };
 
-    const nivelActual = this.state.nivel;
-    nivelActual.operacion.respuestaUsuario = event.target.value;
-    this.setState({
-      nivel: nivelActual,
-    });
-  };
+        // const handleGameOver = () => {
+        //   console.log("handleGameOver called!");
+        //   setGameState({
+        //     nivel: configurarNivel(1),
+        //     ingredients: {
+        //       meat: 0,
+        //       cheese: 0,
+        //       salad: 0,
+        //       bacon: 0,
+        //     },
+        //     openDialog: false,
+        //     perdiste: false,
+        //   });
+        // };
 
-  handleGameOver = () => {
-    console.log("handleGameOver called!");
-    this.setState({
-      nivel: this.configurarNivel(1),
-      ingredients: {
-        meat: 0,
-        cheese: 0,
-        salad: 0,
-        bacon: 0,
-      },
-      openDialog: false,
-      perdiste: false,
-    });
-  };
+        // const handleNextLevel = () => {
+        //   console.log("handleNextLevel called!");
+        //   let nivelSiguiente = gameState.nivel;
+        //   if (nivelSiguiente.numero === 3) {
+        //     this.setShow(true);
+        //     this.setStateOfGame("END");
+        //     return;
+        //   }
 
-  handleNextLevel = () => {
-    console.log("handleNextLevel called!");
-    let nivelSiguiente = this.state.nivel;
-    if (nivelSiguiente.numero === 3) {
-      this.setShow(true);
-      this.setStateOfGame("END");
-      return;
-    }
+        //   nivelSiguiente = configurarNivel(nivelSiguiente.numero + 1);
+        //   setGameState({
+        //     nivel: nivelSiguiente,
+        //     ingredients: {
+        //       meat: 0,
+        //       cheese: 0,
+        //       salad: 0,
+        //       bacon: 0,
+        //     },
+        //   });
 
-    nivelSiguiente = this.configurarNivel(nivelSiguiente.numero + 1);
-    this.setState({
-      nivel: nivelSiguiente,
-      ingredients: {
-        meat: 0,
-        cheese: 0,
-        salad: 0,
-        bacon: 0,
-      },
-    });
+        //   //TODO: guardar en la bd el progreso.
+        // };
 
-    //TODO: guardar en la bd el progreso.
-  };
+        // const handleBotonOrdenar = () => {
+        //   console.log("handleBotonOrdenar called");
+        //   //TODO: validar que la orden este cumplida.
+        //   if (
+        //     gameState.ingredients.salad === gameState.nivel.orden.lechuga &&
+        //     gameState.ingredients.bacon === gameState.nivel.orden.panceta &&
+        //     gameState.ingredients.cheese === gameState.nivel.orden.queso &&
+        //     gameState.ingredients.meat === gameState.nivel.orden.carne
+        //   ) {
+        //     handleNextLevel();
+        //   } else {
+        //     alert("Te faltan o sobran ingredientes!");
+        //   }
+        // };
 
-  handleBotonOrdenar = () => {
-    console.log("handleBotonOrdenar called");
-    //TODO: validar que la orden este cumplida.
-    if (
-      this.state.ingredients.salad === this.state.nivel.orden.lechuga &&
-      this.state.ingredients.bacon === this.state.nivel.orden.panceta &&
-      this.state.ingredients.cheese === this.state.nivel.orden.queso &&
-      this.state.ingredients.meat === this.state.nivel.orden.carne
-    ) {
-      this.handleNextLevel();
-    } else {
-      alert("Te faltan o sobran ingredientes!");
-    }
-  };
+        // const disabledInfo = {
+        //   ...gameState.ingredients,
+        // };
 
-  render() {
-    const disabledInfo = {
-      ...this.state.ingredients,
-    };
+        return <div>frula</div>;
+        // return (loadingState ? "..." :
+        //   <LayoutGame
+        //     backgroundImage={BackgroundImage}
+        //     game="BurgerBilder"
+        //     level={gameState.nivel.numero}
+        //     points={0}
+        //   >
+        //     <div className="BurgerBuilder">
+        //       <Paper className="OrderDetail" elevation={4}>
+        //         <Typography variant="h6">Nivel {gameState.nivel.numero}</Typography>
+        //         <Typography variant="inherit">
+        //           Arma una hamburguesa con los siguientes ingredientes: Carne:{" "}
+        //           {gameState.nivel.orden.carne}, Queso: {gameState.nivel.orden.queso},
+        //           Lechuga: {gameState.nivel.orden.lechuga}, Panceta:{" "}
+        //           {gameState.nivel.orden.panceta}
+        //         </Typography>
+        //       </Paper>
+        //       <Burger ingredients={gameState.ingredients} />
 
-    for (let key in disabledInfo) {
-      disabledInfo[key] = disabledInfo[key] < 0;
-    }
+        //       {/* <Grid container spacing={2} justify="center" alignItems="center">
+        //         <Grid item xs={12} md={8}>
+        //           <BuildControls
+        //             ingridientAdded={addIngridientHandler}
+        //             ingridientRemoved={removeIngridientHandler}
+        //             disabled={disabledInfo}
+        //             ingredients={gameState.ingredients}
+        //           ></BuildControls>
+        //         </Grid>
+        //         <Grid item xs={12} md={4}>
+        //           <Button
+        //             variant="contained"
+        //             color="primary"
+        //             onClick={() => handleBotonOrdenar()}
+        //             className="OrderButton"
+        //           >
+        //             Marche pedido
+        //           </Button>
+        //         </Grid>
+        //       </Grid> */}
 
-    return (
-      <LayoutGame
-        backgroundImage={BackgroundImage}
-        game="BurgerBilder"
-        level={this.state.nivel.numero}
-        points={0}
-      >
-        <div className="BurgerBuilder">
-
-          <Paper className="OrderDetail" elevation={4}>
-            <Typography variant="h6">Nivel {this.state.nivel.numero}</Typography>
-            <Typography variant="inherit">
-              Arma una hamburguesa con los siguientes ingredientes: Carne:{" "}
-              {this.state.nivel.orden.carne}, Queso:{" "}
-              {this.state.nivel.orden.queso}, Lechuga:{" "}
-              {this.state.nivel.orden.lechuga}, Panceta:{" "}
-              {this.state.nivel.orden.panceta}
-            </Typography>
-          </Paper>
-          <Burger ingredients={this.state.ingredients} />
-
-          <Grid container spacing={2} justify="center" alignItems="center">
-            <Grid item xs={12} md={8}>
-              <BuildControls
-                ingridientAdded={this.addIngridientHandler}
-                ingridientRemoved={this.removeIngridientHandler}
-                disabled={disabledInfo}
-                ingredients={this.state.ingredients}
-              ></BuildControls>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => this.handleBotonOrdenar()}
-                className="OrderButton"
-              >
-                Marche pedido
-            </Button>
-            </Grid>
-          </Grid>
-
-          <DialogOperacion
-            open={this.state.openDialog}
-            handleClose={this.handleDialogClose}
-            respuestaChanged={this.handleRespuestaChanged}
-            operation={this.state.nivel.operacion}
-            gameStatus={this.state.perdiste}
-            handleGameOver={this.handleGameOver}
-          />
-        </div>
-      </LayoutGame>
-    );
-  }
-}
+        //       {/* <DialogOperacion
+        //         open={gameState.openDialog}
+        //         handleClose={handleDialogClose}
+        //         respuestaChanged={handleRespuestaChanged}
+        //         operation={gameState.nivel.operacion}
+        //         gameStatus={gameState.perdiste}
+        //         handleGameOver={handleGameOver}
+        //       /> */}
+        //     </div>
+        //   </LayoutGame>
+        // );
+      };;
 
 export default BurgerBuilder;
