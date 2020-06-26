@@ -1,21 +1,21 @@
 // Librerias
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Paper, Typography, Button } from "@material-ui/core";
 
 // Componentes externos
-import LayoutGame from '../../Components/Layout/LayaoutContainer';
+import LayoutGame from "../../Components/Layout/LayaoutContainer";
 
 // Componentes internos
-import controller from "./Controller";
+import { obtenerNivel } from "./Controller";
 import styles from "./Styles";
-import {Background} from "./Assets";
+import { Background } from "./Assets";
 
 const JuegoNumAPalabra = (props) => {
   const classes = styles();
 
   const [nivelState, setNivelState] = useState({
     dificultad: 1,
-    nivel: controller.obtenerNivel(1),
+    nivel: null,
     perdio: false,
   });
 
@@ -23,13 +23,29 @@ const JuegoNumAPalabra = (props) => {
     perdio: false,
   });
 
+  const [loading, setLoading] = useState(true);
+
   //LAYOUT HOOK NEW
   const [winner, setWinner] = useState(false);
   const [loser, setLoser] = useState(false);
   const [points, setPoints] = useState(0);
 
+  useEffect(() => {
+    recuperarNivel(1);
+  }, []);
+
+  const recuperarNivel = (dificultad) => {
+    setLoading(true);
+    var promise = obtenerNivel(dificultad);
+    promise.then((data) => {
+      setNivelState({ dificultad: dificultad, nivel: data, perdio: false});
+      setGameState({ perdio: false });
+      setLoading(false);
+    });
+  };
+
   const opcionClickHandler = (opcion) => {
-    if (opcion.Correcta === true) {
+    if (opcion.correcta === true) {
       //WIINER
       console.log("Correcta!");
       subirNivel();
@@ -48,23 +64,19 @@ const JuegoNumAPalabra = (props) => {
     }
 
     var nuevaDificultad = nivelState.dificultad + 1;
-    setNivelState({
-      dificultad: nuevaDificultad,
-      nivel: controller.obtenerNivel(nuevaDificultad),
-    });
+    recuperarNivel(nuevaDificultad);
   };
 
   const reiniciar = () => {
-
-    setNivelState({
-      dificultad: 1,
-      nivel: controller.obtenerNivel(1),
-    });
+    console.log("reiniciar called");
+    recuperarNivel(1);
   };
 
-  return (
+  return loading ? (
+    "..."
+  ) : (
     <LayoutGame
-      level={nivelState.nivel.nivel}
+      level={nivelState.nivel.numero}
       points={points}
       game="PalabrasNumeros"
       winner={winner}
@@ -74,26 +86,26 @@ const JuegoNumAPalabra = (props) => {
       <Container className={classes.container}>
         <Typography variant="h2" style={{ fontWeight: "bold" }}>
           <Paper elevation={4} className={classes.paperNumero}>
-            {nivelState.nivel.Numero}
+            {nivelState.nivel.numero}
           </Paper>
         </Typography>
         <Container className={classes.containerOpciones}>
-          {nivelState.nivel.Respuestas.map((opcion) => (
+          {nivelState.nivel.respuestas.map((opcion) => (
             <Paper
               elevation={4}
               className={
                 !gameState.perdio
                   ? classes.paper
-                  : opcion.Correcta
+                  : opcion.correcta
                   ? classes.paperCorrecta
                   : classes.paperIncorrecta
               }
               onClick={() =>
                 gameState.perdio ? null : opcionClickHandler(opcion)
               }
-              key={opcion.Descripcion}
+              key={opcion.descripcion}
             >
-              {opcion.Descripcion}
+              {opcion.descripcion}
             </Paper>
           ))}
         </Container>
