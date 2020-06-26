@@ -70,16 +70,13 @@ function Login(props) {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const handleRegister = () => {
-    props.show();
-    props.showSignUp();
-  };
+
   const classes = useStyles(props);
   
   return (
     <Dialog open={true} classes={classes} onBackdropClick={props.show}>
       <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
-        <Container>
+        <Container style={{margin:".2rem"}}>
           <Grid flex container spacing={2} alignItems="center">
             <Grid flex item xs={12} style={{ textAlign: "right" }}>
               <img
@@ -157,34 +154,7 @@ function Login(props) {
                 Iniciar
               </Button>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              justify="center"
-              alignItems="center"
-              style={{ textAlign: "center" }}
-            >
-              <Typography className={classes.TitleH2 + " " + classes.TextBold}>
-                {" "}
-                No estás registrado aún?{" "}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              justify="center"
-              alignItems="center"
-              style={{ textAlign: "center" }}
-            >
-              <Button
-                className={classes.buttom}
-                variant="outlined"
-                onClick={() => handleRegister()}
-                color="secondary"
-              >
-                Registrarse
-              </Button>
-            </Grid>
+            
           </Grid>
         </Container>
       </form>

@@ -1,7 +1,7 @@
 const paperScrollPaper = {
   maxHeight: "unset",
-  height: "100%",
-  width: "100vw",
+/*   height: "80%",
+ */  width: "100vw",
   overflow: "hidden",
 };
 
