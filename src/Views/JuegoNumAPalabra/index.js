@@ -38,7 +38,8 @@ const JuegoNumAPalabra = (props) => {
     setLoading(true);
     var promise = obtenerNivel(dificultad);
     promise.then((data) => {
-      setNivelState({ dificultad: dificultad, nivel: data });
+      setNivelState({ dificultad: dificultad, nivel: data, perdio: false});
+      setGameState({ perdio: false });
       setLoading(false);
     });
   };
@@ -67,6 +68,7 @@ const JuegoNumAPalabra = (props) => {
   };
 
   const reiniciar = () => {
+    console.log("reiniciar called");
     recuperarNivel(1);
   };
 
