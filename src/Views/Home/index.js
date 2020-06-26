@@ -8,7 +8,6 @@ import { withRouter } from "react-router-dom";
 
 // Componentes internos
 import Login from "./Components/Login";
-import SignUp from "./Components/SignUp";
 import { Background } from "./Assets";
 import { TitleH1, ButtomDefualt, ContainerCenter } from "./Styles";
 
@@ -30,12 +29,8 @@ const useStyles = makeStyles({
 
 export default withRouter(function Home(props) {
   const [dialogLogin, setDialogLogin] = useState(false);
-  const [dialogSignUp, setDialogSignUp] = useState(false);
   const handleLoginClick = () => {
     setDialogLogin(!dialogLogin);
-  };
-  const handleSignUpClick = () => {
-    setDialogSignUp(!dialogSignUp);
   };
 
   const classes = useStyles(props);
@@ -56,9 +51,8 @@ export default withRouter(function Home(props) {
           Ingresar
         </Button>
         {dialogLogin ? (
-          <Login show={handleLoginClick} showSignUp={handleSignUpClick} />
+          <Login show={handleLoginClick} />
         ) : null}
-        {dialogSignUp ? <SignUp show={handleSignUpClick} /> : null}
       </Container>
     </div>
   );

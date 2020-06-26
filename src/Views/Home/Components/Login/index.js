@@ -77,10 +77,9 @@ function Login(props) {
   const classes = useStyles(props);
   
   return (
-      
       <Dialog open={true} classes={props} onBackdropClick={props.show}>
         <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
-          <Container style={{margin:".2rem"}}>
+          <Container style={{overflow:"hidden"}}>
             <Grid flex container spacing={2} alignItems="center">
               <Grid flex item xs={12} style={{ textAlign: "right" }}>
                 <img
