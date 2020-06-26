@@ -15,7 +15,6 @@ const JuegoNumAPalabra = (props) => {
 
   const [nivelState, setNivelState] = useState({
     dificultad: 1,
-    // nivel: controller.obtenerNivel(1),
     nivel: null,
     perdio: false,
   });
