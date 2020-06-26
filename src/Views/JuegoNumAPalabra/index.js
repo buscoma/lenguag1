@@ -1,6 +1,8 @@
 // Librerias
 import React, { useState, useEffect } from "react";
 import { Container, Paper, Typography, Button } from "@material-ui/core";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {authFetch} from "../../AuthProvider"
 
 // Componentes externos
 import LayoutGame from "../../Components/Layout/LayaoutContainer";
@@ -56,9 +58,19 @@ const JuegoNumAPalabra = (props) => {
     }
   };
 
+  const getPoints = () => {
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=juegoNumAPalabra&level=" + nivelState.dificultad)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+			})
+			.catch(error => console.log('error', error));
+	}
+
   const subirNivel = () => {
     if (nivelState.dificultad === 3) {
       //GAME IS OVER, THE USER WINNER
+      getPoints();
       setWinner(true);
       return;
     }
@@ -73,10 +85,10 @@ const JuegoNumAPalabra = (props) => {
   };
 
   return loading ? (
-    "..."
+    <CircularProgress />
   ) : (
     <LayoutGame
-      level={nivelState.nivel.numero}
+      level={nivelState.dificultad}
       points={points}
       game="PalabrasNumeros"
       winner={winner}

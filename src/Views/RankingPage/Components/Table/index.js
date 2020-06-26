@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
+import CircularProgress from '@material-ui/core/CircularProgress';import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -148,7 +148,7 @@ export default function TableResponsive(props) {
       }}
     >
       {loading ? (
-        "Loading"
+        <CircularProgress />
       ) : (
           <Container maxWidth="md">
             <Grid container wrap="wrap" spacing={2}>
