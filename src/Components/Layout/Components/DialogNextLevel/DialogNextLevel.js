@@ -47,12 +47,12 @@ export default function CustomizedDialogs(props) {
         </IconButton>
         <Grid container spacing={4}>
           <Grid item xs={12} md={12}>
-            <Typography className={[classesTypografy.titleGame].join(" ")}> Nivel completado!! </Typography>
+            <Typography className={[classesTypografy.titleGame].join(" ")}>¡¡Nivel completado!!</Typography>
           </Grid>
           <Grid item xs={6} >
             <Grid container >
               <Grid item xs={12}>
-                <Typography className={[classesTypografy.titlePanel].join(" ")}> Nivel </Typography>
+                <Typography className={[classesTypografy.titlePanel].join(" ")}>Nivel</Typography>
               </Grid>
               <Grid item xs={12} >
                 <Typography className={[classesTypografy.textPanel].join(" ")}>{props.flagAndLevel}</Typography>
@@ -62,7 +62,7 @@ export default function CustomizedDialogs(props) {
           <Grid item xs={6} >
             <Grid container >
               <Grid item xs={12} >
-                <Typography className={[classesTypografy.titlePanel].join(" ")}> Puntos</Typography>
+                <Typography className={[classesTypografy.titlePanel].join(" ")}>Puntos</Typography>
               </Grid>
               <Grid item xs={12} >
                 <Typography className={[classesTypografy.textPanel].join(" ")}>{JSON.parse(sessionStorage.getItem("User")).points}</Typography>
@@ -71,15 +71,15 @@ export default function CustomizedDialogs(props) {
           </Grid>
           <Grid container item xs={12}  >
             <Grid item xs={12}>
-              <Typography className={[classesTypografy.titleEnunciado].join(" ")}> Superaste el nivel! </Typography>
+              <Typography className={[classesTypografy.titleEnunciado].join(" ")}>¡Nivel superado!</Typography>
             </Grid>
           </Grid>
           <Grid container item xs={12} >
             <Grid item xs={12} sm={6} className={[classesButtom.root].join(" ")}>
-              <Button onClick={()=> setOpen(!open)} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}>  Jugar siguiente nivel </Button>
+              <Button onClick={()=> setOpen(!open)} variant="contained" color="primary" className={[classesButtom.buttom].join(" ")}>Siguiente nivel</Button>
             </Grid>
             <Grid item xs={12} sm={6}  className={[classesButtom.root].join(" ")}>
-              <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}> Elegir otro juego </Button>
+              <Button href="/landing_page" variant="outlined" color="secondary" className={[classesButtom.buttom].join(" ")}>Elegir otro juego</Button>
             </Grid>
           </Grid>
         </Grid>

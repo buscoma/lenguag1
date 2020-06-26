@@ -112,10 +112,10 @@ const ComprensionLectora = (props) => {
   };
 
   const subirNivel = () => {
+    getPoints();
     if (nivelState.dificultad === 3) {
       //alert("ganaste!");
-      //EL juego termino.
-      getPoints();
+      //EL juego termino.     
       setWinner(true);
       return;
     }

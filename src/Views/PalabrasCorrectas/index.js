@@ -49,7 +49,7 @@ const PalabrasCorrectas = (props) => {
          }else if (state.text[state.position].EsCorrecta === true) {
             setState((prev) => ({
                 ...prev,
-                mensaje: 'Es correcto, la palabra esta escrita bien.',
+                mensaje: 'La palabra esta bien escrita.',
                 rightAnswer: true,
                 playNextWord: true
 
@@ -57,7 +57,7 @@ const PalabrasCorrectas = (props) => {
         } else {
             setState((prev) => ({
                 ...prev,
-                mensaje: 'Es incorrecto, la palabra esta escrita mal.',
+                mensaje: 'La palabra esta mal escrita.',
                 wrongAnswer: true,
                 playNextWord: true
             }));
@@ -71,14 +71,14 @@ const PalabrasCorrectas = (props) => {
         }else if (state.text[state.position].EsCorrecta === false) {
             setState((prev) => ({
                 ...prev,
-                mensaje: 'Es correcto, la palabra esta escrita mal.',
+                mensaje: 'La palabra esta mal escrita.',
                 rightAnswer: true,
                 playNextWord: true
             }));
         } else {
             setState((prev) => ({
                 ...prev,
-                mensaje: 'Es incorrecto, la palabra esta escrita bien.',
+                mensaje: 'La palabra esta bien escrita.',
                 wrongAnswer: true,
                 playNextWord: true
             }));
@@ -86,8 +86,8 @@ const PalabrasCorrectas = (props) => {
     };
 
     const levelUp = () => {
+        getPoints();
         if(state.level < 3){
-            getPoints();
             setState((prev) => ({
                 ...prev,
                 level: prev.level + 1,
@@ -171,7 +171,7 @@ const PalabrasCorrectas = (props) => {
                                     <Grid item xs={12}>
                                         <Typography className={clasessTypografy.questionTitle}>
                                             {' '}
-                                        La palabra esta escrita correctamente?
+                                        ¿La siguiente palabra esta bien escrita?
                                     </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -210,7 +210,7 @@ const PalabrasCorrectas = (props) => {
                                 <Grid container spacing={3} justify="center">
                                     <Grid item xs={12}>
                                         <Alert icon=" " severity="success" className={classesAlert.alert}>
-                                            <AlertTitle className={classesAlert.alert}>RESPUESTA CORRECTO</AlertTitle>
+                                            <AlertTitle className={classesAlert.alert}>¡Respuesta correcta!</AlertTitle>
                                             {state.mensaje}
                                         </Alert>
                                     </Grid>
@@ -222,7 +222,7 @@ const PalabrasCorrectas = (props) => {
                                             fullWidth
                                         >
                                             {' '}
-                                        ESTAS LISTO PARA CONTINUAR{' '}
+                                        ¿Estás listo para continuar?{' '}
                                         </Button>
                                     </Grid>
                                 </Grid>
@@ -231,7 +231,7 @@ const PalabrasCorrectas = (props) => {
                                 <Grid container spacing={3} justify="center">
                                     <Grid item xs={12}>
                                         <Alert icon=" " severity="error" className={classesAlert.alert}>
-                                            <AlertTitle className={classesAlert.alert}>RESPUESTA INCORRECTA</AlertTitle>
+                                            <AlertTitle className={classesAlert.alert}>Respuesta incorrecta</AlertTitle>
                                             {state.mensaje}
                                         </Alert>
                                     </Grid>
@@ -243,7 +243,7 @@ const PalabrasCorrectas = (props) => {
                                             fullWidth
                                         >
                                             {' '}
-                                        Jugar a otra cosa{' '}
+                                        Elegir otro juego{' '}
                                         </Button>
                                     </Grid>
                                     <Grid item xs={12} md={6}>

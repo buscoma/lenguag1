@@ -6,12 +6,12 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-
+import Alert from '@material-ui/lab/Alert';
 // Componentes internos
 import { TextBold, TextBlackShadow } from "./Styles";
 import {
   paperScrollPaper,
-  buttom,
+  button,
   paper,
   logo,
   logoClose,
@@ -22,6 +22,7 @@ import {login} from "../../../../AuthProvider";
 
 function Login(props) {
   const API_URL = "https://backendlenguamaticag1.herokuapp.com";
+  const [invalidPassword, setInvalidPassword] = useState(false);
   const [values, setValues] = useState({
     name: "",
     password: "",
@@ -46,7 +47,7 @@ function Login(props) {
       },
     },
     TextBold,
-    buttom,
+    button,
     input,
   });
 
@@ -56,12 +57,14 @@ function Login(props) {
       name: values.name,
       password: values.password,
     }).then(res => {
-      console.log(res.data)
-      // localStorage.setItem('token', res.data.token);
-      // localStorage.setItem('refresh', res.data.refresh);
-      login(res.data);
-      props.history.push('/landing_page')
+      if (res.status === 200){
+        login(res.data);
+        props.history.push('/landing_page')
+      } else{
+        
+      }
     }).catch((err) => {
+      setInvalidPassword(true);
       console.log(err);
     });
   };
@@ -74,91 +77,94 @@ function Login(props) {
   const classes = useStyles(props);
   
   return (
-    <Dialog open={true} classes={classes} onBackdropClick={props.show}>
-      <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
-        <Container style={{margin:".2rem"}}>
-          <Grid flex container spacing={2} alignItems="center">
-            <Grid flex item xs={12} style={{ textAlign: "right" }}>
-              <img
-                src={CloseLogo}
-                onClick={props.show}
-                className={classes.logoClose}
-                alt="Logo"
-              />
-            </Grid>
-            <Grid item xs={12} style={{ textAlign: "center" }}>
-              <img
-                src={RegistrarLogo}
-                style={{ height: "15vh", width: "15vh" }}
-                alt="Logo"
-              />
-            </Grid>
-            <Grid item xs={12} style={{ textAlign: "center" }}>
-              <Typography
-                className={
-                  classes.TitleH2 +
-                  " " +
-                  classes.TextBold +
-                  " " +
-                  classes.TextBlackShadow
-                }
+      
+      <Dialog open={true} classes={props} onBackdropClick={props.show}>
+        <form onSubmit={e => handleSubmit(e)} noValidate autoComplete="on">
+          <Container style={{margin:".2rem"}}>
+            <Grid flex container spacing={2} alignItems="center">
+              <Grid flex item xs={12} style={{ textAlign: "right" }}>
+                <img
+                  src={CloseLogo}
+                  onClick={props.show}
+                  className={classes.logoClose}
+                  alt="Logo"
+                />
+              </Grid>
+              <Grid item xs={12} style={{ textAlign: "center" }}>
+                <img
+                  src={RegistrarLogo}
+                  style={{ height: "15vh", width: "15vh" }}
+                  alt="Logo"
+                />
+              </Grid>
+              <Grid item xs={12} style={{ textAlign: "center" }}>
+                <Typography
+                  className={
+                    classes.TitleH2 +
+                    " " +
+                    classes.TextBold +
+                    " " +
+                    classes.TextBlackShadow
+                  }
+                >
+                  Inicia sesión o registrate
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                //justify="strech"
+                alignItems="center"
+                style={{ textAlign: "center" }}
               >
-                Regístrate para jugar!!
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              justify="strech"
-              alignItems="center"
-              style={{ textAlign: "center" }}
-            >
-              <TextField
-                className={classes.textField}
-                value={values.name}
-                onChange={handleChange("name")}
-                fullWidth
-                placeholder="Nombre de usuario"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              justify="center"
-              alignItems="center"
-              style={{ textAlign: "center" }}
-            >
-              <TextField
-                className={classes.input}
-                value={values.password}
-                onChange={handleChange("password")}
-                type="password"
-                fullWidth
-                autoComplete="current-password"
-                placeholder="Contraseña"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              justify="center"
-              alignItems="center"
-              style={{ textAlign: "center" }}
-            >
-              <Button
-                className={classes.buttom}
-                variant="outlined"
-                type="submit"
-                color="primary"
+                <TextField
+                  className={classes.textField}
+                  value={values.name}
+                  onChange={handleChange("name")}
+                  fullWidth
+                  placeholder="Nombre de usuario"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                justify="center"
+                alignItems="center"
+                style={{ textAlign: "center" }}
               >
-                Iniciar
-              </Button>
+                <TextField
+                  className={classes.input}
+                  value={values.password}
+                  onChange={handleChange("password")}
+                  type="password"
+                  fullWidth
+                  autoComplete="current-password"
+                  placeholder="Contraseña"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                justify="center"
+                alignItems="center"
+                style={{ textAlign: "center" }}
+              >
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  type="submit"
+                  color="primary"
+                >
+                  Iniciar
+                </Button>
+              </Grid>
+              <Grid item xs={12} style={{ textAlign: "center" }}>
+              {invalidPassword ? <Alert severity="error"> Ese nombre de usuario ya se encuentra registrado, ¿tenes otro? </Alert>: null}
+              </Grid>
             </Grid>
-            
-          </Grid>
-        </Container>
-      </form>
-    </Dialog>
+          </Container>
+        </form>
+      </Dialog>
   );
 }
 

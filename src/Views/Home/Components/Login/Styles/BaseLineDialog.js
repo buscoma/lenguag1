@@ -25,7 +25,7 @@ const input = {
   fontSize: "4rem",
 };
 
-const buttom = {
+const button = {
   fontSize: "1.5rem",
   padding: "1rem",
   fontWeight: "bold",
@@ -35,4 +35,4 @@ const buttom = {
     padding: "1rem",
   },
 };
-export { paperScrollPaper, paper, logoClose, logo, buttom, input };
+export { paperScrollPaper, paper, logoClose, logo, button, input };

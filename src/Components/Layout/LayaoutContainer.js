@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -14,6 +14,14 @@ import {
 } from "./Components";
 
 export default function LayoutContainer(props) {
+
+    const [points, setPoints] = useState(0);
+
+    useEffect(() => {
+        console.log("BUSQUE PUNTOS VIEJA")
+        setPoints(JSON.parse(sessionStorage.getItem("User")).points)
+    }, [points]);
+
     const useStyles = makeStyles((theme) => ({
         root: {
             padding: "20px",
@@ -81,21 +89,21 @@ export default function LayoutContainer(props) {
                 open={panelDialogOpen}
                 onClose={handlePanel}
                 level={props.level}
-                points={JSON.parse(sessionStorage.getItem("User")).points}
+                points={points}
                 title={Enunciados[props.game].title}
                 description={Enunciados[props.game].description}
             />
 
-            <DialogNextLevel flagAndLevel={props.level} points={JSON.parse(sessionStorage.getItem("User")).points} />
+            <DialogNextLevel flagAndLevel={props.level} points={points} />
 
             <DialogFinishGame
                 level={props.level}
-                points={JSON.parse(sessionStorage.getItem("User")).points}
+                points={points}
                 openFlag={props.winner}
             />
 
             <DialogLoserGame
-                points={JSON.parse(sessionStorage.getItem("User")).points}
+                points={points}
                 openFlag={props.loser}
                 urlGameAgein={Enunciados[props.game].urlGame}
             />

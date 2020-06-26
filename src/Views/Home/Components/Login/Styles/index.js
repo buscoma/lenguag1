@@ -12,12 +12,11 @@ const TitleH1 = {
   },
 };
 const TitleH2 = {
-  fontSize: "2rem",
+  fontSize: "3rem",
   padding: ".7rem",
-
   textAlign: "center",
   "@media (min-width: 768px)": {
-    fontSize: "5rem",
+    fontSize: "2rem",
     padding: "1.5rem",
   },
 };
