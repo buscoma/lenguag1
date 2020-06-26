@@ -87,6 +87,7 @@ const PalabrasCorrectas = (props) => {
 
     const levelUp = () => {
         if(state.level < 3){
+            getPoints();
             setState((prev) => ({
                 ...prev,
                 level: prev.level + 1,
@@ -102,6 +103,15 @@ const PalabrasCorrectas = (props) => {
             }))
         }
     }
+
+    const getPoints = () => {
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasCorrectas&level=" + state.level)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+			})
+			.catch(error => console.log('error', error));
+	}
 
     const readyForNextWord = () => {
         if (state.position < state.text.length - 1) {

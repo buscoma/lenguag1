@@ -97,6 +97,7 @@ const PalabrasPerdidas = () => {
 	};
 
 	const pasarSigNivel = () => {
+		getPoints()
 		setEmptySentences([]);
 		setLooseWords([]);
 		setState((prev) => ({ ...prev, level: prev.level + 1 }))
@@ -104,7 +105,14 @@ const PalabrasPerdidas = () => {
 		setFlag(true)
 	}
 
-
+	const getPoints = () => {
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasPerdidas&level=" + state.level)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+			})
+			.catch(error => console.log('error', error));
+	}
 
 	const [looserWordSelected, setLooserWordSelected] = useState(undefined);
 

@@ -30,7 +30,7 @@ export default function SecuenciaDeNumeros(props) {
 	const [loser, setLoser] = useState(false);
 
 	const [stopTimer, setStopTimer] = useState(true);
-	const time = 45;
+	const time = 60;
 
 
 	const nextIdIsRight = (id) => {
@@ -89,10 +89,10 @@ export default function SecuenciaDeNumeros(props) {
 		if (level < 3) {/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
 			
 			setLevel(level + 1);
-			setStopTimer(true);
 		} else {/* Termino el juego, y GANASTE!!!!! */
 			setWinner(true);
 		}
+		setStopTimer(true);
 	}
 
 	const startNextLevel = () => {

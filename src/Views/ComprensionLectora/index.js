@@ -16,6 +16,7 @@ import LayaoutGame from '../../Components/Layout/LayaoutContainer';
 import * as BaseStyle from "./Styles";
 import controller from "./Controller";
 import { Background } from "./Assets";
+import {authFetch} from "../../AuthProvider"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,6 +115,7 @@ const ComprensionLectora = (props) => {
     if (nivelState.dificultad === 3) {
       //alert("ganaste!");
       //EL juego termino.
+      getPoints();
       setWinner(true);
       return;
     }
@@ -124,6 +126,15 @@ const ComprensionLectora = (props) => {
       nivel: controller.obtenerNivel(nuevaDificultad),
     });
   };
+  
+  const getPoints = () => {
+		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=comprensionLectora&level=" + nivelState.dificultad)
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+			})
+			.catch(error => console.log('error', error));
+	}
 
   const reiniciar = () => {
     setGameState({ perdio: false });
