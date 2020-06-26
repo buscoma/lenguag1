@@ -18,21 +18,22 @@ class BurgerBuilder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nivel: null,
-            ingredients: {
-                meat: 0,
-                cheese: 0,
-                salad: 0,
-                bacon: 0,
-            },
-            openDialog: false,
-            perdiste: false,
-            loading: true,
+          nivel: { numero: 1 },
+          ingredients: {
+            meat: 0,
+            cheese: 0,
+            salad: 0,
+            bacon: 0,
+          },
+          openDialog: false,
+          perdiste: false,
+          loading: true,
+          winner: false,
+          points: 0,
         };
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
         obtenerNivel(1).then((nivelRecuperado) => {
             obtenerOperacion(1).then((operacion) => {
                 nivelRecuperado.operacion = operacion;
@@ -79,7 +80,7 @@ class BurgerBuilder extends Component {
     };
 
     handleDialogClose = () => {
-        console.log("handleDialogClose called!");
+        
         if (
             this.state.nivel.operacion.respuesta !==
             parseInt(this.state.nivel.operacion.respuestaUsuario)
@@ -92,7 +93,6 @@ class BurgerBuilder extends Component {
             const nivelActual = this.state.nivel;
             obtenerOperacion(nivelActual.nivel).then((operacion) => {
                 nivelActual.operacion = operacion;
-                console.log(operacion);
                 this.setState({
                     nivel: nivelActual,
                     openDialog: false,
@@ -102,8 +102,6 @@ class BurgerBuilder extends Component {
     };
 
     handleRespuestaChanged = (event) => {
-        console.log("handlerespuestachanged called!");
-
         const nivelActual = this.state.nivel;
         nivelActual.operacion.respuestaUsuario = event.target.value;
         this.setState({
@@ -112,35 +110,9 @@ class BurgerBuilder extends Component {
     };
 
     handleGameOver = () => {
-        console.log("handleGameOver called!");
+        
         obtenerNivel(1).then((nivelRecuperado) => {
             obtenerOperacion(1).then((operacion) => {
-                nivelRecuperado.operacion = operacion;
-                this.setState({
-                    nivel: nivelRecuperado,
-                    ingredients: {
-                        meat: 0,
-                        cheese: 0,
-                        salad: 0,
-                        bacon: 0,
-                    },
-                    loading: false,
-                });
-            });
-        });
-    };
-
-    handleNextLevel = () => {
-        console.log("handleNextLevel called!");
-        let nivelSiguiente = this.state.nivel;
-        if (nivelSiguiente.nivel === 3) {
-            this.setShow(true);
-            this.setStateOfGame("END");
-            return;
-        }
-
-        obtenerNivel(nivelSiguiente.nivel).then((nivelRecuperado) => {
-            obtenerOperacion(nivelSiguiente.nivel).then((operacion) => {
                 nivelRecuperado.operacion = operacion;
                 this.setState({
                     nivel: nivelRecuperado,
@@ -158,8 +130,40 @@ class BurgerBuilder extends Component {
         });
     };
 
+    handleNextLevel = () => {
+
+        let nivelactual = this.state.nivel;
+        
+        if (nivelactual.nivel === 3) {
+            this.setState({winner: true});
+            return;
+        }
+
+        let newPoints = this.state.points;
+        newPoints = newPoints + (nivelactual.nivel * 100);
+        console.log(newPoints);
+
+        obtenerNivel(nivelactual.nivel + 1).then((nivelRecuperado) => {
+            obtenerOperacion(nivelactual.nivel + 1).then((operacion) => {
+                nivelRecuperado.operacion = operacion;
+                this.setState({
+                    nivel: nivelRecuperado,
+                    ingredients: {
+                        meat: 0,
+                        cheese: 0,
+                        salad: 0,
+                        bacon: 0,
+                    },
+                    openDialog: false,
+                    perdiste: false,
+                    loading: false,
+                    points: newPoints
+                });
+            });
+        });
+    };
+
     handleBotonOrdenar = () => {
-        console.log("handleBotonOrdenar called");
         //TODO: validar que la orden este cumplida.
         if (
             this.state.ingredients.salad === this.state.nivel.orden.lechuga &&
@@ -186,10 +190,12 @@ class BurgerBuilder extends Component {
             "..."
         ) : (
             <LayoutGame
+                points={this.state.points}
+			    winner={this.state.winner}
+			    loser={this.state.perdiste}
                 backgroundImage={BackgroundImage}
                 game="BurgerBilder"
                 level={this.state.nivel.nivel}
-                points={0}
             >
                 <div className="BurgerBuilder">
                     <Paper className="OrderDetail" elevation={4}>
