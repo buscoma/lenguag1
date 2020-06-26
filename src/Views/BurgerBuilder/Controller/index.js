@@ -27,3 +27,15 @@ export const obtenerOperacion = (dificultad) => {
             console.log("error", error);
         });
 };
+
+export const setPoints = (nivel) => {
+    return authFetch(
+        "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=burgerBuilder&level=" +
+            nivel
+    )
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+        })
+        .catch((error) => console.log("error", error));
+};

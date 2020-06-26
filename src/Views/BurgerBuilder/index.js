@@ -12,24 +12,24 @@ import Burger from "./Components/Burger";
 import BuildControls from "./Components/Burger/Components/BuildControls";
 import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
-import {obtenerNivel, obtenerOperacion} from "./Controller";
+import {obtenerNivel, obtenerOperacion, setPoints} from "./Controller";
 
 class BurgerBuilder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          nivel: { numero: 1 },
-          ingredients: {
-            meat: 0,
-            cheese: 0,
-            salad: 0,
-            bacon: 0,
-          },
-          openDialog: false,
-          perdiste: false,
-          loading: true,
-          winner: false,
-          points: 0,
+            nivel: { numero: 1 },
+            ingredients: {
+                meat: 0,
+                cheese: 0,
+                salad: 0,
+                bacon: 0,
+            },
+            openDialog: false,
+            perdiste: false,
+            loading: true,
+            winner: false,
+            points: 0,
         };
     }
 
@@ -80,7 +80,6 @@ class BurgerBuilder extends Component {
     };
 
     handleDialogClose = () => {
-        
         if (
             this.state.nivel.operacion.respuesta !==
             parseInt(this.state.nivel.operacion.respuestaUsuario)
@@ -110,7 +109,6 @@ class BurgerBuilder extends Component {
     };
 
     handleGameOver = () => {
-        
         obtenerNivel(1).then((nivelRecuperado) => {
             obtenerOperacion(1).then((operacion) => {
                 nivelRecuperado.operacion = operacion;
@@ -131,18 +129,14 @@ class BurgerBuilder extends Component {
     };
 
     handleNextLevel = () => {
-
         let nivelactual = this.state.nivel;
-        
+
         if (nivelactual.nivel === 3) {
-            this.setState({winner: true});
+            setPoints(nivelactual.nivel);
+            this.setState({ winner: true });
             return;
         }
-
-        let newPoints = this.state.points;
-        newPoints = newPoints + (nivelactual.nivel * 100);
-        console.log(newPoints);
-
+    
         obtenerNivel(nivelactual.nivel + 1).then((nivelRecuperado) => {
             obtenerOperacion(nivelactual.nivel + 1).then((operacion) => {
                 nivelRecuperado.operacion = operacion;
@@ -157,8 +151,8 @@ class BurgerBuilder extends Component {
                     openDialog: false,
                     perdiste: false,
                     loading: false,
-                    points: newPoints
                 });
+                setPoints(nivelactual.nivel);
             });
         });
     };
@@ -177,6 +171,8 @@ class BurgerBuilder extends Component {
         }
     };
 
+    
+
     render() {
         const disabledInfo = {
             ...this.state.ingredients,
@@ -191,8 +187,8 @@ class BurgerBuilder extends Component {
         ) : (
             <LayoutGame
                 points={this.state.points}
-			    winner={this.state.winner}
-			    loser={this.state.perdiste}
+                winner={this.state.winner}
+                loser={this.state.perdiste}
                 backgroundImage={BackgroundImage}
                 game="BurgerBilder"
                 level={this.state.nivel.nivel}
