@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Views/NavBar";
 import Enunciados from "./Components/Enunciados";
 
 import {

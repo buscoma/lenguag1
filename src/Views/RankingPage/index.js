@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 // Componentes internos
 import Table from "./Components/Table";
 import { useStyles, useStyleImage } from "./Styles";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Views/NavBar";
 
 export default function Ranking() {
     const classes = useStyles();

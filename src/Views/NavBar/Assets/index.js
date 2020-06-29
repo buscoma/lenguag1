@@ -1,0 +1,1 @@
+export const WoodGrain = require("./woodgrain.svg");

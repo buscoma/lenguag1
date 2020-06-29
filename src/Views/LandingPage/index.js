@@ -11,7 +11,7 @@ import CuadrupleBoton from "./Components/CuadrupleBoton";
 import { TitleH1, TitleH3 } from "./Styles";
 import "./Styles/LandingPage.css";
 import { withRouter } from "react-router-dom";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Views/NavBar";
 
 const useStyles = makeStyles({
     TitleH1,

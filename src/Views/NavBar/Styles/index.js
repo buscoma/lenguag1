@@ -24,6 +24,20 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
     textAlign: "right",
   },
+  flexbox: {
+    display:"-webkit-box",
+    display:"-moz-box",
+    display:"-ms-flexbox",
+    display:"-webkit-flex",
+    display:"flex"
+  },
+  rightHold: {
+    marginLeft:"auto",
+    alignItems:"center"
+  },
+  userspan:{
+    marginLeft: "10px"
+  }
 }));
 
 export { useStyles};
