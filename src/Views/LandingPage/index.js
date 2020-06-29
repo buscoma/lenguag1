@@ -35,27 +35,18 @@ export default withRouter(function LandingPage() {
                             elevation={3}
                             className={[classes.root].join(" ")}
                         >
-                            <Typography
-                                className={[
-                                    "LenguaMatica",
-                                    classes.TitleH1,
-                                ].join(" ")}
-                            >
+                            <Typography className={["LenguaMatica",classes.TitleH1,].join(" ")} >
                                 {" "}
                                 LenguaMática!{" "}
                             </Typography>
                         </Paper>
                     </Grid>
+
                     <Grid item xs={10} sm={5}>
-                        <Paper
-                            elevation={3}
-                            className={[classes.root].join(" ")}
-                        >
-                            <Grid container spacing={1} justify="center">
+                        <Paper elevation={3} className={[classes.root].join(" ")}  >
+                            <Grid container spacing={1}  justify="center" >
                                 <Grid item xs={10}>
-                                    <Typography
-                                        className={[classes.TitleH3].join(" ")}
-                                    >
+                                    <Typography className={[classes.TitleH3].join(" ")} >
                                         Lengua
                                     </Typography>
                                 </Grid>
@@ -65,6 +56,7 @@ export default withRouter(function LandingPage() {
                             </Grid>
                         </Paper>
                     </Grid>
+
                     <Grid item xs={10} sm={5}>
                         <Paper
                             elevation={3}

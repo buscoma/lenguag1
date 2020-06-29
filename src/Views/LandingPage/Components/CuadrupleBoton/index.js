@@ -4,12 +4,12 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
-import { Abc, Math, Ranking } from "./Assets";
+import { Abc, Ranking, Burguer, Secuencia, NumPalab, RightWrong, Comprension } from "./Assets";
 import { ContainerCenter, TitleH3, TextWhiteShadow, TextBold } from "./Styles";
 
 const imagesLeng = [
   {
-    url: Abc,
+    url: RightWrong,
     title: "Palabras Correctas",
     width: "100%",
     href: "/palabras_correctas",
@@ -21,7 +21,7 @@ const imagesLeng = [
     href: "/palabras_perdidas",
   },
   {
-    url: Abc,
+    url: Comprension,
     title: "Comprensión Lectora",
     width: "100%",
     href: "/comprension_lectora",
@@ -36,19 +36,19 @@ const imagesLeng = [
 
 const imagesMath = [
   {
-    url: Math,
+    url: Secuencia,
     title: "Secuencia Números",
     width: "100%",
     href: "/secuencia_numeros",
   },
   {
-    url: Math,
+    url: Burguer,
     title: "Burger Builder",
     width: "100%",
     href: "/burger_builder",
   },
   {
-    url: Math,
+    url: NumPalab,
     title: "Numero a Palabra",
     width: "100%",
     href: "/numero_a_palabra",
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   TextWhiteShadow,
   image: {
     position: "relative",
-    height: 100,
+    height: 130,
     [theme.breakpoints.down("xs")]: {
       width: "100% !important", // Overrides inline-style
       height: 70,
