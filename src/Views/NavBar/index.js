@@ -57,6 +57,7 @@ function NavBar(props) {
             aria-haspopup="true"
             onClick={handleBack}
             color="inherit"
+            title="Salir"
           >
             <ExitToAppRoundedIcon />
           </IconButton>
@@ -67,6 +68,7 @@ function NavBar(props) {
               aria-haspopup="true"
               onClick={props.handleShowPanel}
               color="inherit"
+              
             >
               <ArrowBackIosRoundedIcon />
             </IconButton>
@@ -82,6 +84,7 @@ function NavBar(props) {
             aria-haspopup="true"
             onClick={handleHome}
             color="inherit"
+            title="Ir a la Home" 
           >
             <HomeRoundedIcon className={classes.homeIcon} />
           </IconButton>

@@ -9,10 +9,10 @@ const useStylesTypografy = makeStyles((theme) => ({
         marginBottom: "1em",
         textDecoration : "underline",
         [theme.breakpoints.up('sm')]:{
-            fontSize: "2.5rem",
+            fontSize: "2rem",
         },
         [theme.breakpoints.up('md')]:{
-            fontSize: "3.5rem",
+            fontSize: "2rem",
         },
     },
     titlePanel : {
@@ -24,7 +24,7 @@ const useStylesTypografy = makeStyles((theme) => ({
             fontSize: "2rem",
         },
         [theme.breakpoints.up('md')]:{
-            fontSize: "2.5rem",
+            fontSize: "2rem",
         },
     },
     textPanel : {
@@ -38,7 +38,7 @@ const useStylesTypografy = makeStyles((theme) => ({
         },
     },
     titleEnunciado : {
-        textAlign : "left",
+        textAlign : "center",
         fontSize: "1.5rem",
         fontWeight : "750",
         marginBottom: ".5em",
@@ -46,17 +46,17 @@ const useStylesTypografy = makeStyles((theme) => ({
             fontSize: "2rem",
         },
         [theme.breakpoints.up('md')]:{
-            fontSize: "2.5rem",
+            fontSize: "2rem",
         },
     },
     textEnunciado : {
-        textAlign : "left",
+        textAlign : "center",
         fontSize: "1.2rem",
         [theme.breakpoints.up('sm')]:{
             fontSize: "1.5rem",
         },
         [theme.breakpoints.up('md')]:{
-            fontSize: "1.8rem",
+            fontSize: "1.5rem",
         },
     },
 
