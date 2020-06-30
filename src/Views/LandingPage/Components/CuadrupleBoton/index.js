@@ -138,14 +138,14 @@ export default function CuadrupleBoton(props) {
 
     <Grid container spacing={2} justify="center" alignItems="center">
       {(props.type === 'leng' ? imagesLeng : imagesMath).map((image) => (
-        <Grid item xs={6} md={5}>
+        <Grid item xs={6} md={5} key={image.title}>
           <ButtonBase
             focusRipple
             key={image.title}
             className={classes.image}
             focusVisibleClassName={classes.focusVisible}
             style={{
-              width: image.width,
+              width: image.width,  
             }}
             href={image.href}
           >
