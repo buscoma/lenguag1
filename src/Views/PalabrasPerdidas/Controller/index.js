@@ -1,17 +1,14 @@
-import { authfetch } from "../../../AuthProvider";
+import { authFetch } from "../../../AuthProvider";
 
-const Controller = async (level) => {
-    authfetch(
+export const obtenerNivel = async (level) => {
+    return authFetch(
         "https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" +
             level
     )
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((result) => {
-            console.log(JSON.parse(result).data["0"].frases);
-
-            return JSON.parse(result).data["0"].frases; // JSON con las frases del nivel 1
+            console.log(result.data);
+            return result.data;
         })
         .catch((error) => console.log("error", error));
 };
-
-export default Controller;
