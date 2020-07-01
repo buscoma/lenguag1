@@ -86,7 +86,7 @@ const ContainerCenter = {
 const progress = {};
 
 const paper = {
-  padding: "35px",
+  padding: "10px",
   marginBottom: "25px",
   fontSize: "22px",
   fontWeight: "bold",
@@ -108,7 +108,7 @@ const paper = {
 };
 
 const paperCorrecta = {
-  padding: "35px",
+  padding: "10px",
   marginBottom: "25px",
   fontSize: "24px",
   fontWeight: "bold",
@@ -120,7 +120,7 @@ const paperCorrecta = {
 };
 
 const paperIncorrecta = {
-  padding: "35px",
+  padding: "10px",
   marginBottom: "25px",
   fontSize: "22px",
   fontWeight: "bold",

@@ -175,7 +175,7 @@ const ComprensionLectora = (props) => {
                     <Grid container>
                         <Grid item xs={12}>
                             <Typography className={classes.H3}>
-                                <Paper  elevation={4} className={classes.paperNumero}>
+                                <Paper elevation={4} className={classes.paperNumero}>
                                     {"Nivel " + nivelState.dificultad}
                                 </Paper>
                             </Typography>
@@ -190,7 +190,7 @@ const ComprensionLectora = (props) => {
                         <Grid item xs={12} md={6}>
                             <Container className={classes.containerOpciones}>
                                 {nivelState.nivel.respuestas.map((opcion) => (
-                                    <Typography className={classes.H3} key={opcion.descripcion}>
+                                    <Typography  className={classes.H3} key={opcion.descripcion}>
                                         <Paper
                                             elevation={4}
                                             style={{ marginBottom: "0px" }}

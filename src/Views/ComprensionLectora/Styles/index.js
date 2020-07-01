@@ -85,7 +85,7 @@ const ContainerCenter = {
 const progress = {};
 
 const paper = {
-    padding: "35px",
+    padding: "25px",
     marginBottom: "25px",
     fontSize: "22px",
     fontWeight: "bold",
