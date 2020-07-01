@@ -22,7 +22,7 @@ export default function Clock(props) {
     <div>
       <Typography classes={clasessTypografy}>
         {" "}
-        {props.stopTimer ? "HAS CLICK PARA INICIAR EL TIEMPO" :  counter }
+        {props.stopTimer ? "HAZ CLICK PARA INICIAR EL TIEMPO" :  counter }
         
       </Typography>
     </div>
