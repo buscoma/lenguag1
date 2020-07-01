@@ -31,7 +31,7 @@ export default function SecuenciaDeNumeros(props) {
 
 	const [stopTimer, setStopTimer] = useState(true);
 	const time = 60;
-
+	const [points, setPoints] = useState(0);
 
 	const nextIdIsRight = (id) => {
 		const isRight = secuencia.some(e => (e.id < id && e.disabled === false));
@@ -56,27 +56,25 @@ export default function SecuenciaDeNumeros(props) {
 	}
 
 	const getPoints = () => {
-		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=secuenciaNumeros&level=" + level)
+		return authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=secuenciaNumeros&level=" + level)
 			.catch(error => console.log('error', error));
 	}
 
-	const playerDetails = () => {
-		return authFetch(
-			"https://backendlenguamaticag1.herokuapp.com/api/player/details"
-		)
-		.then((res) => res.json())
-		.then((userResult) => {
-			sessionStorage.setItem("User", JSON.stringify(userResult.data));
-		});
-	};
+    const playerDetails = () => {
+        return authFetch(
+            "https://backendlenguamaticag1.herokuapp.com/api/player/details"
+        )
+            .then((res) => res.json())
+            .then((userResult) => {
+                return userResult.data;
+            });
+    };
 
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
 		updateButtomsState(id);
 		if (nextIdIsRight(id)) {
 			if (levelIsFinish()) {
-				playerDetails();
-				getPoints();
 				levelUp();
 			}
 		}
@@ -92,14 +90,22 @@ export default function SecuenciaDeNumeros(props) {
 	}
 
 	const levelUp = () => {
-		if (level < 3) {/* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
-			
-			setLevel(level + 1);
-		} else {/* Termino el juego, y GANASTE!!!!! */
-			setWinner(true);
-		}
-		setStopTimer(true);
-	}
+        getPoints().then(() => {
+            playerDetails().then((data) => {
+                sessionStorage.setItem("User", JSON.stringify(data));
+                setPoints(data.points);
+            });
+        });
+
+        if (level < 3) {
+            /* Todavia no termina el juego. Pido los datos para el siguiente nivel. */
+            setLevel(level + 1);
+        } else {
+            /* Termino el juego, y GANASTE!!!!! */
+            setWinner(true);
+        }
+        setStopTimer(true);
+    };
 
 	const startNextLevel = () => {
 		setStopTimer(false);
@@ -140,6 +146,7 @@ export default function SecuenciaDeNumeros(props) {
 			loser={loser}
 			game="SecuenciaDeNumeros"
 			backgroundImage={BackgroundMat}
+			points={points}
 		>
 			<Paper className={clasessPaper.root}>
 				<Grid container style={{ marginBottom: '1rem' }}>
@@ -157,7 +164,7 @@ export default function SecuenciaDeNumeros(props) {
 				<Collapse in={!stopTimer} >
 					<Grid container >
 						{loading ? " LOADING" : secuencia.map((image) => (
-							<Grid Item xs={6} sm={3} align="center">
+							<Grid Item xs={6} sm={3} align="center" key={image.id}>
 								<ButtonComponent className={clasessButtom.buttomNumber} id={image.id} disabled={image.disabled} methodAddId={methodAddId} />
 							</Grid>
 						))}

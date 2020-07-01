@@ -85,16 +85,17 @@ const PalabrasCorrectas = (props) => {
         }
     };
 
-    const levelUp = async () => {
-        await getPoints();
-        await playerDetails()
-        .then(data => {
-            sessionStorage.setItem("User", JSON.stringify(data));
-            setState((prev) => ({
-                ...prev,
-                points: data.points,
-            }));
+    const levelUp = () => {
+        getPoints().then(()=>{
+            playerDetails().then(data=>{
+                sessionStorage.setItem("User", JSON.stringify(data));
+                setState((prev) => ({
+                    ...prev,
+                    points: data.points,
+                }));
+            });
         });
+    
         if(state.level < 3){
             setState((prev) => ({
                 ...prev,
@@ -113,7 +114,7 @@ const PalabrasCorrectas = (props) => {
     }
 
     const getPoints = () => {
-		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasCorrectas&level=" + state.level)
+		return authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasCorrectas&level=" + state.level)
 			.catch(error => console.log('error', error));
 	}
 

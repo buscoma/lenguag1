@@ -164,6 +164,7 @@ export default function TableResponsive(props) {
                           posicion={e.posicion}
                           nombre={e.name}
                           puntos={e.points}
+                          key={e.name}
                         />)) : ""}
                     </Grid>
                   </Grid>
@@ -187,6 +188,7 @@ export default function TableResponsive(props) {
                           posicion={data.posicion}
                           nombre={data.name}
                           puntos={data.points}
+                          key={data.name}
                         />
                       )) : 'loding'}
                     </Grid>

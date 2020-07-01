@@ -7,7 +7,6 @@ export const obtenerNivel = async (level) => {
     )
         .then((response) => response.json())
         .then((result) => {
-            console.log(result.data);
             return result.data;
         })
         .catch((error) => console.log("error", error));

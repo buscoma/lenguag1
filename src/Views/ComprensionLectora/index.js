@@ -132,7 +132,12 @@ const ComprensionLectora = (props) => {
     };
 
     const subirNivel = () => {
-        getPoints();
+        getPoints().then(()=>{
+            playerDetails().then((data) => {
+                sessionStorage.setItem("User", JSON.stringify(data));
+                setPuntos(data.points);
+            });
+        });
         if (nivelState.dificultad === 3) {
             //EL juego termino.
             setWinner(true);
@@ -143,16 +148,21 @@ const ComprensionLectora = (props) => {
         recuperarNivel(nuevaDificultad);
     };
 
+    const playerDetails = () => {
+        return authFetch(
+            "https://backendlenguamaticag1.herokuapp.com/api/player/details"
+        )
+            .then((res) => res.json())
+            .then((userResult) => {
+                return userResult.data;
+            });
+    };
+
     const getPoints = () => {
-        authFetch(
+        return authFetch(
             "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=comprensionLectora&level=" +
                 nivelState.dificultad
-        )
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-            })
-            .catch((error) => console.log("error", error));
+        ).catch((error) => console.log("error", error));
     };
 
     const reiniciar = () => {

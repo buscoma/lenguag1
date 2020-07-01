@@ -12,7 +12,7 @@ import Burger from "./Components/Burger";
 import BuildControls from "./Components/Burger/Components/BuildControls";
 import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
-import { obtenerNivel, obtenerOperacion, setPoints, playerDetails } from "./Controller";
+import { obtenerNivel, obtenerOperacion, getPoints, playerDetails } from "./Controller";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class BurgerBuilder extends Component {
@@ -133,8 +133,12 @@ class BurgerBuilder extends Component {
     let nivelactual = this.state.nivel;
 
     if (nivelactual.nivel === 3) {
-      setPoints(nivelactual.nivel);
-      playerDetails();
+      getPoints(nivelactual.nivel).then(() => {
+          playerDetails().then((data) => {
+              sessionStorage.setItem("User", JSON.stringify(data));
+              this.setState({ points: data.points });
+          });
+      });
       this.setState({ winner: true });
       return;
     }
@@ -154,8 +158,12 @@ class BurgerBuilder extends Component {
           perdiste: false,
           loading: false,
         });
-        setPoints(nivelactual.nivel);
-        playerDetails();
+        getPoints(nivelactual.nivel).then(() => {
+            playerDetails().then((data) => {
+                sessionStorage.setItem("User", JSON.stringify(data));
+                this.setState({ points: data.points });
+            });
+        });
       });
     });
   };

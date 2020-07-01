@@ -37,7 +37,7 @@ const PalabrasPerdidas = () => {
 		setEmptySentences([]);
         setLooseWords([]);
 		setLoading(true);
-		console.log("paso por recuperarNivel");
+		
         var promise = obtenerNivel(dificultad);
         promise
             .then((response) => {
@@ -108,16 +108,17 @@ const PalabrasPerdidas = () => {
     };
 
     const pasarSigNivel = () => {
-		getPoints();
+		getPoints().then(()=>{
+            playerDetails().then((data) => {
+                sessionStorage.setItem("User", JSON.stringify(data));
+                setState((prev) => ({
+                    ...prev,
+                    points: data.points,
+                    level: prev.level + 1,
+                }));
+            });
+        });
 		 
-        playerDetails().then((data) => {
-            sessionStorage.setItem("User", JSON.stringify(data));
-            setState((prev) => ({
-                ...prev,
-                points: data.points,
-                level: prev.level + 1,
-            }));
-		});
 		
         recuperarNivel(state.level + 1);
     };
@@ -133,8 +134,7 @@ const PalabrasPerdidas = () => {
     };
 
     const getPoints = () => {
-		console.log("getPoints nivel", state.level);
-        authFetch(
+        return authFetch(
             "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasPerdidas&level=" +
                 state.level
         ).catch((error) => console.log("error", error));
