@@ -37,7 +37,6 @@ function Login(props) {
       }
     }).catch((err) => {
       setInvalidPassword(true);
-      console.log(err);
     });
   };
 

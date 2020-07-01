@@ -33,9 +33,16 @@ export const setPoints = (nivel) => {
         "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=burgerBuilder&level=" +
             nivel
     )
-        .then((response) => response.json())
-        .then((json) => {
-            console.log(json);
-        })
         .catch((error) => console.log("error", error));
+};
+
+
+export const playerDetails = () => {
+    return authFetch(
+        "https://backendlenguamaticag1.herokuapp.com/api/player/details"
+    )
+    .then((res) => res.json())
+    .then((userResult) => {
+        sessionStorage.setItem("User", JSON.stringify(userResult.data));
+    });
 };

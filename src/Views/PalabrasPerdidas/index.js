@@ -22,7 +22,7 @@ const PalabrasPerdidas = () => {
 
 	const [state, setState] = useState({
 		level: 1,
-		posints: 0,
+		points: 0,
 		winner: false,
 		loser: false,
 		frasesBackend: [],
@@ -35,34 +35,30 @@ const PalabrasPerdidas = () => {
 
 
 	const intento = async function () {
-		
 		authFetch("https://backendlenguamaticag1.herokuapp.com/api/games/palabrasPerdidas?nivel=" + state.level)
-			.then(response => response.text())
-			.then(result => {
+		.then(response => response.json())
+		.then(response => {
+			
+			let list = response.data.frases;
 
-				let list = JSON.parse(result).data["0"].frases;
-
-				list.forEach(item => {
-					let looseWord = { idWord: item.id, word: item.palabra, isUsed: false }
-					let aux = looseWords;
-					aux.push(looseWord);
-					aux.sort(function(){return Math.random() - 0.5})
-					setLooseWords(aux);
-				})
-
-				list.forEach(item => {
-					let emptySentence = { idSentence: item.id, begin: item.frase_frente, end: item.frase_atras, idWord: undefined, word: undefined }
-					let aux = emptySentences;
-					aux.push(emptySentence);
-					aux.sort(function(){return Math.random() - 0.5})
-					setEmptySentences(aux);
-				})
-				console.log(emptySentences)
-
-				//viejo
-				setState((prev) => ({ ...prev, frasesBackend: list }));
+			list.forEach(item => {
+				let looseWord = { idWord: item.id, word: item.palabra, isUsed: false }
+				let aux = looseWords;
+				aux.push(looseWord);
+				aux.sort(function(){return Math.random() - 0.5})
+				setLooseWords(aux);
 			})
-			.catch(error => console.log('error', error));
+
+			list.forEach(item => {
+				let emptySentence = { idSentence: item.id, begin: item.frase_frente, end: item.frase_atras, idWord: undefined, word: undefined }
+				let aux = emptySentences;
+				aux.push(emptySentence);
+				aux.sort(function(){return Math.random() - 0.5})
+				setEmptySentences(aux);
+			})
+			setState((prev) => ({ ...prev, frasesBackend: list }));
+		})
+		.catch(error => console.log('error', error));
 	}
 
 	useEffect(() => {
@@ -72,16 +68,11 @@ const PalabrasPerdidas = () => {
 		}
 	}, [flag, state]);
 
-	
-
 	const juegoTerminado = () => {
 		if(state.level < 3){
 			let threeIsEmptySentence = emptySentences.some(e => (e.idWord === undefined));
-			console.log(emptySentences)
-			console.log(!threeIsEmptySentence)
 			if (!threeIsEmptySentence) {
 				let isLevelComplete = emptySentences.some(e => (e.idWord === e.idSentence));
-				console.log(isLevelComplete)
 				if (isLevelComplete) {
 					pasarSigNivel();
 				} else {
@@ -97,21 +88,31 @@ const PalabrasPerdidas = () => {
 	};
 
 	const pasarSigNivel = () => {
-		getPoints()
+		getPoints();
 		setEmptySentences([]);
 		setLooseWords([]);
-		setState((prev) => ({ ...prev, level: prev.level + 1 }))
+		playerDetails()
+		.then(data => {
+			sessionStorage.setItem("User", JSON.stringify(data));
+			setState((prev) => ({ ...prev, points: data.points, level: prev.level + 1 }))
+		});
 		setLoading(false);
 		setFlag(true)
 	}
 
+	const playerDetails = () => {
+		return authFetch(
+			"https://backendlenguamaticag1.herokuapp.com/api/player/details"
+		)
+		.then((res) => res.json())
+		.then((userResult) => {
+			return userResult.data;
+		});
+	};
+
 	const getPoints = () => {
 		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=palabrasPerdidas&level=" + state.level)
-			.then(response => response.json())
-			.then(json => {
-				console.log(json)
-			})
-			.catch(error => console.log('error', error));
+		.catch(error => console.log('error', error));
 	}
 
 	const [looserWordSelected, setLooserWordSelected] = useState(undefined);
@@ -156,7 +157,7 @@ const PalabrasPerdidas = () => {
 	return (
 		<LayoutGame
 			level={ state.level}
-			points={state.posints}
+			points={state.points}
 			winner={state.winner}
 			loser={state.loser}
 			game="PalabrasPerdidas"
@@ -173,8 +174,8 @@ const PalabrasPerdidas = () => {
 							</Grid>
 							{loading ? 'Loading...' :
 								looseWords.map((item) => (
-									<Grid item xs={6} md={12}>
-										<Botonera word={item} looserWordSelected={looserWordSelected} onClick={setLooserWordSelected} />
+									<Grid key={item.id} item xs={6} md={12}>
+										<Botonera key={item.id} word={item} looserWordSelected={looserWordSelected} onClick={setLooserWordSelected} />
 									</Grid>
 								))}
 						</Grid>
@@ -184,8 +185,8 @@ const PalabrasPerdidas = () => {
 								<Typography className={clasessTypografy.Title} variant="h5"> Frases a completar</Typography>
 							</Grid>
 							{loading ? 'Loading...' : emptySentences.map((item) => (
-								<Grid item xs={12}>
-									<Frases sentence={item} onClickSelectMe={completarFrase} thereIsWordSelected={looserWordSelected !== undefined} setPalabra={recuperarPalabra} />
+								<Grid key={item.id} item xs={12}>
+									<Frases key={item.id} sentence={item} onClickSelectMe={completarFrase} thereIsWordSelected={looserWordSelected !== undefined} setPalabra={recuperarPalabra} />
 								</Grid>
 							))}
 

@@ -67,7 +67,6 @@ export default function AutoGridNoWrap(props) {
         } else {
             setFriend(result[0])
             setIsFindFriend(true)
-            console.log(friend)
         }
     }
 

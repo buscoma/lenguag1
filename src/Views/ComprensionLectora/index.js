@@ -123,16 +123,19 @@ const ComprensionLectora = (props) => {
 
     const opcionClickHandler = (opcion) => {
         if (opcion.correcta === true) {
-            console.log("Correcta!");
             subirNivel();
         } else {
             setLoser(true);
-            console.log("Incorrecta");
         }
     };
 
-    const subirNivel = () => {
-        getPoints();
+    const subirNivel = async () => {
+        await getPoints();
+        await playerDetails()
+        .then(data => {
+          sessionStorage.setItem("User", JSON.stringify(data));
+          setPuntos(data.points);
+        });
         if (nivelState.dificultad === 3) {
             //EL juego termino.
             setWinner(true);
@@ -148,11 +151,17 @@ const ComprensionLectora = (props) => {
             "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=comprensionLectora&level=" +
                 nivelState.dificultad
         )
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-            })
-            .catch((error) => console.log("error", error));
+        .catch((error) => console.log("error", error));
+    };
+
+    const playerDetails = () => {
+      return authFetch(
+          "https://backendlenguamaticag1.herokuapp.com/api/player/details"
+      )
+      .then((res) => res.json())
+      .then((userResult) => {
+          return userResult.data;
+      });
     };
 
     const reiniciar = () => {

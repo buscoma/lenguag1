@@ -56,20 +56,26 @@ export default function SecuenciaDeNumeros(props) {
 	}
 
 	const getPoints = () => {
-		console.log(level)
 		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=secuenciaNumeros&level=" + level)
-			.then(response => response.json())
-			.then(json => {
-				console.log(json)
-			})
 			.catch(error => console.log('error', error));
 	}
+
+	const playerDetails = () => {
+		return authFetch(
+			"https://backendlenguamaticag1.herokuapp.com/api/player/details"
+		)
+		.then((res) => res.json())
+		.then((userResult) => {
+			sessionStorage.setItem("User", JSON.stringify(userResult.data));
+		});
+	};
 
 	//FUNCTION THAT VERIFIES INPUTS
 	const methodAddId = (id) => {
 		updateButtomsState(id);
 		if (nextIdIsRight(id)) {
 			if (levelIsFinish()) {
+				playerDetails();
 				getPoints();
 				levelUp();
 			}
@@ -102,7 +108,6 @@ export default function SecuenciaDeNumeros(props) {
 
 	useEffect(() => {
 		async function fetchApi() {
-			console.log(level)
 			try {
 				setLoading(true);
 

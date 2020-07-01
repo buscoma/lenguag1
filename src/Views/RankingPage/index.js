@@ -31,14 +31,6 @@ export default function Ranking() {
                             alignItems="center"
                             style={{ textAlign: "center" }}
                         >
-                            {/* <Typography
-                                className={classes.font}
-                                variant="h3"
-                                noWrap
-                            >
-                                {" "}
-                                Juguemos{" "}
-                            </Typography> */}
                         </Grid> 
                         <Grid item xs={12}>
                             <Table />

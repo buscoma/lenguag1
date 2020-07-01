@@ -18,7 +18,6 @@ export default function LayoutContainer(props) {
     const [points, setPoints] = useState(0);
 
     useEffect(() => {
-        console.log("BUSQUE PUNTOS VIEJA")
         setPoints(JSON.parse(sessionStorage.getItem("User")).points)
     }, [points]);
 

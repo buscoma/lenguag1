@@ -12,7 +12,7 @@ import Burger from "./Components/Burger";
 import BuildControls from "./Components/Burger/Components/BuildControls";
 import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
-import { obtenerNivel, obtenerOperacion, setPoints } from "./Controller";
+import { obtenerNivel, obtenerOperacion, setPoints, playerDetails } from "./Controller";
 
 class BurgerBuilder extends Component {
   constructor(props) {
@@ -133,6 +133,7 @@ class BurgerBuilder extends Component {
 
     if (nivelactual.nivel === 3) {
       setPoints(nivelactual.nivel);
+      playerDetails();
       this.setState({ winner: true });
       return;
     }
@@ -153,6 +154,7 @@ class BurgerBuilder extends Component {
           loading: false,
         });
         setPoints(nivelactual.nivel);
+        playerDetails();
       });
     });
   };

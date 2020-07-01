@@ -1,16 +1,10 @@
 
 function json(){
     return  {
-        Example: {
-            id_game: 0,
-            title: "Ejemplo de juego",
-            description: "Oh, no. Esto es un ejemplo y te esta haciendo perder el tiempo. Sigue leyendo para seguir perdiendo el tiempo. Como te gusta perder le tiempo. #Flojo",
-            urlGame : "/example_rapa"
-        },
         PalabrasPerdidas: {
             id_game: 1,
             title: "Palabras Perdidas",
-            description: "Oh, no. Las palabras se han perdido y necesitan ayuda para volver a sus oraciones. Selecciona la palabra e indica la posición correcta.",
+            description: "¡Oh no!. Las palabras se han perdido y necesitan ayuda para volver a sus oraciones. Selecciona la palabra e indica la posición correcta.",
             urlGame : "/palabras_perdidas"
         },
         PalabrasCorrectas: {

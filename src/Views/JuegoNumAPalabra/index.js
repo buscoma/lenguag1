@@ -49,28 +49,38 @@ const JuegoNumAPalabra = (props) => {
   const opcionClickHandler = (opcion) => {
     if (opcion.correcta === true) {
       //WIINER
-      console.log("Correcta!");
       subirNivel();
     } else {
       //LOSER
-      console.log("Incorrecta");
+      setLoser(true);
       setGameState({ perdio: true });
     }
   };
 
   const getPoints = () => {
 		authFetch("https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=juegoNumAPalabra&level=" + nivelState.dificultad)
-			.then(response => response.json())
-			.then(json => {
-				console.log(json)
-			})
 			.catch(error => console.log('error', error));
 	}
 
-  const subirNivel = () => {
+  const playerDetails = () => {
+    return authFetch(
+        "https://backendlenguamaticag1.herokuapp.com/api/player/details"
+    )
+    .then((res) => res.json())
+    .then((userResult) => {
+        return userResult.data;
+    });
+  };
+
+  const subirNivel = async () => {
+    await getPoints();
+    await playerDetails()
+    .then(data => {
+      sessionStorage.setItem("User", JSON.stringify(data));
+      setPoints(data.points);
+    });
     if (nivelState.dificultad === 3) {
       //GAME IS OVER, THE USER WINNER
-      getPoints();
       setWinner(true);
       return;
     }
@@ -80,7 +90,6 @@ const JuegoNumAPalabra = (props) => {
   };
 
   const reiniciar = () => {
-    console.log("reiniciar called");
     recuperarNivel(1);
   };
 
