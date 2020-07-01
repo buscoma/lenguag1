@@ -123,19 +123,16 @@ const ComprensionLectora = (props) => {
 
     const opcionClickHandler = (opcion) => {
         if (opcion.correcta === true) {
+            console.log("Correcta!");
             subirNivel();
         } else {
             setLoser(true);
+            console.log("Incorrecta");
         }
     };
 
-    const subirNivel = async () => {
-        await getPoints();
-        await playerDetails()
-        .then(data => {
-          sessionStorage.setItem("User", JSON.stringify(data));
-          setPuntos(data.points);
-        });
+    const subirNivel = () => {
+        getPoints();
         if (nivelState.dificultad === 3) {
             //EL juego termino.
             setWinner(true);
@@ -151,17 +148,11 @@ const ComprensionLectora = (props) => {
             "https://backendlenguamaticag1.herokuapp.com/api/player/levelUp?game=comprensionLectora&level=" +
                 nivelState.dificultad
         )
-        .catch((error) => console.log("error", error));
-    };
-
-    const playerDetails = () => {
-      return authFetch(
-          "https://backendlenguamaticag1.herokuapp.com/api/player/details"
-      )
-      .then((res) => res.json())
-      .then((userResult) => {
-          return userResult.data;
-      });
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+            })
+            .catch((error) => console.log("error", error));
     };
 
     const reiniciar = () => {
@@ -179,19 +170,19 @@ const ComprensionLectora = (props) => {
             game="CompresionLectora"
             backgroundImage={Background}
         >
-            <div className={classes.root}>
+            
                 <Container className={classes.container}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Typography className={classes.H3}>
-                                <Paper className={classes.paperNumero}>
+                                <Paper  elevation={4} className={classes.paperNumero}>
                                     {"Nivel " + nivelState.dificultad}
                                 </Paper>
                             </Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Typography className={classes.H2}>
-                                <Paper className={classes.paperNumero}>
+                                <Paper elevation={4} className={classes.paperNumero}>
                                     {nivelState.nivel.pregunta}
                                 </Paper>
                             </Typography>
@@ -199,7 +190,7 @@ const ComprensionLectora = (props) => {
                         <Grid item xs={12} md={6}>
                             <Container className={classes.containerOpciones}>
                                 {nivelState.nivel.respuestas.map((opcion) => (
-                                    <Typography className={classes.H3}>
+                                    <Typography className={classes.H3} key={opcion.descripcion}>
                                         <Paper
                                             elevation={4}
                                             style={{ marginBottom: "0px" }}
@@ -234,7 +225,7 @@ const ComprensionLectora = (props) => {
                         </Button>
                     ) : null}
                 </Container>
-            </div>
+            
         </LayaoutGame>
     );
 };

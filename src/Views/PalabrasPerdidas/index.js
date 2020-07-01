@@ -13,6 +13,7 @@ import Botonera from "./Components/Botonera";
 import Frases from "./Components/Frases";
 import { authFetch } from "../../AuthProvider";
 import { obtenerNivel } from "./Controller";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const PalabrasPerdidas = () => {
     const clasessPaper = useStylesPaper();
@@ -199,7 +200,7 @@ const PalabrasPerdidas = () => {
                                 </Typography>
                             </Grid>
                             {loading
-                                ? "Loading..."
+                                ? (<CircularProgress/>)
                                 : looseWords.map((item) => (
                                       <Grid key={item.idWord} item xs={6} md={12}>
                                           <Botonera
@@ -224,7 +225,7 @@ const PalabrasPerdidas = () => {
                                 </Typography>
                             </Grid>
                             {loading
-                                ? "Loading..."
+                                ? (<CircularProgress/>)
                                 : emptySentences.map((item) => (
                                       <Grid key={item.idSentence} item xs={12}>
                                           <Frases

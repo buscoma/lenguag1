@@ -13,6 +13,7 @@ import BuildControls from "./Components/Burger/Components/BuildControls";
 import "./Styles/BurgerBuilder.css";
 import DialogOperacion from "./Components/DialogOperacion";
 import { obtenerNivel, obtenerOperacion, setPoints, playerDetails } from "./Controller";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class BurgerBuilder extends Component {
   constructor(props) {
@@ -183,7 +184,7 @@ class BurgerBuilder extends Component {
     }
 
     return this.state.loading ? (
-      "..."
+      <CircularProgress />
     ) : (
       <LayoutGame
         points={this.state.points}
